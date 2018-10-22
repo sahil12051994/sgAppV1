@@ -6,4 +6,6 @@
     <string name="copyright">CBTB Lab IIT Roorkee</string>
     <string name="statusOfPatientState">The complexity of this state</string>
     <string name="whoGraphDescription">Graph showing the women who follow the WHO Guidelines during thier pregnancy</string>
+    <string name="PieChartDesc">Distribution of patients on various factors</string>
+    <string name="PirChartDesc">This is Pie Chart</string>
 </resources>

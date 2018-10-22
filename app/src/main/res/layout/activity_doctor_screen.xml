@@ -164,12 +164,12 @@
             android:layout_height="150dp"
             android:layout_margin="3dp" />
 
-        <com.github.mikephil.charting.charts.BarChart
+        <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/doc2chart"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="250dp"
             android:layout_margin="3dp" />
-
+        
     </LinearLayout>
 
 </android.support.v7.widget.LinearLayoutCompat>

@@ -23,6 +23,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -31,6 +32,10 @@ import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
@@ -112,6 +117,28 @@ public class DoctorScreen extends AppCompatActivity {
         });
         getDoctorData();
         getDoctorAllPatientsData();
+        getAllPatientsBpData();
+    }
+
+    public void getAllPatientsBpData(){
+        PieChart pieChart = (PieChart) findViewById(R.id.doc2chart);
+        ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
+        yvalues.add(new PieEntry(30f, "High BP"));
+        yvalues.add(new PieEntry(15f, "Low BP"));
+        yvalues.add(new PieEntry(12f, "Albumin"));
+        yvalues.add(new PieEntry(25f, "Urine"));
+        yvalues.add(new PieEntry(23f, "Weight"));
+
+        PieDataSet dataSet = new PieDataSet(yvalues, getString(R.string.PieChartDesc));
+
+        PieData data = new PieData(dataSet);
+        pieChart.setDrawHoleEnabled(false);
+        data.setValueTextSize(13f);
+        data.setValueTextColor(Color.DKGRAY);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        data.setValueFormatter(new PercentFormatter());
+        pieChart.setData(data);
+
     }
 
     public void getDoctorAllPatientsData() {
@@ -159,29 +186,41 @@ public class DoctorScreen extends AppCompatActivity {
 
                             BarChart barChart = (BarChart) findViewById(R.id.whoChart);
 
-                            ArrayList<BarEntry> dataInBarChart = new ArrayList<BarEntry>();
-                            dataInBarChart.add(new BarEntry(1,anc1Count));
-                            dataInBarChart.add(new BarEntry(2, anc2Count));
-                            dataInBarChart.add(new BarEntry(3, anc3Count));
-                            dataInBarChart.add(new BarEntry(4, anc4Count));
-                            dataInBarChart.add(new BarEntry(5, anc5Count));
-                            dataInBarChart.add(new BarEntry(6, anc6Count));
-                            dataInBarChart.add(new BarEntry(7, anc7Count));
-                            dataInBarChart.add(new BarEntry(8, anc8Count));
+//                            ArrayList<BarEntry> dataInBarChart = new ArrayList<BarEntry>();
 
-                            BarDataSet bardataset = new BarDataSet(dataInBarChart, "Your patients following WHO Guidelines");
-                            ArrayList<String> labels2 = new ArrayList<String>();
-                            labels2.add("ANC1");
-                            labels2.add("ANC2");
-                            labels2.add("ANC3");
-                            labels2.add("ANC4");
-                            labels2.add("ANC5");
-                            labels2.add("ANC6");
-                            labels2.add("ANC7");
-                            labels2.add("ANC8");
+                            List<BarEntry> entriesGroup1 = new ArrayList<>();
+                            List<BarEntry> entriesGroup2 = new ArrayList<>();
 
-                            BarData data1 = new BarData(bardataset);
-                            barChart.setData(data1);
+                            entriesGroup1.add(new BarEntry(1,anc1Count));
+                            entriesGroup2.add(new BarEntry(1,total_ladies-anc1Count));
+                            entriesGroup1.add(new BarEntry(2, anc2Count));
+                            entriesGroup2.add(new BarEntry(2,total_ladies-anc2Count));
+                            entriesGroup1.add(new BarEntry(3, anc3Count));
+                            entriesGroup2.add(new BarEntry(3,total_ladies-anc3Count));
+                            entriesGroup1.add(new BarEntry(4, anc4Count));
+                            entriesGroup2.add(new BarEntry(4,total_ladies-anc4Count));
+                            entriesGroup1.add(new BarEntry(5, anc5Count));
+                            entriesGroup2.add(new BarEntry(5,total_ladies-anc5Count));
+                            entriesGroup1.add(new BarEntry(6, anc6Count));
+                            entriesGroup2.add(new BarEntry(6,total_ladies-anc6Count));
+                            entriesGroup1.add(new BarEntry(7, anc7Count));
+                            entriesGroup2.add(new BarEntry(7,total_ladies-anc7Count));
+                            entriesGroup1.add(new BarEntry(8, anc8Count));
+                            entriesGroup2.add(new BarEntry(8,total_ladies-anc8Count));
+
+                            BarDataSet set1 = new BarDataSet(entriesGroup1, "Following WHO Guidelines");
+                            BarDataSet set2 = new BarDataSet(entriesGroup2, "Not Following WHO Guidelines");
+                            set2.setColor(Color.RED);
+
+                            float groupSpace = 0.06f;
+                            float barSpace = 0.02f; // x2 dataset
+                            float barWidth = 0.45f; // x2 dataset
+//                          (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
+
+                            BarData data = new BarData(set1, set2);
+                            data.setBarWidth(barWidth); // set the width of each bar
+                            barChart.setData(data);
+                            barChart.groupBars(0.5f,groupSpace, barSpace); // perform the "explicit" grouping
                             barChart.setDragEnabled(true);
                             barChart.setScaleEnabled(true);
                             barChart.invalidate();

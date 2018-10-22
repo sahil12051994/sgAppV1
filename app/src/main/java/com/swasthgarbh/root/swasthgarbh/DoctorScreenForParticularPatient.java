@@ -236,7 +236,6 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                             dataSets.add(set1);
                             dataSets.add(set2);
-
                             LineData data = new LineData(dataSets);
                             chart.setData(data);
                             chart.invalidate();
