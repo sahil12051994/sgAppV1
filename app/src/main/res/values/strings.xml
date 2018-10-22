@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">SwasthGarbh</string>
+    <string name="patient_register">Patient</string>
+    <string name="doctor_register">Doctor</string>
+    <string name="signin_button">SignIn</string>
+    <string name="copyright">CBTB Lab IIT Roorkee</string>
+    <string name="statusOfPatientState">The complexity of this state</string>
+    <string name="whoGraphDescription">Graph showing the women who follow the WHO Guidelines during thier pregnancy</string>
+</resources>
