@@ -21,6 +21,11 @@
                 app:showAsAction="ifRoom"
                 android:title="Notifications" />
 
+            <item android:id="@+id/hospitalsNearYou"
+                android:icon="@android:drawable/ic_menu_today"
+                app:showAsAction="ifRoom"
+                android:title="Nearby Hospitals" />
+
             <item android:id="@+id/action_logout"
                 android:icon="@android:drawable/ic_menu_delete"
                 app:showAsAction="ifRoom"

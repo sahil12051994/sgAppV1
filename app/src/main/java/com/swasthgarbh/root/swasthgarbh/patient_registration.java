@@ -130,6 +130,11 @@ public class patient_registration extends AppCompatActivity {
         else if (item.getItemId() == R.id.action_notification){
             i = new Intent(this, PatientNotifications.class);
             startActivity(i);
+        } else if (item.getItemId() == R.id.hospitalsNearYou){
+            String url = "https://www.google.co.in/search?q=hospitals+near+you&oq=hospitals+near+you&aqs=chrome..69i57.4099j0j9&client=ms-android-samsung&sourceid=chrome-mobile&ie=UTF-8#istate=lrl:xpd";
+            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+            webIntent.setData(Uri.parse(url));
+            startActivity(webIntent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -389,6 +394,7 @@ public class patient_registration extends AppCompatActivity {
 
                             ArrayList<Entry> yValues = new ArrayList<Entry>();
                             ArrayList<Entry> y2Values = new ArrayList<Entry>();
+                            ArrayList<Entry> y3Values = new ArrayList<Entry>();
 
                             for (int i = 0; i < patientBpData.length(); i++) {
                                 JSONObject po = (JSONObject) patientBpData.get(i);
@@ -398,6 +404,7 @@ public class patient_registration extends AppCompatActivity {
 
                                 yValues.add(new Entry(i, po.getInt("systolic")));
                                 y2Values.add(new Entry(i, po.getInt("diastolic")));
+                                y3Values.add(new Entry(i, po.getInt("weight")));
                             }
 
                             chart.setDragEnabled(true);
@@ -407,11 +414,15 @@ public class patient_registration extends AppCompatActivity {
                             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
                             LineDataSet set2 = new LineDataSet(y2Values, "Diastole");
                             set2.setAxisDependency(YAxis.AxisDependency.LEFT);
+                            LineDataSet set3 = new LineDataSet(y3Values, "weight");
+                            set3.setAxisDependency(YAxis.AxisDependency.LEFT);
 
                             set1.setFillAlpha(110);
                             set1.setLineWidth(3f);
                             set2.setLineWidth(2f);
+                            set1.setColor(Color.rgb(36, 113, 163));
                             set2.setColor(Color.RED);
+                            set3.setColor(Color.rgb(40, 180, 99));
 
 
                             YAxis leftAxis = chart.getAxisLeft();
@@ -433,10 +444,12 @@ public class patient_registration extends AppCompatActivity {
 
                             set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
                             set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                            set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
                             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                             dataSets.add(set1);
                             dataSets.add(set2);
+                            dataSets.add(set3);
 
                             LineData data = new LineData(dataSets);
                             chart.setData(data);
