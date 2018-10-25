@@ -109,16 +109,10 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                 return;
             }
 
-
             if (str_doctor_mobile.length() == 0) {
                 Toast.makeText(PatientSignup.this, "Enter your doctor's number", Toast.LENGTH_LONG).show();
                 return;
             }
-
-//            if (str_doctor_mobile.length() != 10 || str_mobile.length() != 10) {
-//                Toast.makeText(RegisterActivity.this, "Enter 10 digit number", Toast.LENGTH_LONG).show();
-//                return;
-//            }
 
             if (str_doc_name.length() == 0 ) {
                 Toast.makeText(PatientSignup.this, "Enter a valid doctor's number", Toast.LENGTH_LONG).show();
@@ -177,11 +171,6 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                         params.put("mobile", mobile.getText());
                         params.put("email", "" + email.getText());
                         params.put("doctor", doc_id);
-//                        String d = "" + date_of_birth.getText();
-//                        String d_new = "" + d.split("/")[0] + "-" + d.split("/")[1] + "-" + d.split("/")[2];
-//                        Log.e("TAG", d_new);
-
-
                         params.put("date_of_birth", date_of_birth.getText());
 
                         params.put("gender", gender);
@@ -196,26 +185,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
             ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
 
         }
-//        else if (view.getId() == R.id.editText3) {
-//            datePickerDialog.show();
-//        }
-//        else if (view.getId() == R.id.editText11) {
-//            timePickerDialog.show();
-//        }
     }
-
-//    @Override
-//    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-//        i1 = i1 + 1;
-//        date_of_birth.setText(i + "/" + i1 + "/" + i2);
-//        Toast.makeText(this, "" + i + i1 + i2, Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void onTimeSet(TimePicker timePicker, int i, int i1) {
-//        time_reminder.setText(i + ":" + i1);
-//        Toast.makeText(this, "" + i + i1, Toast.LENGTH_SHORT).show();
-//    }
 
     @Override
     public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

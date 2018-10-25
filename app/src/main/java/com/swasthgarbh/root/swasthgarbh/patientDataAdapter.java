@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -67,31 +68,28 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
         yearPatientRow.setText(current_patient_data.timeVal());
 
         if(current_patient_data.getDocOrPat() == 1) {
-
-//            if (current_patient_data.abdominal_pain) {
-//                TextView abdominalPain = (TextView) listItemView.findViewById(R.id.abdominalPain);
-//                abdominalPain.setTextColor(Color.GREEN);
-//            }
-//            if (current_patient_data.headache) {
-//                TextView headache = (TextView) listItemView.findViewById(R.id.headache);
-//                headache.setTextColor(Color.GREEN);
-//            }
-//            if (current_patient_data.swelling_in_hands_or_face) {
-//                TextView swelling = (TextView) listItemView.findViewById(R.id.swelling);
-//                swelling.setTextColor(Color.GREEN);
-//            }
-//            if (current_patient_data.decreased_fetal_movements) {
-//                TextView decreasedMove = (TextView) listItemView.findViewById(R.id.decreasedMove);
-//                decreasedMove.setTextColor(Color.GREEN);
-//            }
-//            if (current_patient_data.visual_problems) {
-//                TextView visualProb = (TextView) listItemView.findViewById(R.id.visualProb);
-//                visualProb.setTextColor(Color.GREEN);
-//            }
-//            if (current_patient_data.bleeding_per_vaginum > 0) {
-//                TextView bleedingVag = (TextView) listItemView.findViewById(R.id.bleedingVag);
-//                bleedingVag.setText("Bleeding/Vag : " + current_patient_data.bleeding_per_vaginum);
-//            }
+            LinearLayout otherDetailsPatient = (LinearLayout) listItemView.findViewById(R.id.otherDetailsPatient);
+            //all getting removed on scroll
+            if (!current_patient_data.getAbdominal_pain()) {
+                TextView abdominalPain = (TextView) listItemView.findViewById(R.id.abdominalPain);
+                otherDetailsPatient.removeView(abdominalPain);
+            }
+            if (!current_patient_data.getHeadache()) {
+                TextView headache = (TextView) listItemView.findViewById(R.id.headache);
+                otherDetailsPatient.removeView(headache);
+            }
+            if (!current_patient_data.getSwelling_in_hands_or_face()) {
+                TextView swelling = (TextView) listItemView.findViewById(R.id.swelling);
+                otherDetailsPatient.removeView(swelling);
+            }
+            if (!current_patient_data.getDecreased_fetal_movements()) {
+                TextView decreasedMove = (TextView) listItemView.findViewById(R.id.decreasedMove);
+                otherDetailsPatient.removeView(decreasedMove);
+            }
+            if (!current_patient_data.getVisual_problems()) {
+                TextView visualProb = (TextView) listItemView.findViewById(R.id.visualProb);
+                otherDetailsPatient.removeView(visualProb);
+            }
         }
         return listItemView;
     }

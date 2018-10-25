@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="#fff"
+    android:elevation="1dp">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/pk"
+            android:layout_width="wrap_content"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/image_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Image - 22 Dec 2017"
+            android:textSize="25sp"
+            android:textColor="#EB1C23"
+            />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

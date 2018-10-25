@@ -27,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -209,16 +210,17 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
                             ArrayList<Entry> yValues = new ArrayList<Entry>();
                             ArrayList<Entry> y2Values = new ArrayList<Entry>();
+                            ArrayList<Entry> y3Values = new ArrayList<Entry>();
 
                             for (int i = 0; i < patientBpData.length(); i++) {
                                 JSONObject po = (JSONObject) patientBpData.get(i);
-//                                patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getInt("heart_rate"), po.getInt("weight"), po.getBoolean("headache"), po.getBoolean("abdominal_pain"), po.getBoolean("visual_problems"), po.getInt("bleeding_per_vaginum"), po.getBoolean("decreased_fetal_movements"), po.getBoolean("swelling_in_hands_or_face"), po.getString("extra_comments"));
-                                patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin") ,po.getInt("weight"), true, true, true, po.getDouble("bleeding_per_vaginum") , true, true, "I have a headache");
+                                patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin") ,po.getInt("weight"), po.getBoolean("headache"), po.getBoolean("abdominal_pain"), po.getBoolean("visual_problems"), po.getDouble("bleeding_per_vaginum") , po.getBoolean("decreased_fetal_movements"), po.getBoolean("swelling_in_hands_or_face"), po.getString("extra_comments"));
                                 patientRowData.add(pr);
                                 Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
 
                                 yValues.add(new Entry(i, po.getInt("systolic")));
                                 y2Values.add(new Entry(i, po.getInt("diastolic")));
+                                y3Values.add(new Entry(i, po.getInt("weight")));
                             }
 
                             chart.setDragEnabled(true);
@@ -228,14 +230,43 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
                             LineDataSet set2 = new LineDataSet(y2Values, "Diastole");
                             set2.setAxisDependency(YAxis.AxisDependency.LEFT);
+                            LineDataSet set3 = new LineDataSet(y3Values, "weight");
+                            set3.setAxisDependency(YAxis.AxisDependency.LEFT);
 
                             set1.setFillAlpha(110);
                             set1.setLineWidth(3f);
                             set2.setLineWidth(2f);
+                            set1.setColor(Color.rgb(36, 113, 163));
                             set2.setColor(Color.RED);
+                            set3.setColor(Color.rgb(40, 180, 99));
+
+
+                            YAxis leftAxis = chart.getAxisLeft();
+                            LimitLine ll = new LimitLine(140f, "Critical");
+                            ll.setLineColor(Color.rgb(102, 255, 255));
+                            ll.setLineWidth(1f);
+                            ll.setTextColor(Color.BLACK);
+                            ll.setTextSize(12f);
+                            ll.enableDashedLine(4, 2, 0);
+                            leftAxis.addLimitLine(ll);
+
+                            LimitLine l2 = new LimitLine(90f, "Critical");
+                            l2.setLineColor(Color.RED);
+                            l2.setLineWidth(1f);
+                            l2.setTextColor(Color.BLACK);
+                            l2.setTextSize(12f);
+                            l2.enableDashedLine(4, 2, 0);
+                            leftAxis.addLimitLine(l2);
+
+//                            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+//                            set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+//                            set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
                             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                             dataSets.add(set1);
                             dataSets.add(set2);
+                            dataSets.add(set3);
+
                             LineData data = new LineData(dataSets);
                             chart.setData(data);
                             chart.invalidate();

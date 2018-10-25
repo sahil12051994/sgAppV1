@@ -20,6 +20,7 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -57,6 +58,7 @@ public class patient_registration extends AppCompatActivity {
     patientDataAdapter adapter;
     private int doctorId;
     TextView doctorName, patientName, pregStartDate, doctorMobile, whoFollowing;
+    LinearLayout TextWhenNoData, parentView, chartLayout;
     ImageView callDoctor;
 
     Dialog choose_doc;
@@ -274,6 +276,9 @@ public class patient_registration extends AppCompatActivity {
         whoFollowing = (TextView) findViewById(R.id.whoFollowing);
         callDoctor = (ImageView)  findViewById(R.id.callDoctor);
 
+//        TextWhenNoData = (LinearLayout) findViewById(R.id.viewIfNoData);
+//        parentView = (LinearLayout) findViewById(R.id.parentView);
+//        chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
 //        Button logOutButton = (Button) findViewById(R.id.analyseResult);
 //        logOutButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -386,82 +391,87 @@ public class patient_registration extends AppCompatActivity {
                             doctorId = response.getInt("doctor");
                             patientName.setText(response.getString("name"));
                             JSONArray patientBpData = response.getJSONArray("data");
+                            if(patientBpData.length()!=0){
+//                                parentView.removeView(TextWhenNoData);
+                                /******************************
+                                 * To set the charts
+                                 */
+                                LineChart chart = (LineChart) findViewById(R.id.chart);
 
-                            /******************************
-                             * To set the charts
-                             */
-                            LineChart chart = (LineChart) findViewById(R.id.chart);
+                                ArrayList<Entry> yValues = new ArrayList<Entry>();
+                                ArrayList<Entry> y2Values = new ArrayList<Entry>();
+                                ArrayList<Entry> y3Values = new ArrayList<Entry>();
 
-                            ArrayList<Entry> yValues = new ArrayList<Entry>();
-                            ArrayList<Entry> y2Values = new ArrayList<Entry>();
-                            ArrayList<Entry> y3Values = new ArrayList<Entry>();
+                                for (int i = 0; i < patientBpData.length(); i++) {
+                                    JSONObject po = (JSONObject) patientBpData.get(i);
+                                    patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
+                                    patientRowData.add(pr);
+                                    Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
 
-                            for (int i = 0; i < patientBpData.length(); i++) {
-                                JSONObject po = (JSONObject) patientBpData.get(i);
-                                patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
-                                patientRowData.add(pr);
-                                Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
+                                    yValues.add(new Entry(i, po.getInt("systolic")));
+                                    y2Values.add(new Entry(i, po.getInt("diastolic")));
+                                    y3Values.add(new Entry(i, po.getInt("weight")));
+                                }
 
-                                yValues.add(new Entry(i, po.getInt("systolic")));
-                                y2Values.add(new Entry(i, po.getInt("diastolic")));
-                                y3Values.add(new Entry(i, po.getInt("weight")));
+                                chart.setDragEnabled(true);
+                                chart.setScaleEnabled(true);
+
+                                LineDataSet set1 = new LineDataSet(yValues, "Systole");
+                                set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+                                LineDataSet set2 = new LineDataSet(y2Values, "Diastole");
+                                set2.setAxisDependency(YAxis.AxisDependency.LEFT);
+                                LineDataSet set3 = new LineDataSet(y3Values, "weight");
+                                set3.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+                                set1.setFillAlpha(110);
+                                set1.setLineWidth(3f);
+                                set2.setLineWidth(2f);
+                                set1.setColor(Color.rgb(36, 113, 163));
+                                set2.setColor(Color.RED);
+                                set3.setColor(Color.rgb(40, 180, 99));
+
+
+                                YAxis leftAxis = chart.getAxisLeft();
+                                LimitLine ll = new LimitLine(140f, "Critical");
+                                ll.setLineColor(Color.rgb(102, 255, 255));
+                                ll.setLineWidth(1f);
+                                ll.setTextColor(Color.BLACK);
+                                ll.setTextSize(12f);
+                                ll.enableDashedLine(4, 2, 0);
+                                leftAxis.addLimitLine(ll);
+
+                                LimitLine l2 = new LimitLine(90f, "Critical");
+                                l2.setLineColor(Color.RED);
+                                l2.setLineWidth(1f);
+                                l2.setTextColor(Color.BLACK);
+                                l2.setTextSize(12f);
+                                l2.enableDashedLine(4, 2, 0);
+                                leftAxis.addLimitLine(l2);
+
+                                set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                                set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                                set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+
+                                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                                dataSets.add(set1);
+                                dataSets.add(set2);
+                                dataSets.add(set3);
+
+                                LineData data = new LineData(dataSets);
+                                chart.setData(data);
+                                chart.invalidate();
+                                chart.animateXY(3000, 3000);
+                                /*
+                                 * To set the charts
+                                 ******************************/
+
+                                patientDataAdapter itemsAdapter = new patientDataAdapter(patient_registration.this, patientRowData);
+                                ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
+                                listView.setAdapter(itemsAdapter);
+//                            } else {
+//                                Log.i("hahahahahaah", "onResponse: ");
+//                                parentView.removeView(chartLayout);
                             }
-
-                            chart.setDragEnabled(true);
-                            chart.setScaleEnabled(true);
-
-                            LineDataSet set1 = new LineDataSet(yValues, "Systole");
-                            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            LineDataSet set2 = new LineDataSet(y2Values, "Diastole");
-                            set2.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            LineDataSet set3 = new LineDataSet(y3Values, "weight");
-                            set3.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-                            set1.setFillAlpha(110);
-                            set1.setLineWidth(3f);
-                            set2.setLineWidth(2f);
-                            set1.setColor(Color.rgb(36, 113, 163));
-                            set2.setColor(Color.RED);
-                            set3.setColor(Color.rgb(40, 180, 99));
-
-
-                            YAxis leftAxis = chart.getAxisLeft();
-                            LimitLine ll = new LimitLine(140f, "Critical");
-                            ll.setLineColor(Color.rgb(102, 255, 255));
-                            ll.setLineWidth(1f);
-                            ll.setTextColor(Color.BLACK);
-                            ll.setTextSize(12f);
-                            ll.enableDashedLine(4, 2, 0);
-                            leftAxis.addLimitLine(ll);
-
-                            LimitLine l2 = new LimitLine(90f, "Critical");
-                            l2.setLineColor(Color.RED);
-                            l2.setLineWidth(1f);
-                            l2.setTextColor(Color.BLACK);
-                            l2.setTextSize(12f);
-                            l2.enableDashedLine(4, 2, 0);
-                            leftAxis.addLimitLine(l2);
-
-                            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-                            set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-                            set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-
-                            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                            dataSets.add(set1);
-                            dataSets.add(set2);
-                            dataSets.add(set3);
-
-                            LineData data = new LineData(dataSets);
-                            chart.setData(data);
-                            chart.invalidate();
-                            chart.animateXY(3000, 3000);
-                            /*
-                             * To set the charts
-                             ******************************/
-
-                            patientDataAdapter itemsAdapter = new patientDataAdapter(patient_registration.this, patientRowData);
-                            ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
-                            listView.setAdapter(itemsAdapter);
                             getDoctorData();
                         } catch (JSONException e) {
                             e.printStackTrace();

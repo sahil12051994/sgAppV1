@@ -60,6 +60,7 @@ public class patient_data_listview_class {
     }
 
     public  int getDocOrPat() { return docScreen_or_pScreen; }
+
     public int bpSysValue(){
         return bp_sys;
     }
@@ -93,6 +94,26 @@ public class patient_data_listview_class {
     }
 
     public String timeVal() { return time; }
+
+    public Boolean getAbdominal_pain() {
+        return abdominal_pain;
+    }
+
+    public Boolean getHeadache() {
+        return headache;
+    }
+
+    public Boolean getSwelling_in_hands_or_face() {
+        return swelling_in_hands_or_face;
+    }
+
+    public Boolean getVisual_problems() {
+        return visual_problems;
+    }
+
+    public Boolean getDecreased_fetal_movements() {
+        return decreased_fetal_movements;
+    }
 
     public int getStatusId(){
         if (bp_sys > 150 && bp_dys > 110){

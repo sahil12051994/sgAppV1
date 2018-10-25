@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".patient_registration">
+    tools:context=".patient_registration"
+    android:id="@+id/parentView">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
@@ -79,20 +80,17 @@
                 <TextView
                     android:id="@+id/patientName"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="Sahil" />
+                    android:layout_height="20dp"/>
 
                 <TextView
                     android:id="@+id/pregStartDate"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="4th April, 2018" />
+                    android:layout_height="20dp"/>
 
                 <TextView
                     android:id="@+id/doctorName"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="Deepak Sharma" />
+                    android:layout_height="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -101,8 +99,7 @@
                     <TextView
                         android:id="@+id/doctorMobile"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="9876543445" />
+                        android:layout_height="match_parent"/>
 
                     <ImageView
                         android:id="@+id/callDoctor"
@@ -116,17 +113,45 @@
                 <TextView
                     android:id="@+id/whoFollowing"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="Following" />
+                    android:layout_height="20dp"/>
 
             </LinearLayout>
 
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/viewIfNoData"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_margin="5dp"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<ImageView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/error" />-->
+
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:text="No Data Initially"-->
+                <!--android:textSize="40sp" />-->
+
+        <!--</LinearLayout>-->
+
+    <!--</LinearLayout>-->
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/chartLayout">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
@@ -206,4 +231,4 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.LinearLayoutCompat>
+</LinearLayout>

@@ -8,4 +8,11 @@
     <string name="whoGraphDescription">Graph showing the women who follow the WHO Guidelines during thier pregnancy</string>
     <string name="PieChartDesc">Distribution of patients on various factors</string>
     <string name="PirChartDesc">This is Pie Chart</string>
+
+    <string-array name="medicine_freq">
+        <item>Daily</item>
+        <item>Weekly</item>
+        <item>Monthly</item>
+    </string-array>
+
 </resources>

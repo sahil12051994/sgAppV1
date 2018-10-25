@@ -21,6 +21,11 @@
                 app:showAsAction="ifRoom"
                 android:title="Medicines" />
 
+            <item android:id="@+id/patientImages"
+                android:icon="@android:drawable/ic_menu_today"
+                app:showAsAction="ifRoom"
+                android:title="Complication Images" />
+
             <item android:id="@+id/action_logout"
                 android:icon="@android:drawable/ic_menu_delete"
                 app:showAsAction="ifRoom"
