@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,6 +35,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +52,8 @@ public class MedicineReminder extends AppCompatActivity {
     RadioGroup radioGroupFReq;
     RadioButton radioGroupFReqDaily,radioGroupFReqWeekly,radioGroupFReqMonthly;
     FloatingActionButton fab;
+//    ImageView reminderButton;
+//    ListView patient_medicine_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +64,8 @@ public class MedicineReminder extends AppCompatActivity {
         clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
         getPatientData(clickedPatientId);
         fab = findViewById(R.id.fab);
+//        patient_medicine_list = (ListView) findViewById(R.id.patient_medicine_list);
+//        reminderButton = (ImageView) patient_medicine_list.getChildAt(0).findViewById(R.id.reminderButton);
 
         final HashMap<String, String> user = session.getUserDetails();
         if ("doctor".equals(user.get("type"))){

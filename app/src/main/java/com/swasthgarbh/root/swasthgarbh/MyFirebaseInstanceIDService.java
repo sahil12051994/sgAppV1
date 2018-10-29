@@ -41,17 +41,13 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         user = new HashMap<String, String>();
         user = session.getUserDetails();
 
-//
-//        // If you want to send messages to this application instance or
-//        // manage this apps subscriptions on the server side, send the
-//        // Instance ID token to your app server.
         if (refreshedToken != null) {
             sendRegistrationToServer(refreshedToken);
         }
     }
 
     private void sendRegistrationToServer(final String refreshedToken) {
-        String url = ApplicationController.get_base_url() + "dhadkan/api/device";
+        String url = ApplicationController.get_base_url() + "cbtbiitr/api/device";
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                 url, null,
                 new Response.Listener<JSONObject>() {

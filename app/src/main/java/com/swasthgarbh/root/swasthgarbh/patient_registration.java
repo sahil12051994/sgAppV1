@@ -12,13 +12,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -51,7 +54,9 @@ import java.util.Random;
 
 public class patient_registration extends AppCompatActivity {
 
-    private Button whoGuideLines, logOutButton, done, name_of_medicine, extra_comments, doc_number, doc_name;
+    private Button whoGuideLines, logOutButton, done, name_of_medicine, extra_comments;
+    EditText doc_number;
+    TextView doc_name, docHospital, docSpeciality;
     static SessionManager session;
     ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
     ListView patient_list_view;
@@ -127,7 +132,7 @@ public class patient_registration extends AppCompatActivity {
             return true;
         }
         else if (item.getItemId() == R.id.action_change_doctor){
-//            change_doctor();
+            change_doctor();
         }
         else if (item.getItemId() == R.id.action_notification){
             i = new Intent(this, PatientNotifications.class);
@@ -142,126 +147,163 @@ public class patient_registration extends AppCompatActivity {
     }
 
 
-//    private void change_doctor() {
-//        choose_doc = new Dialog(this);
-//        choose_doc.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        choose_doc.setContentView(R.layout.choose_doc_dialog);
-//        choose_doc.setCancelable(true);
-//        done = choose_doc.findViewById(R.id.login);
-//
-//        doc_number = choose_doc.findViewById(R.id.editText8);
-//        doc_number.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable editable) {
-//                if (editable.toString().length() == 10) {
-//                    String url = ApplicationController.get_base_url() + "api/doctor?mobile=" + editable.toString();
-//                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-//                            url, null,
-//                            new Response.Listener<JSONObject>() {
-//
-//                                @Override
-//                                public void onResponse(JSONObject response) {
-//                                    Log.d("TAG", response.toString());
-//
-//                                    try {
-//                                        doc_name.setText(response.get("name") + "");
-//                                        doc_id = (int) response.get("pk");
-//                                    } catch (JSONException e) {
-//                                        e.printStackTrace();
-//                                        doc_name.setText("");
-//                                        Toast.makeText(patient_registration.this, "No doctor with this mobile number is registered", Toast.LENGTH_SHORT).show();
-//
-//                                    }
-//                                }
-//                            }, new Response.ErrorListener() {
-//
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//                            Log.d("TAG", "Error Message: " + error.getMessage());
-//                        }
-//                    }) {
-//                        @Override
-//                        public Map<String, String> getHeaders() throws AuthFailureError {
-//                            Map<String, String> params = new HashMap<String, String>();
-//                            params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
-//                            Log.d("TAG", "Token " + session.getUserDetails().get("Token"));
-////                params.put("Authorization", "Token f00a64734d608991730ccba944776c316c38c544");
-//                            return params;
-//                        }
-//
-//                    };
-//                    ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
-//                }
-//            }
-//        });
-//        doc_name = choose_doc.findViewById(R.id.editText9);
-//        choose_doc.show();
-//
-//        done.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                if (v.getId() == R.id.login) {
-//
-//
-//                    String url = ApplicationController.get_base_url() + "api/patient/" + session.getUserDetails().get("id");
-//                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-//                            url, null,
-//                            new Response.Listener<JSONObject>() {
-//
-//                                @Override
-//                                public void onResponse(JSONObject response) {
-//                                    Log.d("TAG", response.toString());
-//                                    choose_doc.dismiss();
-//                                    Toast.makeText(patient_registration.this, "Doctor changed", Toast.LENGTH_LONG).show();
-//
-//                                }
-//                            }, new Response.ErrorListener() {
-//
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//                            Log.d("TAG", "Error Message: " + error.getMessage());
-//                        }
-//                    }) {
-//
-//                        @Override
-//                        public byte[] getBody() {
-//                            JSONObject params = new JSONObject();
-//                            try {
-//                                params.put("d_id", doc_id);
-//                            } catch (JSONException e) {
-//                                e.printStackTrace();
-//                            }
-//
-//                            return params.toString().getBytes();
-//
-//                        }
-//
-//                        @Override
-//                        public Map<String, String> getHeaders() throws AuthFailureError {
-//                            Map<String, String> params = new HashMap<String, String>();
-//                            params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
-//                            Log.d("TAG", "Token " + session.getUserDetails().get("Token"));
-////                params.put("Authorization", "Token f00a64734d608991730ccba944776c316c38c544");
-//                            return params;
-//                        }
-//                    };
-//                    ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
-//                }
-//
-//            }
-//        });
-//    }
+    private void change_doctor() {
+        choose_doc = new Dialog(this);
+        choose_doc.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        choose_doc.setContentView(R.layout.choose_doc_dialog);
+        choose_doc.setCancelable(true);
+        done = choose_doc.findViewById(R.id.changeDocButton);
+
+        doc_number = choose_doc.findViewById(R.id.enteredNumber);
+        doc_number.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (editable.toString().length() == 10) {
+                    String url = ApplicationController.get_base_url() + "api/doctor?mobile=" + editable.toString();
+                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                            url, null,
+                            new Response.Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Log.d("TAG", response.toString());
+
+                                    try {
+                                        doc_name.setText(response.get("name") + "");
+                                        docHospital.setText(response.get("hospital") + "");
+                                        docSpeciality.setText(response.get("speciality") + "");
+                                        doc_id = (int) response.get("pk");
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                        doc_name.setText("");
+                                        Toast.makeText(patient_registration.this, "No doctor with this mobile number is registered", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                }
+                            }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("TAG", "Error Message: " + error.getMessage());
+                        }
+                    }) {
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
+                            Log.d("TAG", "Token " + session.getUserDetails().get("Token"));
+//                params.put("Authorization", "Token f00a64734d608991730ccba944776c316c38c544");
+                            return params;
+                        }
+
+                    };
+                    ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
+                }
+            }
+        });
+
+        doc_name = choose_doc.findViewById(R.id.docName);
+        docHospital = choose_doc.findViewById(R.id.docHospital);
+        docSpeciality = choose_doc.findViewById(R.id.docSpeciality);
+
+        choose_doc.show();
+
+        // Get screen width and height in pixels
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        // The absolute width of the available display size in pixels.
+        int displayWidth = displayMetrics.widthPixels;
+        // The absolute height of the available display size in pixels.
+        int displayHeight = displayMetrics.heightPixels;
+
+        // Initialize a new window manager layout parameters
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+        // Copy the alert dialog window attributes to new layout parameter instance
+        layoutParams.copyFrom(choose_doc.getWindow().getAttributes());
+
+        // Set the alert dialog window width and height
+        // Set alert dialog width equal to screen width 90%
+        // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+        // Set alert dialog height equal to screen height 90%
+        // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+        // Set alert dialog width equal to screen width 80%
+        int dialogWindowWidth = (int) (displayWidth * 0.8f);
+        // Set alert dialog height equal to screen height 70%
+        int dialogWindowHeight = (int) (displayHeight * 0.65f);
+        // Set the width and height for the layout parameters
+        // This will bet the width and height of alert dialog
+        layoutParams.width = dialogWindowWidth;
+        layoutParams.height = dialogWindowHeight;
+        // Apply the newly created layout parameters to the alert dialog window
+        choose_doc.getWindow().setAttributes(layoutParams);
+
+
+        done.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (v.getId() == R.id.login) {
+
+
+                    String url = ApplicationController.get_base_url() + "api/patient/" + session.getUserDetails().get("id");
+                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
+                            url, null,
+                            new Response.Listener<JSONObject>() {
+
+                                @Override
+                                public void onResponse(JSONObject response) {
+                                    Log.d("TAG", response.toString());
+                                    choose_doc.dismiss();
+                                    Toast.makeText(patient_registration.this, "Doctor changed", Toast.LENGTH_LONG).show();
+
+                                }
+                            }, new Response.ErrorListener() {
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            Log.d("TAG", "Error Message: " + error.getMessage());
+                        }
+                    }) {
+
+                        @Override
+                        public byte[] getBody() {
+                            JSONObject params = new JSONObject();
+                            try {
+                                params.put("d_id", doc_id);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                            return params.toString().getBytes();
+
+                        }
+
+                        @Override
+                        public Map<String, String> getHeaders() throws AuthFailureError {
+                            Map<String, String> params = new HashMap<String, String>();
+                            params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
+                            Log.d("TAG", "Token " + session.getUserDetails().get("Token"));
+                            return params;
+                        }
+                    };
+                    ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
+                }
+
+            }
+        });
+    }
 
 
     @Override
