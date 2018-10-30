@@ -179,7 +179,6 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
         });
     }
 
-
     /*
      * to fill the patient details
      * API for doctor details
@@ -194,7 +193,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("apihit", response.toString());
+                        Log.d("apihitttttttt", response.toString());
                         try {
                             doctorId = response.getInt("doctor");
                             patientName.setText(response.getString("name"));

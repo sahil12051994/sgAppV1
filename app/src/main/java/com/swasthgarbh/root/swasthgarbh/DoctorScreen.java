@@ -117,29 +117,8 @@ public class DoctorScreen extends AppCompatActivity {
         });
         getDoctorData();
         getDoctorAllPatientsData();
-        getAllPatientsBpData();
     }
 
-    public void getAllPatientsBpData(){
-        PieChart pieChart = (PieChart) findViewById(R.id.doc2chart);
-        ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-        yvalues.add(new PieEntry(30f, "High BP"));
-        yvalues.add(new PieEntry(15f, "Low BP"));
-        yvalues.add(new PieEntry(12f, "Albumin"));
-        yvalues.add(new PieEntry(25f, "Urine"));
-        yvalues.add(new PieEntry(23f, "Weight"));
-
-        PieDataSet dataSet = new PieDataSet(yvalues, getString(R.string.PieChartDesc));
-
-        PieData data = new PieData(dataSet);
-        pieChart.setDrawHoleEnabled(false);
-        data.setValueTextSize(13f);
-        data.setValueTextColor(Color.DKGRAY);
-        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-        data.setValueFormatter(new PercentFormatter());
-        pieChart.setData(data);
-
-    }
 
     public void getDoctorAllPatientsData() {
         String url = ApplicationController.get_base_url() + "swasthgarbh/patient";
@@ -267,6 +246,30 @@ public class DoctorScreen extends AppCompatActivity {
                             doctorEmail.setText(response.getString("email"));
                             doctorTotalPatients.setText(String.valueOf(response.getJSONArray("patients").length()));
                             doctorSpeciality.setText(response.getString("speciality"));
+
+                            JSONObject analysis_obj = (JSONObject) response.getJSONObject("analysis_object");
+                            PieChart pieChart = (PieChart) findViewById(R.id.doc2chart);
+                            ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
+                            yvalues.add(new PieEntry(analysis_obj.getInt("high_sys"), "High Systole"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("high_dys"), "High Diastole"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("high_weight"), "Over Weight"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("hyper_tension"), "Hypertensed"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("urine_albumin"), "High Urine Albumin"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("who_following"), "Following WHO"));
+
+                            PieDataSet dataSet = new PieDataSet(yvalues, getString(R.string.PieChartDesc));
+
+                            PieData data = new PieData(dataSet);
+                            pieChart.setDrawHoleEnabled(true);
+                            data.setValueTextSize(13f);
+                            data.setValueTextColor(Color.DKGRAY);
+                            pieChart.setEntryLabelColor(Color.BLACK);
+                            dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+                            dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+//                            data.setValueFormatter(new PercentFormatter());
+                            pieChart.setData(data);
+                            pieChart.invalidate();
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
