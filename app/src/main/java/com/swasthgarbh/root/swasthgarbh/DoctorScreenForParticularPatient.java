@@ -200,7 +200,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             patientName.setText(response.getString("name"));
                             patientEmail.setText(response.getString("email"));
                             patientMobile.setText(String.valueOf(response.getInt("mobile")));
-
+                            whoFollowing.setText(response.getString("who_following"));
                             JSONArray patientBpData = response.getJSONArray("data");
 
                             /******************************

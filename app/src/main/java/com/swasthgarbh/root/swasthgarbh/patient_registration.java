@@ -432,6 +432,8 @@ public class patient_registration extends AppCompatActivity {
                         try {
                             doctorId = response.getInt("doctor");
                             patientName.setText(response.getString("name"));
+                            whoFollowing.setText(response.getString("who_following"));
+                            Log.i("whoooooo", "onResponse: " + response.getString("who_following"));
                             JSONArray patientBpData = response.getJSONArray("data");
                             if(patientBpData.length()!=0){
 //                                parentView.removeView(TextWhenNoData);

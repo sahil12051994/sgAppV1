@@ -215,7 +215,7 @@ public class WHOGuidelines extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Intent i = new Intent(WHOGuidelines.this, WHOGuidelines.class);
+                        Intent i = new Intent(WHOGuidelines.this, patient_registration.class);
                         startActivity(i);
                         finish();
                     }
