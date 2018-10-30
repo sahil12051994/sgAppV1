@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -52,6 +53,7 @@ public class MedicineReminder extends AppCompatActivity {
     RadioGroup radioGroupFReq;
     RadioButton radioGroupFReqDaily,radioGroupFReqWeekly,radioGroupFReqMonthly;
     FloatingActionButton fab;
+    SwipeRefreshLayout mSwipeRefreshLayout;
 //    ImageView reminderButton;
 //    ListView patient_medicine_list;
 
@@ -66,6 +68,7 @@ public class MedicineReminder extends AppCompatActivity {
         fab = findViewById(R.id.fab);
 //        patient_medicine_list = (ListView) findViewById(R.id.patient_medicine_list);
 //        reminderButton = (ImageView) patient_medicine_list.getChildAt(0).findViewById(R.id.reminderButton);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshMedicine);
 
         final HashMap<String, String> user = session.getUserDetails();
         if ("doctor".equals(user.get("type"))){
@@ -78,6 +81,14 @@ public class MedicineReminder extends AppCompatActivity {
         } else if ("patient".equals(user.get("type"))) {
             fab.hide();
         }
+
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPatientData(clickedPatientId);
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     public void showAddMedicineDialog() {

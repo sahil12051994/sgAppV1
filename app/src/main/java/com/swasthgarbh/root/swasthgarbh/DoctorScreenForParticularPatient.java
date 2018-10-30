@@ -392,8 +392,6 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                     ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
 
                 }
-
-
             }
         });
 

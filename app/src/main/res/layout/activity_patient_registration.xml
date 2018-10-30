@@ -47,27 +47,27 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="Name" />
+                    android:text="@string/name" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="Pregnancy Start" />
+                    android:text="@string/pregnancy_start" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="Doctor" />
+                    android:text="@string/doctor" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="Doctors Mobile" />
+                    android:text="@string/doctors_mobile" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:text="WHO Medication" />
+                    android:text="@string/who_medication" />
 
             </LinearLayout>
 
@@ -180,7 +180,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Add Data"
+            android:text="@string/add_data"
             android:textAllCaps="false" />
 
         <Button
@@ -188,7 +188,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="WHO"
+            android:text="@string/who"
             android:textAllCaps="false" />
 
         <Button
@@ -196,7 +196,7 @@
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Medication "
+            android:text="@string/medication"
             android:textAllCaps="false" />
 
     </LinearLayout>
@@ -219,7 +219,7 @@
             android:layout_height="wrap_content"
             android:padding="3dp"
             android:text="Your History"
-            tools:text="Your History" />
+            tools:text="@string/your_history" />
 
         <ListView
             android:id="@+id/patient_data_list_view"

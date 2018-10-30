@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -80,17 +79,17 @@
                 <TextView
                     android:id="@+id/registeredDoctorName"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:id="@+id/registeredDoctorHospital"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp" />
 
                 <TextView
                     android:id="@+id/registeredDoctorSpeciality"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,14 +98,14 @@
                     <TextView
                         android:id="@+id/registeredDoctorTotalPatients"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/registeredDoctorEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp" />
 
             </LinearLayout>
 
@@ -145,31 +144,55 @@
             android:textAllCaps="false" />
 
         <!--<Button-->
-            <!--android:layout_width="0px"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text=" "-->
-            <!--android:textAllCaps="false" />-->
+        <!--android:layout_width="0px"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text=" "-->
+        <!--android:textAllCaps="false" />-->
 
     </LinearLayout>
 
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/whoChart"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_margin="3dp" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/doc2chart"
-            android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_margin="3dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="X Axis : ANC Level  |   Y Axis:  Number of patients" />
 
-    </LinearLayout>
 
-</android.support.v7.widget.LinearLayoutCompat>
+            <com.github.mikephil.charting.charts.BarChart
+                android:id="@+id/whoChart"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="3dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="Number of patients in corresponding categories" />
+
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/doc2chart"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_margin="3dp" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

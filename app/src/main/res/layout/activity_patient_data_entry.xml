@@ -37,7 +37,7 @@
                         android:layout_width="89dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Blood Pressure"
+                        android:text="@string/blood_pressure"
                         android:textSize="20sp" />
 
                     <LinearLayout
@@ -55,7 +55,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="Systyole" />
+                                android:text="@string/systyole" />
 
                             <EditText
                                 android:id="@+id/sysData"
@@ -74,7 +74,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="Diastyole" />
+                                android:text="@string/diastyole" />
 
                             <EditText
                                 android:id="@+id/dysData"
@@ -109,7 +109,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:text="Headache" />
+                        android:text="@string/headache" />
 
                     <CheckBox
                         android:id="@+id/abdPain"
@@ -118,7 +118,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:text="Abdominal Pain" />
+                        android:text="@string/abdominal_pain" />
 
                     <CheckBox
                         android:id="@+id/visProb"
@@ -127,7 +127,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:text="Visual Problems" />
+                        android:text="@string/visual_problems" />
 
                     <CheckBox
                         android:id="@+id/decFea"
@@ -136,7 +136,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:text="Decreased Fetal Movements" />
+                        android:text="@string/decreased_fetal_movements" />
 
                     <CheckBox
                         android:id="@+id/swell"
@@ -145,7 +145,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:text="Swelling in Hands or Face" />
+                        android:text="@string/swelling_in_hands_or_face" />
 
                     <CheckBox
                         android:id="@+id/hyperT"
@@ -154,7 +154,7 @@
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_weight="1"
-                        android:text="Hypertension" />
+                        android:text="@string/hypertension" />
 
 
                 </LinearLayout>
@@ -194,7 +194,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="Urine Albumin" />
+                                android:text="@string/urine_albumin" />
 
                             <EditText
                                 android:id="@+id/urineAlbumin"
@@ -213,7 +213,7 @@
                                 android:layout_width="160dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="Bleeding per vaginum" />
+                                android:text="@string/bleeding_per_vaginum" />
 
                             <EditText
                                 android:id="@+id/bleedingVag"
@@ -248,7 +248,7 @@
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Heart Rate"
+                        android:text="@string/heart_rate"
                         android:textSize="20sp" />
 
                     <EditText
@@ -258,7 +258,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="5"
                         android:backgroundTint="@color/colortheme"
-                        android:hint="in Beats/Minute"
+                        android:hint="@string/in_beats_minute"
                         android:inputType="number" />
 
                 </LinearLayout>
@@ -284,7 +284,7 @@
                         android:layout_width="130dp"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="Body Weight"
+                        android:text="@string/body_weight"
                         android:textSize="20sp" />
 
                     <EditText
@@ -294,7 +294,7 @@
                         android:layout_margin="10dp"
                         android:layout_weight="5"
                         android:backgroundTint="@color/colortheme"
-                        android:hint="in Kg"
+                        android:hint="@string/in_kg"
                         android:inputType="number" />
 
                 </LinearLayout>
@@ -311,7 +311,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:text="Extra Comments / Complications"
+                    android:text="@string/extra_comments_complications"
                     android:textColor="@color/colortheme" />
 
                 <LinearLayout
@@ -333,7 +333,7 @@
                             android:layout_margin="10dp"
                             android:layout_weight="5"
                             android:backgroundTint="@color/colortheme"
-                            android:hint="Something you want doctor to know" />
+                            android:hint="@string/something_you_want_doctor_to_know" />
 
                     </LinearLayout>
 
@@ -345,7 +345,7 @@
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="10dp"
-                        android:text="Upload photo"
+                        android:text="@string/upload_photo"
                         android:textAllCaps="false" />
 
                 </LinearLayout>
@@ -376,7 +376,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Send"
+                    android:text="@string/send"
                     android:textAllCaps="false" />
 
                 <ImageView

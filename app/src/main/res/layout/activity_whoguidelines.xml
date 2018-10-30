@@ -28,7 +28,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="LMP"
+                    android:text="@string/lmp"
                     android:textSize="40px" />
 
                 <TextView
@@ -37,7 +37,7 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:text="EDD"
+                    android:text="@string/edd"
                     android:textSize="40px" />
             </LinearLayout>
 
@@ -136,37 +136,37 @@
                             android:id="@+id/anc1dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                         <CheckBox
                             android:id="@+id/anc1ana"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Anaemia" />
+                            android:text="@string/anaemia" />
 
                         <CheckBox
                             android:id="@+id/anc1hiv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="HIV" />
+                            android:text="@string/hiv" />
 
                         <CheckBox
                             android:id="@+id/anc1ult"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Ultrasound" />
+                            android:text="@string/ultrasound" />
 
                         <CheckBox
                             android:id="@+id/anc1tet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Tetnus" />
+                            android:text="@string/tetnus" />
 
                         <CheckBox
                             android:id="@+id/anc1uri"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Urine Test" />
+                            android:text="@string/urine_test" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -230,13 +230,13 @@
                             android:id="@+id/anc2dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                         <CheckBox
                             android:id="@+id/anc2ult"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Ultrasound" />
+                            android:text="@string/ultrasound" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -299,19 +299,19 @@
                             android:id="@+id/anc3dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                         <CheckBox
                             android:id="@+id/anc3ana"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Anaemia" />
+                            android:text="@string/anaemia" />
 
                         <CheckBox
                             android:id="@+id/anc3uri"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Urine Test" />
+                            android:text="@string/urine_test" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -367,7 +367,7 @@
                             android:id="@+id/anc4dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -430,13 +430,13 @@
                             android:id="@+id/anc5dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                         <CheckBox
                             android:id="@+id/anc5uri"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Urine Test" />
+                            android:text="@string/urine_test" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -492,13 +492,13 @@
                             android:id="@+id/anc6dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                         <CheckBox
                             android:id="@+id/anc6ana"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Anaemia" />
+                            android:text="@string/anaemia" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -554,7 +554,7 @@
                             android:id="@+id/anc7dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Diabetese" />
+                            android:text="@string/diabetese" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -604,7 +604,7 @@
                         android:id="@+id/anc8dia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Diabetese" />
+                        android:text="@string/diabetese" />
 
                 </LinearLayout>
 
@@ -618,7 +618,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
-                android:text="Update My Data"
+                android:text="@string/update_my_data"
                 android:textAllCaps="false"
                 tools:text="Update My Data" />
 

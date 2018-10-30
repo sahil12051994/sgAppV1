@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="or_register_as">रजिस्टर करें</string>
+    <string name="app_name">स्वस्थ कोख</string>
+    <string name="patient_register">मरीज</string>
+    <string name="doctor_register">चिकित्सक</string>
+    <string name="signin_button">दाखिल</string>
+    <string name="copyright">CBTB प्रयोगशाला आईआईटी रुड़की</string>
+    <string name="statusOfPatientState">इस राज्य की जटिलता</string>
+    <string name="whoGraphDescription">ग्राफ उन महिलाओं को दिखा रहा है जो अपनी गर्भावस्था के दौरान डब्ल्यूएचओ दिशानिर्देशों का पालन करते हैं</string>
+    <string name="PieChartDesc">विभिन्न कारकों पर रोगियों का वितरण</string>
+    <string name="PirChartDesc">यह पाई चार्ट है</string>
+    <string name="name">नाम</string>
+    <string name="doctor">चिकित्सक</string>
+    <string name="doctors_mobile">डॉक्टर मोबाइल</string>
+    <string name="pregnancy_start">गर्भावस्था शुरू</string>
+    <string name="who_medication">डब्ल्यूएचओ दवा</string>
+    <string name="add_data">डेटा जोड़ें</string>
+    <string name="who">वडब्ल्यूएचओ</string>
+    <string name="medication">दवा</string>
+    <string name="your_history">आपका इतिहास</string>
+    <string name="blood_pressure">रक्त चाप</string>
+    <string name="systyole">सिस्टोलिक</string>
+    <string name="diastyole">डाइऐस्टली</string>
+    <string name="headache">सरदर्द</string>
+    <string name="abdominal_pain">पेट में दर्द</string>
+    <string name="visual_problems">दृश्य समस्याएं</string>
+    <string name="decreased_fetal_movements">कमजोर भ्रूण आंदोलनों</string>
+    <string name="swelling_in_hands_or_face">हाथ या चेहरे में सूजन</string>
+    <string name="hypertension">उच्च रक्तचाप</string>
+    <string name="urine_albumin">मूत्र अल्बुमिन</string>
+    <string name="bleeding_per_vaginum">प्रति योनि रक्तस्राव</string>
+    <string name="heart_rate">हृदय गति</string>
+    <string name="in_beats_minute">बीट्स / मिनट में</string>
+    <string name="body_weight">शरीर का वजन</string>
+    <string name="in_kg">केजी में</string>
+    <string name="extra_comments_complications">अतिरिक्त टिप्पणियां / जटिलताओं</string>
+    <string name="something_you_want_doctor_to_know">कुछ आप डॉक्टर को जानना चाहते हैं</string>
+    <string name="upload_photo">फोटो अपलोड करें</string>
+    <string name="send">भेजना</string>
+    <string name="period">अवधि</string>
+    <string name="starting_from">से शुरू :</string>
+    <string name="to_be_taken_till">तक ले जाने के लिए:</string>
+    <string name="diabetese">डायबिटीज़</string>
+    <string name="anaemia">खून की कमी</string>
+    <string name="hiv">एचआईवी</string>
+    <string name="ultrasound">अल्ट्रासाउंड</string>
+    <string name="tetnus">टिटनेस</string>
+    <string name="urine_test">मूत्र परीक्षण</string>
+    <string name="update_my_data">मेरा डेटा अपडेट करें</string>
+    <string name="lmp">अंतिम माहवारी</string>
+    <string name="edd">वितरण</string>
+
+    <string-array name="medicine_freq">
+        <item>रोज</item>
+        <item>साप्ताहिक</item>
+        <item>महीने के</item>
+    </string-array>
+</resources>
