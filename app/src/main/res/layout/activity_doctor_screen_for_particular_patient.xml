@@ -145,7 +145,9 @@
             android:id="@+id/MedicineReminderDoctor"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
+            android:background="@drawable/my_btn"
             android:text="Medicine"
             android:textAllCaps="false" />
 
@@ -153,7 +155,9 @@
             android:id="@+id/NotificationByDoctor"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:layout_weight="1"
+            android:background="@drawable/my_btn"
             android:text="Notify"
             android:textAllCaps="false" />
 

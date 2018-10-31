@@ -11,15 +11,10 @@
 
         <menu>
 
-            <item android:id="@+id/action_refresh"
+            <item android:id="@+id/who_details"
                 android:icon="@android:drawable/ic_menu_rotate"
                 app:showAsAction="ifRoom"
                 android:title="WHO Tests" />
-
-            <item android:id="@+id/action_notification"
-                android:icon="@android:drawable/ic_menu_today"
-                app:showAsAction="ifRoom"
-                android:title="Medicines" />
 
             <item android:id="@+id/patientImages"
                 android:icon="@android:drawable/ic_menu_today"

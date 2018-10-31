@@ -334,6 +334,7 @@ public class patient_registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(patient_registration.this, WHOGuidelines.class);
+                intent.putExtra("EXTRA_PATIENT_ID", session.getUserDetails().get("id"));
                 startActivity(intent);
             }
         });

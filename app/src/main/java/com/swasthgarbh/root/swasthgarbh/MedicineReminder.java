@@ -42,7 +42,6 @@ import java.util.Map;
 
 public class MedicineReminder extends AppCompatActivity {
 
-    ArrayList<MedicineListClass> medicineRowAdapter = new ArrayList<MedicineListClass>();
     ListView patient_list_view;
     patientDataAdapter adapter;
     static SessionManager session;
@@ -178,7 +177,7 @@ public class MedicineReminder extends AppCompatActivity {
 
     public void getPatientData(int id){
         String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + id;
-
+        final ArrayList<MedicineListClass> medicineRowAdapter = new ArrayList<MedicineListClass>();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONObject>() {

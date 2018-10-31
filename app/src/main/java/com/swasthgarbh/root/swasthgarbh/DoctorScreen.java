@@ -111,8 +111,8 @@ public class DoctorScreen extends AppCompatActivity {
         allNotificationsDoctor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DoctorScreen.this, patientDataEntry.class);
-                startActivity(intent);
+                Intent i = new Intent(DoctorScreen.this, PatientNotifications.class);
+                startActivity(i);
             }
         });
         getDoctorData();

@@ -179,7 +179,10 @@
             android:id="@+id/addData"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
+            android:background="@drawable/my_btn"
             android:text="@string/add_data"
             android:textAllCaps="false" />
 
@@ -189,7 +192,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/who"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:background="@drawable/my_btn"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"/>
 
         <Button
             android:id="@+id/medicineList"
@@ -197,7 +203,10 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/medication"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:background="@drawable/my_btn"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"/>
 
     </LinearLayout>
 

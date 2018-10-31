@@ -44,10 +44,6 @@ public class PatientNotifications extends AppCompatActivity {
             case R.id.action_logout:
                 logout(this);
                 return true;
-            case R.id.action_refresh:
-                Intent i = new Intent(this, PatientNotifications.class);
-                startActivity(i);
-                finish();
             default:
                 return super.onOptionsItemSelected(item);
         }

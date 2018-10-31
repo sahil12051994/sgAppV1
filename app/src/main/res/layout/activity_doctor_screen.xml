@@ -131,7 +131,9 @@
             android:id="@+id/allPatientsDoctor"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginRight="3dp"
             android:layout_weight="1"
+            android:background="@drawable/my_btn"
             android:text="All Patients"
             android:textAllCaps="false" />
 
@@ -139,7 +141,9 @@
             android:id="@+id/allNotificationsDoctor"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
             android:layout_weight="1"
+            android:background="@drawable/my_btn"
             android:text="Notifications"
             android:textAllCaps="false" />
 

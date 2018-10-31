@@ -19,8 +19,8 @@
     <string name="medication">Medication</string>
     <string name="your_history">Your History</string>
     <string name="blood_pressure">Blood Pressure</string>
-    <string name="systyole">Systyole</string>
-    <string name="diastyole">Diastyole</string>
+    <string name="systole">Systole</string>
+    <string name="diastole">Diastole</string>
     <string name="headache">Headache</string>
     <string name="abdominal_pain">Abdominal Pain</string>
     <string name="visual_problems">Visual Problems</string>
@@ -55,5 +55,6 @@
         <item>Weekly</item>
         <item>Monthly</item>
     </string-array>
+    <string name="title_activity_all_images_view">all_images_view</string>
 
 </resources>

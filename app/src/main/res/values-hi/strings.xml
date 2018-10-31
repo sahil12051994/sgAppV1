@@ -20,8 +20,8 @@
     <string name="medication">दवा</string>
     <string name="your_history">आपका इतिहास</string>
     <string name="blood_pressure">रक्त चाप</string>
-    <string name="systyole">सिस्टोलिक</string>
-    <string name="diastyole">डाइऐस्टली</string>
+    <string name="systole">सिस्टोलिक</string>
+    <string name="diastole">डाइऐस्टली</string>
     <string name="headache">सरदर्द</string>
     <string name="abdominal_pain">पेट में दर्द</string>
     <string name="visual_problems">दृश्य समस्याएं</string>

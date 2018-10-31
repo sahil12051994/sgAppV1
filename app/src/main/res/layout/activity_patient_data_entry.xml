@@ -55,7 +55,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="@string/systyole" />
+                                android:text="@string/systole" />
 
                             <EditText
                                 android:id="@+id/sysData"
@@ -74,7 +74,7 @@
                                 android:layout_width="100dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
-                                android:text="@string/diastyole" />
+                                android:text="@string/diastole" />
 
                             <EditText
                                 android:id="@+id/dysData"
@@ -337,14 +337,25 @@
 
                     </LinearLayout>
 
+                    <ImageView
+                        android:id="@+id/ivImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_margin="15dp"
+                        android:visibility="gone" />
+
                     <Button
                         android:id="@+id/add_pic"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="30dp"
                         android:layout_marginBottom="10dp"
+                        android:background="@drawable/my_btn"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
                         android:text="@string/upload_photo"
                         android:textAllCaps="false" />
 
@@ -353,11 +364,6 @@
             </android.support.v7.widget.CardView>
 
 
-            <ImageView
-                android:id="@+id/ivImage"
-                android:layout_width="80dp"
-                android:layout_height="100dp"
-                android:visibility="gone"/>
 
 
             <FrameLayout
@@ -375,19 +381,10 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="50dp"
+                    android:background="@drawable/my_btn"
                     android:text="@string/send"
                     android:textAllCaps="false" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:id="@+id/loader"
-                    android:layout_marginBottom="5dp"
-                    android:visibility="gone" />
-
 
             </FrameLayout>
 

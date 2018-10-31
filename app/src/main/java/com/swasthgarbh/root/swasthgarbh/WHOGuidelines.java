@@ -30,7 +30,7 @@ import static com.swasthgarbh.root.swasthgarbh.patient_registration.session;
 public class WHOGuidelines extends AppCompatActivity {
 
     CheckBox anc1_diabtese, anc1_anemia, anc1_hiv, anc1_ultrasound, anc1_tetnus, anc1_urine, anc2_diabtese, anc2_anemia, anc3_diabtese, anc3_anemia, anc3_urine, anc4_diabtese, anc5_diabtese, anc5_urine, anc6_diabtese, anc6_anemia, anc7_diabtese, anc8_diabtese;
-
+    int clickedPatientId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +84,9 @@ public class WHOGuidelines extends AppCompatActivity {
 
         session = new SessionManager(this);
 //      Getting the WHO Data
-        String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + session.getUserDetails().get("id");
+        clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
+
+        String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + clickedPatientId;
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONObject>() {
@@ -199,6 +201,12 @@ public class WHOGuidelines extends AppCompatActivity {
         ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
 
         Button updateWhoData = (Button) findViewById(R.id.updateWhoData);
+
+        final HashMap<String, String> user = session.getUserDetails();
+        if ("doctor".equals(user.get("type"))){
+            updateWhoData.setVisibility(View.GONE);
+//            anc8_diabtese.setEnabled(false);
+        }
         updateWhoData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -49,7 +49,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
     ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
     ListView patient_list_view;
     patientDataAdapter adapter;
-    private int doctorId;
+    private int doctorId, clickedPatientId;
     TextView doctorName, patientName, pregStartDate, patientMobile, whoFollowing, patientEmail;
     ImageView callDoctor;
     Button notify, send;
@@ -59,7 +59,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.doctor_menu, menu);
+        getMenuInflater().inflate(R.menu.patient_detail_in_doctor, menu);
         return true;
     }
 
@@ -69,6 +69,14 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
         if (item.getItemId() == R.id.action_logout){
             logout(this);
             return true;
+        } else if (item.getItemId() == R.id.patientImages){
+            Intent intent = new Intent(this, all_images_view.class);
+            intent.putExtra("EXTRA_PATIENT_ID", clickedPatientId);
+            startActivity(intent);
+        } else if (item.getItemId() == R.id.who_details){
+            Intent intent = new Intent(DoctorScreenForParticularPatient.this, WHOGuidelines.class);
+            intent.putExtra("EXTRA_PATIENT_ID", clickedPatientId);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -164,7 +172,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
         session = new SessionManager(this);
 
-        final int clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
+        clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
         getPatientData(clickedPatientId);
 
 
