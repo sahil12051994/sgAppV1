@@ -140,6 +140,9 @@ public class patient_registration extends AppCompatActivity {
             Intent webIntent = new Intent(Intent.ACTION_VIEW);
             webIntent.setData(Uri.parse(url));
             startActivity(webIntent);
+        } else if (item.getItemId() == R.id.aboutPre){
+            i = new Intent(this, AboutPreeclampsia.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }

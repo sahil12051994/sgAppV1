@@ -14,22 +14,27 @@
             <item android:id="@+id/action_change_doctor"
                 android:icon="@android:drawable/ic_menu_add"
                 app:showAsAction="ifRoom"
-                android:title="Change doctor" />
+                android:title="@string/change_doctor" />
 
             <item android:id="@+id/action_notification"
                 android:icon="@android:drawable/ic_menu_today"
                 app:showAsAction="ifRoom"
-                android:title="Notifications" />
+                android:title="@string/notifications" />
 
             <item android:id="@+id/hospitalsNearYou"
                 android:icon="@android:drawable/ic_menu_today"
                 app:showAsAction="ifRoom"
-                android:title="Nearby Hospitals" />
+                android:title="@string/nearby_hospitals" />
+
+            <item android:id="@+id/aboutPre"
+                android:icon="@android:drawable/ic_menu_today"
+                app:showAsAction="ifRoom"
+                android:title="@string/about_preeclapmsia" />
 
             <item android:id="@+id/action_logout"
                 android:icon="@android:drawable/ic_menu_delete"
                 app:showAsAction="ifRoom"
-                android:title="Logout" />
+                android:title="@string/logout" />
 
         </menu>
 

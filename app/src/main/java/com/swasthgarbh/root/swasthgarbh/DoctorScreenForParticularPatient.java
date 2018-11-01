@@ -174,7 +174,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
         clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
         getPatientData(clickedPatientId);
-
+        p_id = String.valueOf(clickedPatientId);
 
         Button MedicineReminderDoctor = (Button) findViewById(R.id.MedicineReminderDoctor);
         MedicineReminderDoctor.setOnClickListener(new View.OnClickListener() {
@@ -285,6 +285,8 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             patientDataAdapter itemsAdapter = new patientDataAdapter(DoctorScreenForParticularPatient.this, patientRowData);
                             ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
                             listView.setAdapter(itemsAdapter);
+                            JSONObject device = (JSONObject) response.get("device");
+                            to_fcm = device.getString("device_id");
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

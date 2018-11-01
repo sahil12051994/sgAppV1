@@ -171,8 +171,6 @@ public class DoctorScreen extends AppCompatActivity {
 
                             BarChart barChart = (BarChart) findViewById(R.id.whoChart);
 
-//                            ArrayList<BarEntry> dataInBarChart = new ArrayList<BarEntry>();
-
                             List<BarEntry> entriesGroup1 = new ArrayList<>();
                             List<BarEntry> entriesGroup2 = new ArrayList<>();
 

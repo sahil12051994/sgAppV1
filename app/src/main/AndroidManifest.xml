@@ -41,6 +41,7 @@
         <activity android:name=".MedicineReminder" />
         <activity android:name=".PatientImages" />
         <activity android:name=".all_images_view" />
+        <activity android:name=".AboutPreeclampsia"></activity>
     </application>
 
 </manifest>
