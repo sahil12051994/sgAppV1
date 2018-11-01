@@ -21,17 +21,19 @@
             <TextView
                 android:id="@+id/PatientNameInList"
                 android:layout_width="0px"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
+                android:layout_weight="0.7"
                 android:inputType="textPersonName"
                 android:text="Sahil Sharma"
                 android:textSize="25sp" />
 
             <ImageView
-                android:layout_width="38dp"
+                android:layout_width="0px"
+                android:layout_weight="0.2"
                 android:layout_height="match_parent"
-                android:src="@drawable/analysis"/>
+                android:layout_marginTop="5dp"
+                android:src="@drawable/analysis" />
 
         </LinearLayout>
 

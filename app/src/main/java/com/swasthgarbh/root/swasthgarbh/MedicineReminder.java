@@ -1,6 +1,8 @@
 package com.swasthgarbh.root.swasthgarbh;
 
+import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -12,12 +14,14 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -35,9 +39,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class MedicineReminder extends AppCompatActivity {
@@ -50,27 +56,38 @@ public class MedicineReminder extends AppCompatActivity {
     EditText medName, medStart, medEnd, medComments;
     int clickedPatientId;
     RadioGroup radioGroupFReq;
-    RadioButton radioGroupFReqDaily,radioGroupFReqWeekly,radioGroupFReqMonthly;
+    RadioButton radioGroupFReqDaily, radioGroupFReqWeekly, radioGroupFReqMonthly;
     FloatingActionButton fab;
     SwipeRefreshLayout mSwipeRefreshLayout;
-//    ImageView reminderButton;
-//    ListView patient_medicine_list;
+
+    private DatePickerDialog fromDatePickerDialog;
+    private DatePickerDialog toDatePickerDialog;
+
+    private SimpleDateFormat dateFormatterShow, dateFormatterServer;
+    String medStartTime, medEndTime;
+
+    Calendar newDate1 = Calendar.getInstance();
+    Calendar newDate2 = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_medicine_reminder);
 
+        dateFormatterShow = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        dateFormatterServer = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:dd'Z'");
+
         session = new SessionManager(this);
-        clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
+        clickedPatientId = getIntent().getIntExtra("EXTRA_PATIENT_ID", 0);
+        Log.i("iiiidddd", "onCreate: " + clickedPatientId);
         getPatientData(clickedPatientId);
+
         fab = findViewById(R.id.fab);
-//        patient_medicine_list = (ListView) findViewById(R.id.patient_medicine_list);
-//        reminderButton = (ImageView) patient_medicine_list.getChildAt(0).findViewById(R.id.reminderButton);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshMedicine);
 
+
         final HashMap<String, String> user = session.getUserDetails();
-        if ("doctor".equals(user.get("type"))){
+        if ("doctor".equals(user.get("type"))) {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -99,8 +116,42 @@ public class MedicineReminder extends AppCompatActivity {
 
         addMedButton = add_medicine_dialog.findViewById(R.id.addMedButton);
         medName = add_medicine_dialog.findViewById(R.id.medName);
+
         medStart = add_medicine_dialog.findViewById(R.id.medStart);
+        medStart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fromDatePickerDialog.show();
+            }
+        });
+        Calendar newCalendar = Calendar.getInstance();
+        fromDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                newDate1.set(year, monthOfYear, dayOfMonth);
+                medStart.setText(dateFormatterShow.format(newDate1.getTime()));
+                medStartTime = dateFormatterServer.format(newDate1.getTime());
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
         medEnd = add_medicine_dialog.findViewById(R.id.medEnd);
+        medEnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toDatePickerDialog.show();
+            }
+        });
+        toDatePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                newDate2.set(year, monthOfYear, dayOfMonth);
+                medEnd.setText(dateFormatterShow.format(newDate2.getTime()));
+                medEndTime = dateFormatterServer.format(newDate2.getTime());
+            }
+
+        }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
         medComments = add_medicine_dialog.findViewById(R.id.medComments);
         radioGroupFReq = add_medicine_dialog.findViewById(R.id.radioGroupFreq);
 
@@ -138,19 +189,19 @@ public class MedicineReminder extends AppCompatActivity {
                             params.put("medicine_name", medName.getText());
 
                             String freq = "daily";
-                            if(radioGroupFReqDaily.isChecked()){
+                            if (radioGroupFReqDaily.isChecked()) {
                                 freq = "daily";
-                            } else if (radioGroupFReqMonthly.isChecked()){
+                            } else if (radioGroupFReqMonthly.isChecked()) {
                                 freq = "monthly";
-                            } else if(radioGroupFReqWeekly.isChecked()){
+                            } else if (radioGroupFReqWeekly.isChecked()) {
                                 freq = "weekly";
                             }
 
                             params.put("medicine_freq", freq);
                             params.put("medicine_extra_comments", medComments.getText());
-                            params.put("medicine_Image", "Image file for Medicine 4");
-                            params.put("medicine_start", "2018-10-26T00:24:11.080431");
-                            params.put("medicine_end", "2018-10-26T00:24:11.080431");
+                            params.put("medicine_Image", "Sample image byte for Medicine");
+                            params.put("medicine_start", medStartTime);
+                            params.put("medicine_end", medEndTime);
 
                             Log.i("Boddddyyyyy", "getBody: " + params.toString());
                         } catch (JSONException e) {
@@ -175,7 +226,7 @@ public class MedicineReminder extends AppCompatActivity {
     }
 
 
-    public void getPatientData(int id){
+    public void getPatientData(int id) {
         String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + id;
         final ArrayList<MedicineListClass> medicineRowAdapter = new ArrayList<MedicineListClass>();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -190,7 +241,7 @@ public class MedicineReminder extends AppCompatActivity {
 
                             for (int i = 0; i < medicineData.length(); i++) {
                                 JSONObject po = (JSONObject) medicineData.get(i);
-                                MedicineListClass pr = new MedicineListClass(po.getString("medicine_name"),po.getString("medicine_start"), po.getString("medicine_end"),po.getString("medicine_freq"),po.getString("medicine_extra_comments"));
+                                MedicineListClass pr = new MedicineListClass(po.getString("medicine_name"), po.getString("medicine_start"), po.getString("medicine_end"), po.getString("medicine_freq"), po.getString("medicine_extra_comments"));
                                 medicineRowAdapter.add(pr);
                                 Log.i("Data in array", "" + String.valueOf(medicineData.get(i)));
                             }

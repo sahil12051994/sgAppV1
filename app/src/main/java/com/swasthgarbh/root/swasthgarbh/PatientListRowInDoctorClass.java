@@ -33,10 +33,10 @@ public class PatientListRowInDoctorClass {
     private ArrayList<Entry> yValues = new ArrayList<Entry>();
     private ArrayList<Entry> y2Values = new ArrayList<Entry>();
 
-    public PatientListRowInDoctorClass(int patientId, String name, String dob){
+    public PatientListRowInDoctorClass(int patientId, String name, String lmp){
 
         this.patientName = name;
-        this.patientLmp = dob;
+        this.patientLmp = lmp.split("T")[0].split("-")[2] + "-" + lmp.split("T")[0].split("-")[1] + "-" + lmp.split("T")[0].split("-")[0];;
         this.patientId = patientId;
     }
 

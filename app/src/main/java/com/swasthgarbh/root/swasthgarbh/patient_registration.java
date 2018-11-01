@@ -130,11 +130,9 @@ public class patient_registration extends AppCompatActivity {
         if (item.getItemId() == R.id.action_logout){
             logout(this);
             return true;
-        }
-        else if (item.getItemId() == R.id.action_change_doctor){
+        } else if (item.getItemId() == R.id.action_change_doctor){
             change_doctor();
-        }
-        else if (item.getItemId() == R.id.action_notification){
+        } else if (item.getItemId() == R.id.action_notification){
             i = new Intent(this, PatientNotifications.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.hospitalsNearYou){
@@ -328,13 +326,12 @@ public class patient_registration extends AppCompatActivity {
 //                logout(patient_registration.this);
 //            }
 //        });
-
         Button whoGuidelines = (Button) findViewById(R.id.who_button);
         whoGuidelines.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(patient_registration.this, WHOGuidelines.class);
-                intent.putExtra("EXTRA_PATIENT_ID", session.getUserDetails().get("id"));
+                intent.putExtra("EXTRA_PATIENT_ID", Integer.parseInt(session.getUserDetails().get("id")));
                 startActivity(intent);
             }
         });
@@ -353,7 +350,7 @@ public class patient_registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(patient_registration.this, MedicineReminder.class);
-                intent.putExtra("EXTRA_PATIENT_ID", session.getUserDetails().get("id"));
+                intent.putExtra("EXTRA_PATIENT_ID", Integer.parseInt(session.getUserDetails().get("id")));
                 startActivity(intent);
             }
         });
@@ -434,7 +431,9 @@ public class patient_registration extends AppCompatActivity {
                             doctorId = response.getInt("doctor");
                             patientName.setText(response.getString("name"));
                             whoFollowing.setText(response.getString("who_following"));
-                            Log.i("whoooooo", "onResponse: " + response.getString("who_following"));
+                            String date = response.getString("lmp").split("T")[0].split("-")[2] + "-" + response.getString("lmp").split("T")[0].split("-")[1] + "-" + response.getString("lmp").split("T")[0].split("-")[0];
+                            pregStartDate.setText(date);
+//                            Log.i("whoooooo", "onResponse: " + response.getString("who_following"));
                             JSONArray patientBpData = response.getJSONArray("data");
                             if(patientBpData.length()!=0){
 //                                parentView.removeView(TextWhenNoData);

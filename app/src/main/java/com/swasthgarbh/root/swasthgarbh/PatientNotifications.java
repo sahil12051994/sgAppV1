@@ -34,7 +34,7 @@ public class PatientNotifications extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.patient_menu, menu);
+        getMenuInflater().inflate(R.menu.common_notification_menu, menu);
         return true;
     }
 

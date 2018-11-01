@@ -55,6 +55,24 @@
         <item>Weekly</item>
         <item>Monthly</item>
     </string-array>
-    <string name="title_activity_all_images_view">all_images_view</string>
+    <string name="title_activity_all_images_view" translatable="false">all_images_view</string>
+    <string name="address">Address</string>
+    <string name="age_in_years">Age (in years)</string>
+    <string name="last_mesntural_period">Last Menstrual Period</string>
+    <string name="date">Date</string>
+    <string name="some_extra_details_optional">Some extra details (Optional)</string>
+    <string name="history_of_high_blood_pressure_prior_to_pregnancy">History of high blood pressure prior to pregnancy</string>
+    <string name="a_history_of_preeclampsia">A history of preeclampsia</string>
+    <string name="having_a_mother_or_sister_who_had_preeclampsia">Having a mother or sister who had preeclampsia</string>
+    <string name="a_history_of_obesity">A history of obesity</string>
+    <string name="carrying_more_than_one_baby">Carrying more than one baby</string>
+    <string name="history_of_diabetes_kidney_disease_lupus_or_rheumatoid_arthritis">History of diabetes, kidney disease, lupus, or rheumatoid arthritis</string>
+    <string name="your_credentials">Your credentials</string>
+    <string name="mobile">Mobile</string>
+    <string name="password">Password</string>
+    <string name="email_optional">Email (Optional)</string>
+    <string name="doctor_s_number">Doctor\'s Number</string>
+    <string name="doctor_s_name">Doctor\'s Name</string>
+    <string name="register">Register</string>
 
 </resources>

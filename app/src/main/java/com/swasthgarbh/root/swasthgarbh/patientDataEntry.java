@@ -50,7 +50,7 @@ public class patientDataEntry extends AppCompatActivity {
     ImageView ivImage;
     private String userChoosenTask;
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
-    String ImgBytes;
+    String ImgBytes = "";
     ImageView loader;
 
 

@@ -72,6 +72,12 @@ public class DoctorScreen extends AppCompatActivity {
         if (item.getItemId() == R.id.action_logout) {
             logout(this);
             return true;
+        } else if (item.getItemId() == R.id.action_notification){
+            i = new Intent(this, PatientNotifications.class);
+            startActivity(i);
+        } else if (item.getItemId() == R.id.action_refresh){
+            getDoctorData();
+            getDoctorAllPatientsData();
         }
         return super.onOptionsItemSelected(item);
     }

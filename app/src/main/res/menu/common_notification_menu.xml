@@ -11,16 +11,6 @@
 
         <menu>
 
-            <!--<item android:id="@+id/action_refresh"-->
-                <!--android:icon="@android:drawable/ic_menu_rotate"-->
-                <!--app:showAsAction="ifRoom"-->
-                <!--android:title="" />-->
-
-            <item android:id="@+id/action_refresh"
-                android:icon="@android:drawable/ic_menu_rotate"
-                app:showAsAction="ifRoom"
-                android:title="Refresh" />
-
             <item android:id="@+id/action_logout"
                 android:icon="@android:drawable/ic_menu_delete"
                 app:showAsAction="ifRoom"

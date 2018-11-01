@@ -84,8 +84,7 @@ public class WHOGuidelines extends AppCompatActivity {
 
         session = new SessionManager(this);
 //      Getting the WHO Data
-        clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
-
+        clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 0);
         String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + clickedPatientId;
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,

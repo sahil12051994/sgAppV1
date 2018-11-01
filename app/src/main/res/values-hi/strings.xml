@@ -50,6 +50,24 @@
     <string name="update_my_data">मेरा डेटा अपडेट करें</string>
     <string name="lmp">अंतिम माहवारी</string>
     <string name="edd">वितरण</string>
+    <string name="address">पता</string>
+    <string name="age_in_years">आयु वर्षों में</string>
+    <string name="last_mesntural_period">अंतिम माहवारी</string>
+    <string name="date">दिनांक</string>
+    <string name="some_extra_details_optional">कुछ अतिरिक्त विवरण (वैकल्पिक)</string>
+    <string name="history_of_high_blood_pressure_prior_to_pregnancy">गर्भावस्था से पहले उच्च रक्तचाप का इतिहास</string>
+    <string name="a_history_of_preeclampsia">प्रिक्लेम्पिया का इतिहास</string>
+    <string name="having_a_mother_or_sister_who_had_preeclampsia">एक मां या बहन होने के बाद, जिसमें प्रिक्लेम्पिया थी</string>
+    <string name="a_history_of_obesity">मोटापे का इतिहास</string>
+    <string name="carrying_more_than_one_baby">एक से अधिक बच्चे</string>
+    <string name="history_of_diabetes_kidney_disease_lupus_or_rheumatoid_arthritis">मधुमेह, गुर्दे की बीमारी, ल्यूपस, या रूमेटोइड गठिया का इतिहास</string>
+    <string name="your_credentials">आपके प्रमाण पत्र</string>
+    <string name="mobile">मोबाइल</string>
+    <string name="password">पारण</string>
+    <string name="email_optional">ईमेल वैकल्पिक</string>
+    <string name="doctor_s_number">चिकित्सक की मोबाइल</string>
+    <string name="doctor_s_name">चिकित्सक का नाम</string>
+    <string name="register">रजिस्टर</string>
 
     <string-array name="medicine_freq">
         <item>रोज</item>

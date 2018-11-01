@@ -58,6 +58,9 @@ public class AllPatientListActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_logout){
             logout(this);
             return true;
+        } else if (item.getItemId() == R.id.action_notification){
+            i = new Intent(this, PatientNotifications.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -101,7 +104,7 @@ public class AllPatientListActivity extends AppCompatActivity {
 
                             for (int i = 0; i < allPatientsArray.length(); i++) {
                                 JSONObject po = (JSONObject) allPatientsArray.get(i);
-                                PatientListRowInDoctorClass pr = new PatientListRowInDoctorClass(po.getInt("pk"),po.getString("name"), po.getString("date_of_birth"));
+                                PatientListRowInDoctorClass pr = new PatientListRowInDoctorClass(po.getInt("pk"),po.getString("name"), po.getString("lmp"));
                                 patientRowData.add(pr);
                             }
 
