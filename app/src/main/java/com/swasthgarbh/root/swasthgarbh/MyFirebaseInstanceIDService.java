@@ -88,7 +88,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
             }
         };
         ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
-
     }
 
 }
