@@ -39,6 +39,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -249,6 +250,8 @@ public class MedicineReminder extends AppCompatActivity {
                             ListView listView = (ListView) findViewById(R.id.patient_medicine_list);
                             listView.setAdapter(itemsAdapter);
                         } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
                             e.printStackTrace();
                         }
 //                            edit.commit();

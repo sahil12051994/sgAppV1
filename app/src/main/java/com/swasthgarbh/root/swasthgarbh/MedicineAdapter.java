@@ -16,9 +16,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 
@@ -33,6 +36,7 @@ import com.google.api.services.calendar.model.Events;
 public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
 
     static SessionManager session;
+    private SimpleDateFormat dateFormatterServer;
 
     public MedicineAdapter(Activity context, ArrayList<MedicineListClass> patientData) {
         super(context, 0, patientData);
@@ -65,6 +69,14 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
 
         ImageView reminder = (ImageView)listItemView.findViewById(R.id.reminderButton);
 
+//        try {
+//            Date date = dateFormatterServer.parse(current_medicine_data.getStartDate().split("T")[0]);
+//            long millis = date.getTime();
+//            Log.i("startttdateee", "getView: " + millis);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+
         session = new SessionManager(getContext());
         final HashMap<String, String> user = session.getUserDetails();
         Log.i("typeeeeee", "getView: " + user.get("type"));
@@ -77,19 +89,21 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
                     calIntent.setData(CalendarContract.Events.CONTENT_URI);
                     calIntent.setType("vnd.android.cursor.item/event");
 
-                    String date = current_medicine_data.getStartDate();
-                    int month = Integer.parseInt(date.split("-")[1]);
+                    dateFormatterServer = new SimpleDateFormat("yyyy-MM-dd");
+                    Date start_date = current_medicine_data.getStartDate();
 
-                    GregorianCalendar calDate = new GregorianCalendar(Integer.parseInt(current_medicine_data.getStartDate_year()), month, Integer.parseInt(current_medicine_data.getStartDate_year()));
                     calIntent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
-                    calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
-                            calDate.getTimeInMillis());
 
-                    date = current_medicine_data.getEndDate();
-                    month = Integer.parseInt(date.split("-")[1]);
-                    GregorianCalendar calEndDate = new GregorianCalendar(Integer.parseInt(current_medicine_data.getEndDate_date()), month, Integer.parseInt(current_medicine_data.getEndDate_year()));
+                    long millis = start_date.getTime();
+                    calIntent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME,
+                            millis);
+                    Date end_date = current_medicine_data.getEndDate();
+
+                    calIntent.putExtra(CalendarContract.EXTRA_EVENT_ALL_DAY, true);
+
+                    millis = end_date.getTime();
                     calIntent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME,
-                            calEndDate.getTimeInMillis());
+                            millis);
 
                     calIntent.putExtra("allDay", false);
                     calIntent.putExtra("rrule", "FREQ=" + current_medicine_data.getfreq());

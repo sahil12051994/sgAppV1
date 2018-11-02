@@ -1,19 +1,24 @@
 package com.swasthgarbh.root.swasthgarbh;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MedicineListClass {
 
-    private String medName, comments, startDate, endDate, frequency;
+    private String medName, comments, frequency;
     public String startDate_date, startDate_month, startDate_year, endDate_date, endDate_month, endDate_year;
+    Date startDate, endDate;
 
-    public MedicineListClass (String medName, String startDate, String endDate, String freq, String comments){
+    public MedicineListClass (String medName, String startDate, String endDate, String freq, String comments) throws ParseException {
+
+        SimpleDateFormat dateFormatterServer = new SimpleDateFormat("yyyy-MM-dd");
 
         this.medName = medName;
         this.frequency = freq;
         this.comments = comments;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.startDate = dateFormatterServer.parse(startDate);
+        this.endDate = dateFormatterServer.parse(endDate);
         this.startDate_date = get_date_date(startDate);
         this.startDate_month = get_date_month(startDate);
         this.startDate_year = get_date_year(startDate);
@@ -23,8 +28,8 @@ public class MedicineListClass {
     }
 
     public String getMedName(){ return medName; }
-    public String getStartDate() { return startDate; }
-    public String getEndDate() { return endDate; }
+    public Date getStartDate() { return startDate; }
+    public Date getEndDate() { return endDate; }
     public String getComments() { return comments; }
     public String getfreq() { return frequency; }
 
