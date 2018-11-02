@@ -121,6 +121,7 @@
         android:layout_marginRight="40dp"
         android:layout_marginBottom="20dp"
         android:text="Add Medicine"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:background="@drawable/my_btn"/>
 
 </LinearLayout>
