@@ -69,17 +69,9 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
 
         ImageView reminder = (ImageView)listItemView.findViewById(R.id.reminderButton);
 
-//        try {
-//            Date date = dateFormatterServer.parse(current_medicine_data.getStartDate().split("T")[0]);
-//            long millis = date.getTime();
-//            Log.i("startttdateee", "getView: " + millis);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
         session = new SessionManager(getContext());
         final HashMap<String, String> user = session.getUserDetails();
-        Log.i("typeeeeee", "getView: " + user.get("type"));
+//        Log.i("typeeeeee", "getView: " + user.get("type"));
         if ("patient".equals(user.get("type"))){
             reminder.setOnClickListener(new View.OnClickListener() {
                 @Override

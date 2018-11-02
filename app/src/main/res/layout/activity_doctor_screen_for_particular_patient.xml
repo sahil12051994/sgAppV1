@@ -70,20 +70,17 @@
                 <TextView
                     android:id="@+id/patientName"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="Sahil" />
+                    android:layout_height="20dp"/>
 
                 <TextView
                     android:id="@+id/pregStartDate"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="4th April, 2018" />
+                    android:layout_height="20dp"/>
 
                 <TextView
                     android:id="@+id/patientEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="Deepak Sharma" />
+                    android:layout_height="20dp"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -92,8 +89,7 @@
                     <TextView
                         android:id="@+id/patientMobile"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="9876543445" />
+                        android:layout_height="match_parent"/>
 
                     <ImageView
                         android:id="@+id/callDoctor"
@@ -107,8 +103,7 @@
                 <TextView
                     android:id="@+id/whoFollowing"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:text="Following" />
+                    android:layout_height="20dp"/>
 
             </LinearLayout>
 

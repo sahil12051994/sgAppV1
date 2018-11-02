@@ -21,17 +21,22 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class PatientListRowInDoctorClass {
 
     private String patientName;
-    private String patientLmp;
+    private String patientLmp, endDate;
     private int patientId;
     private ArrayList<Entry> yValues = new ArrayList<Entry>();
     private ArrayList<Entry> y2Values = new ArrayList<Entry>();
+
 
     public PatientListRowInDoctorClass(int patientId, String name, String lmp){
 
@@ -42,7 +47,20 @@ public class PatientListRowInDoctorClass {
 
     public String getName() {return patientName; }
 
-    public String getLmp() {return patientLmp; }
+//    public String getLmp() {return patientLmp; }
+
+    public String getEDD() throws ParseException {
+
+        endDate = "";
+        String isoDatePattern = "yyyy-MM-dd'T'HH:mm:ddZ";
+        SimpleDateFormat dateFormatterServer = new SimpleDateFormat(isoDatePattern);
+        Calendar c = Calendar.getInstance();
+        c.setTime(dateFormatterServer.parse(patientLmp));
+        c.add(Calendar.DAY_OF_MONTH, 280);
+        endDate = dateFormatterServer.format(c.getTime());
+        return endDate;
+
+    }
 
     public int getPatientId() {return patientId; }
 

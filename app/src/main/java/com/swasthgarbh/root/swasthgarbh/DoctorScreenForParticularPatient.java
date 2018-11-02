@@ -46,7 +46,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
     private Button whoGuideLines, logOutButton;
     static SessionManager session;
-    ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
+//    ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
     ListView patient_list_view;
     patientDataAdapter adapter;
     private int doctorId, clickedPatientId;
@@ -77,6 +77,8 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
             Intent intent = new Intent(DoctorScreenForParticularPatient.this, WHOGuidelines.class);
             intent.putExtra("EXTRA_PATIENT_ID", clickedPatientId);
             startActivity(intent);
+        } else if (item.getItemId() == R.id.action_refresh){
+            getPatientData(clickedPatientId);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -192,7 +194,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
      * API for doctor details
      * */
     public void getPatientData(int pId){
-
+        final ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
         String url = ApplicationController.get_base_url() + "api/patient/" + pId ;
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -208,6 +210,8 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             patientEmail.setText(response.getString("email"));
                             patientMobile.setText(String.valueOf(response.getInt("mobile")));
                             whoFollowing.setText(response.getString("who_following"));
+                            String date = response.getString("lmp").split("T")[0].split("-")[2] + "-" + response.getString("lmp").split("T")[0].split("-")[1] + "-" + response.getString("lmp").split("T")[0].split("-")[0];
+                            pregStartDate.setText(date);
                             JSONArray patientBpData = response.getJSONArray("data");
 
                             /******************************

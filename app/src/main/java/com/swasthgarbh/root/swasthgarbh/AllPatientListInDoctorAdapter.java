@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +58,11 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
         patientName.setText(current_patient_data.getName());
 
         TextView eddDateOfPatient = (TextView)listItemView.findViewById(R.id.eddDateOfPatientInList);
-        eddDateOfPatient.setText("EDD : " + current_patient_data.getLmp());
+        try {
+            eddDateOfPatient.setText("EDD : " + current_patient_data.getEDD());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         final int patientId = current_patient_data.getPatientId();
 
