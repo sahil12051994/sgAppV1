@@ -86,18 +86,23 @@ public class MedicineReminder extends AppCompatActivity {
         fab = findViewById(R.id.fab);
         mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swiperefreshMedicine);
 
-
-        final HashMap<String, String> user = session.getUserDetails();
-        if ("doctor".equals(user.get("type"))) {
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    showAddMedicineDialog();
-                }
-            });
-        } else if ("patient".equals(user.get("type"))) {
-            fab.hide();
-        }
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showAddMedicineDialog();
+            }
+        });
+//        final HashMap<String, String> user = session.getUserDetails();
+//        if ("doctor".equals(user.get("type"))) {
+//            fab.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    showAddMedicineDialog();
+//                }
+//            });
+//        } else if ("patient".equals(user.get("type"))) {
+//            fab.hide();
+//        }
 
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

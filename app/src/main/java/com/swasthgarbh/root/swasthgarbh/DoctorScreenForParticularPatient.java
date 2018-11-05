@@ -237,26 +237,34 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             chart.setDragEnabled(true);
                             chart.setScaleEnabled(true);
 
-                            LineDataSet set1 = new LineDataSet(yValues, "Systole");
+                            LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
                             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            LineDataSet set2 = new LineDataSet(y2Values, "Diastole");
+                            LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");
                             set2.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            LineDataSet set3 = new LineDataSet(y3Values, "weight");
+                            LineDataSet set3 = new LineDataSet(y3Values, "Weight");
                             set3.setAxisDependency(YAxis.AxisDependency.LEFT);
 
                             set1.setFillAlpha(110);
                             set1.setLineWidth(3f);
                             set2.setLineWidth(2f);
+
                             set1.setColor(Color.rgb(36, 113, 163));
                             set2.setColor(Color.RED);
                             set3.setColor(Color.rgb(40, 180, 99));
 
+                            set1.setDrawValues(false);
+                            set2.setDrawValues(false);
+                            set3.setDrawValues(false);
+
+                            set1.setDrawCircles(false);
+                            set2.setDrawCircles(false);
+                            set3.setDrawCircles(false);
 
                             YAxis leftAxis = chart.getAxisLeft();
                             LimitLine ll = new LimitLine(140f, "Critical");
-                            ll.setLineColor(Color.rgb(102, 255, 255));
+                            ll.setLineColor(Color.rgb(36, 113, 163));
                             ll.setLineWidth(1f);
-                            ll.setTextColor(Color.BLACK);
+                            ll.setTextColor(Color.rgb(36, 113, 163));
                             ll.setTextSize(12f);
                             ll.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(ll);
@@ -264,14 +272,14 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             LimitLine l2 = new LimitLine(90f, "Critical");
                             l2.setLineColor(Color.RED);
                             l2.setLineWidth(1f);
-                            l2.setTextColor(Color.BLACK);
+                            l2.setTextColor(Color.RED);
                             l2.setTextSize(12f);
                             l2.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(l2);
 
 //                            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 //                            set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-//                            set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                            set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
 
                             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                             dataSets.add(set1);

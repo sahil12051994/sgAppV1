@@ -4,11 +4,14 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,7 +28,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     Dialog sign_in_dialog;
     EditText username, password;
     SessionManager session;
-
+    TextView disclaimer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,11 +37,11 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         doctor = (Button) findViewById(R.id.doctor_registration);
         patient = (Button) findViewById(R.id.patient_registration);
         sign_in = (Button) findViewById(R.id.signin_modal);
-
+        disclaimer = (TextView) findViewById(R.id.privacyPolicy);
         doctor.setOnClickListener(this);
         patient.setOnClickListener(this);
         sign_in.setOnClickListener(this);
-
+        disclaimer.setOnClickListener(this);
     }
 
     @Override
@@ -51,6 +54,9 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
             startActivity(i);
         } else if (view.getId() == R.id.signin_modal) {
             callLoginDialog();
+        } else if (view.getId() == R.id.privacyPolicy) {
+            Intent i = new Intent(this, Disclaimer.class);
+            startActivity(i);
         }
 
     }
@@ -67,6 +73,37 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         username = sign_in_dialog.findViewById(R.id.username);
         password = sign_in_dialog.findViewById(R.id.password);
         sign_in_dialog.show();
+
+        // Get screen width and height in pixels
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        // The absolute width of the available display size in pixels.
+        int displayWidth = displayMetrics.widthPixels;
+        // The absolute height of the available display size in pixels.
+        int displayHeight = displayMetrics.heightPixels;
+
+        // Initialize a new window manager layout parameters
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+        // Copy the alert dialog window attributes to new layout parameter instance
+        layoutParams.copyFrom(sign_in_dialog.getWindow().getAttributes());
+
+        // Set the alert dialog window width and height
+        // Set alert dialog width equal to screen width 90%
+        // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+        // Set alert dialog height equal to screen height 90%
+        // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+        // Set alert dialog width equal to screen width 80%
+        int dialogWindowWidth = (int) (displayWidth * 0.8f);
+        // Set alert dialog height equal to screen height 70%
+        int dialogWindowHeight = (int) (displayHeight * 0.40f);
+        // Set the width and height for the layout parameters
+        // This will bet the width and height of alert dialog
+        layoutParams.width = dialogWindowWidth;
+        layoutParams.height = dialogWindowHeight;
+        // Apply the newly created layout parameters to the alert dialog window
+        sign_in_dialog.getWindow().setAttributes(layoutParams);
 
         login.setOnClickListener(new View.OnClickListener() {
 

@@ -8,7 +8,7 @@ public class patient_data_listview_class {
 //  patient-> 0 , Doctor->1
 
     private int bp_sys;
-    private int bp_dys, weight;
+    private int bp_dys, weight, dataId;
     private Double urine_albumin, bleedingVag;
     public String date_date, date_month, date_year, time_hour, time_min, time_period, time, timeExtracted;
 
@@ -16,7 +16,7 @@ public class patient_data_listview_class {
     String extra_comments;
     int bleeding_per_vaginum =0;
 
-    public patient_data_listview_class(String date,int bp_sysArg, int bp_dysArg, Double urine_albuminArg, int weight, Double bleedingVag) {
+    public patient_data_listview_class(int dataId, String date,int bp_sysArg, int bp_dysArg, Double urine_albuminArg, int weight, Double bleedingVag) {
         this.bp_sys = bp_sysArg;
         this.bp_dys = bp_dysArg;
         this.urine_albumin = urine_albuminArg;
@@ -30,7 +30,7 @@ public class patient_data_listview_class {
         this.time_min = get_time_min(timeExtracted);
         this.time_period = get_time_period(timeExtracted);
         this.time = this.time_hour + ":" +time_min + " " + this.time_period;
-
+        this.dataId = dataId;
         this.docScreen_or_pScreen=0;
     }
 
@@ -58,6 +58,8 @@ public class patient_data_listview_class {
 
         this.docScreen_or_pScreen=1;
     }
+
+    public int getDataId() {return  dataId;}
 
     public  int getDocOrPat() { return docScreen_or_pScreen; }
 

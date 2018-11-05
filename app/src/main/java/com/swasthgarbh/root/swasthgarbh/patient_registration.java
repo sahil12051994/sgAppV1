@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -65,7 +66,7 @@ public class patient_registration extends AppCompatActivity {
     TextView doctorName, patientName, pregStartDate, doctorMobile, whoFollowing;
     LinearLayout TextWhenNoData, parentView, chartLayout;
     ImageView callDoctor;
-
+    SwipeRefreshLayout mSwipeRefreshLayout;
     Dialog choose_doc;
     int doc_id;
     ImageView ivImage;
@@ -374,6 +375,14 @@ public class patient_registration extends AppCompatActivity {
         session = new SessionManager(this);
 
         getPatientData();
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipeRefreshPatientData);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getPatientData();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     /*
@@ -451,7 +460,7 @@ public class patient_registration extends AppCompatActivity {
 
                                 for (int i = 0; i < patientBpData.length(); i++) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-                                    patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
+                                    patient_data_listview_class pr = new patient_data_listview_class(po.getInt("pk"), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
                                     patientRowData.add(pr);
                                     Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
 
@@ -463,26 +472,32 @@ public class patient_registration extends AppCompatActivity {
                                 chart.setDragEnabled(true);
                                 chart.setScaleEnabled(true);
 
-                                LineDataSet set1 = new LineDataSet(yValues, "Systole");
+                                LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
                                 set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-                                LineDataSet set2 = new LineDataSet(y2Values, "Diastole");
+                                LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");
                                 set2.setAxisDependency(YAxis.AxisDependency.LEFT);
-                                LineDataSet set3 = new LineDataSet(y3Values, "weight");
+                                LineDataSet set3 = new LineDataSet(y3Values, "Weight");
                                 set3.setAxisDependency(YAxis.AxisDependency.LEFT);
 
                                 set1.setFillAlpha(110);
                                 set1.setLineWidth(3f);
-                                set2.setLineWidth(2f);
                                 set1.setColor(Color.rgb(36, 113, 163));
+                                set1.setDrawValues(false);
+                                set1.setDrawCircles(false);
+                                set2.setLineWidth(2f);
                                 set2.setColor(Color.RED);
+                                set2.setDrawValues(false);
+                                set2.setDrawCircles(false);
                                 set3.setColor(Color.rgb(40, 180, 99));
+                                set3.setDrawValues(false);
+                                set3.setDrawCircles(false);
 
 
                                 YAxis leftAxis = chart.getAxisLeft();
                                 LimitLine ll = new LimitLine(140f, "Critical");
-                                ll.setLineColor(Color.rgb(102, 255, 255));
+                                ll.setLineColor(Color.rgb(36, 113, 163));
                                 ll.setLineWidth(1f);
-                                ll.setTextColor(Color.BLACK);
+                                ll.setTextColor(Color.rgb(36, 113, 163));
                                 ll.setTextSize(12f);
                                 ll.enableDashedLine(4, 2, 0);
                                 leftAxis.addLimitLine(ll);
@@ -490,7 +505,7 @@ public class patient_registration extends AppCompatActivity {
                                 LimitLine l2 = new LimitLine(90f, "Critical");
                                 l2.setLineColor(Color.RED);
                                 l2.setLineWidth(1f);
-                                l2.setTextColor(Color.BLACK);
+                                l2.setTextColor(Color.RED);
                                 l2.setTextSize(12f);
                                 l2.enableDashedLine(4, 2, 0);
                                 leftAxis.addLimitLine(l2);

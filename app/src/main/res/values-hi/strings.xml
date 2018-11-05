@@ -5,7 +5,7 @@
     <string name="patient_register">मरीज</string>
     <string name="doctor_register">चिकित्सक</string>
     <string name="signin_button">दाखिल</string>
-    <string name="copyright">CBTB प्रयोगशाला आईआईटी रुड़की</string>
+    <string name="copyright">CBTB प्रयोगशाला आईआईटी रुड़की द्वारा विकसित</string>
     <string name="statusOfPatientState">इस राज्य की जटिलता</string>
     <string name="whoGraphDescription">ग्राफ उन महिलाओं को दिखा रहा है जो अपनी गर्भावस्था के दौरान डब्ल्यूएचओ दिशानिर्देशों का पालन करते हैं</string>
     <string name="PieChartDesc">विभिन्न कारकों पर रोगियों का वितरण</string>

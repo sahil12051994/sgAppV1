@@ -1,8 +1,12 @@
 package com.swasthgarbh.root.swasthgarbh;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +16,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class> {
 
@@ -30,7 +44,7 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        patient_data_listview_class current_patient_data = getItem(position);
+        final patient_data_listview_class current_patient_data = getItem(position);
         session = new SessionManager(getContext());
         final HashMap<String, String> user = session.getUserDetails();
         View listItemView = convertView;
@@ -89,8 +103,64 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
         TextView monthPatientRow = (TextView)listItemView.findViewById(R.id.monthRow);
         monthPatientRow.setText(current_patient_data.monthVal() + "  " + current_patient_data.yearVal());
 
-        TextView yearPatientRow = (TextView)listItemView.findViewById(R.id.timeRow);
+        final TextView yearPatientRow = (TextView)listItemView.findViewById(R.id.timeRow);
         yearPatientRow.setText(current_patient_data.timeVal());
+
+        ImageView dataDelete = (ImageView)listItemView.findViewById(R.id.deletePatientData);
+        dataDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View v) {
+
+                AlertDialog.Builder builder;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    builder = new AlertDialog.Builder(v.getContext(), android.R.style.Theme_Material_Dialog_Alert);
+                } else {
+                    builder = new AlertDialog.Builder(v.getContext());
+                }
+                builder.setTitle("Delete entry")
+                        .setMessage("Are you sure you want to delete this entry?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                                String url = ApplicationController.get_base_url() + "api/data/" + current_patient_data.getDataId();
+
+                                JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.DELETE,
+                                        url, null,
+                                        new Response.Listener<JSONObject>() {
+
+                                            @Override
+                                            public void onResponse(JSONObject response) {
+                                                Log.i("Delete", "onResponse: Data deleted");
+                                                Intent intent = new Intent(v.getContext(), patient_registration.class);
+                                                v.getContext().startActivity(intent);
+                                            }
+                                        }, new Response.ErrorListener() {
+
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+                                        Log.d("TAG", "Error Message: " + error.getMessage());
+                                    }
+                                }) {
+                                    @Override
+                                    public Map<String, String> getHeaders() throws AuthFailureError {
+                                        Map<String, String> params = new HashMap<String, String>();
+                                        params.put("Content-Type", "application/json");
+                                        params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
+                                        return params;
+                                    }
+                                };
+                                ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+                }
+        });
 
         return listItemView;
     }

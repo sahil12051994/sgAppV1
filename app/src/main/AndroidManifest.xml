@@ -13,9 +13,9 @@
     <application
         android:name=".ApplicationController"
         android:allowBackup="true"
-        android:icon="@mipmap/pregnant"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/pregnant"
+        android:roundIcon="@mipmap/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
@@ -28,6 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -38,6 +39,7 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
         <activity android:name=".ChooseActivity" />
         <activity android:name=".DoctorScreen" />
         <activity android:name=".WHOGuidelines" />
@@ -51,7 +53,8 @@
         <activity android:name=".MedicineReminder" />
         <activity android:name=".PatientImages" />
         <activity android:name=".all_images_view" />
-        <activity android:name=".AboutPreeclampsia"></activity>
+        <activity android:name=".AboutPreeclampsia" />
+        <activity android:name=".Disclaimer"></activity>
     </application>
 
 </manifest>

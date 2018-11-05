@@ -114,30 +114,34 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                 chart.setNoDataText("User has not entered any data");
                                 chart.setBackgroundColor(Color.WHITE);
 
-                                LineDataSet set1 = new LineDataSet(yValues, "Systole(mmHg)");
+                                LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
                                 set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-                                LineDataSet set2 = new LineDataSet(y2Values, "Diastole(mmHg)");
+                                LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");
                                 set2.setAxisDependency(YAxis.AxisDependency.LEFT);
 
                                 set1.setFillAlpha(110);
                                 set1.setLineWidth(3f);
                                 set2.setLineWidth(2f);
-                                set1.setColor(Color.rgb(102, 255, 255));
+                                set1.setColor(Color.rgb(36, 113, 163));
+                                set1.setDrawValues(false);
+                                set1.setDrawCircles(false);
                                 set2.setColor(Color.RED);
+                                set2.setDrawValues(false);
+                                set2.setDrawCircles(false);
 
                                 YAxis leftAxis = chart.getAxisLeft();
-                                LimitLine ll = new LimitLine(140f, "");
-                                ll.setLineColor(Color.rgb(102, 255, 255));
+                                LimitLine ll = new LimitLine(140f, "Critical");
+                                ll.setLineColor(Color.rgb(36, 113, 163));
                                 ll.setLineWidth(1f);
-                                ll.setTextColor(Color.BLACK);
+                                ll.setTextColor(Color.rgb(36, 113, 163));
                                 ll.setTextSize(12f);
                                 ll.enableDashedLine(4, 2, 0);
                                 leftAxis.addLimitLine(ll);
 
-                                LimitLine l2 = new LimitLine(90f, "");
+                                LimitLine l2 = new LimitLine(90f, "Critical");
                                 l2.setLineColor(Color.RED);
                                 l2.setLineWidth(1f);
-                                l2.setTextColor(Color.BLACK);
+                                l2.setTextColor(Color.RED);
                                 l2.setTextSize(12f);
                                 l2.enableDashedLine(4, 2, 0);
                                 leftAxis.addLimitLine(l2);
