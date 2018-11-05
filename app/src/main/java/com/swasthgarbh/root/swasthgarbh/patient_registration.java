@@ -75,7 +75,7 @@ public class patient_registration extends AppCompatActivity {
     String ImgBytes;
     Uri ImageUri;
     ImageView loader;
-
+    // Create a Uri from an intent string. Use the result to create an Intent.
     private void logout(Context _c) {
         session = new SessionManager(_c);
         session.logoutUser();
@@ -137,10 +137,20 @@ public class patient_registration extends AppCompatActivity {
             i = new Intent(this, PatientNotifications.class);
             startActivity(i);
         } else if (item.getItemId() == R.id.hospitalsNearYou){
-            String url = "https://www.google.co.in/search?q=hospitals+near+you&oq=hospitals+near+you&aqs=chrome..69i57.4099j0j9&client=ms-android-samsung&sourceid=chrome-mobile&ie=UTF-8#istate=lrl:xpd";
-            Intent webIntent = new Intent(Intent.ACTION_VIEW);
-            webIntent.setData(Uri.parse(url));
-            startActivity(webIntent);
+//            String url = "https://www.google.co.in/search?q=hospitals+near+you&oq=hospitals+near+you&aqs=chrome..69i57.4099j0j9&client=ms-android-samsung&sourceid=chrome-mobile&ie=UTF-8#istate=lrl:xpd";
+//            Intent webIntent = new Intent(Intent.ACTION_VIEW);
+//            webIntent.setData(Uri.parse(url));
+//            startActivity(webIntent);
+
+//            i = new Intent(this, NearbyHospitals.class);
+//            startActivity(i);
+            //classes used : Dataparser, Nearby Hospitals, DownloadURL, GetNearbyPlacesData
+
+            // Search for hospitals nearby //https://developers.google.com/maps/documentation/urls/android-intents
+            Uri gmmIntentUri = Uri.parse("geo:0,0?q=nearbyhospitals");
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
         } else if (item.getItemId() == R.id.aboutPre){
             i = new Intent(this, AboutPreeclampsia.class);
             startActivity(i);
@@ -471,7 +481,7 @@ public class patient_registration extends AppCompatActivity {
 
                                 chart.setDragEnabled(true);
                                 chart.setScaleEnabled(true);
-
+                                chart.getDescription().setEnabled(false);
                                 LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
                                 set1.setAxisDependency(YAxis.AxisDependency.LEFT);
                                 LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");
@@ -510,9 +520,9 @@ public class patient_registration extends AppCompatActivity {
                                 l2.enableDashedLine(4, 2, 0);
                                 leftAxis.addLimitLine(l2);
 
-                                set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-                                set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-                                set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                                set1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                                set2.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                                set3.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
                                 ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                                 dataSets.add(set1);
@@ -530,15 +540,11 @@ public class patient_registration extends AppCompatActivity {
                                 patientDataAdapter itemsAdapter = new patientDataAdapter(patient_registration.this, patientRowData);
                                 ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
                                 listView.setAdapter(itemsAdapter);
-//                            } else {
-//                                Log.i("hahahahahaah", "onResponse: ");
-//                                parentView.removeView(chartLayout);
                             }
                             getDoctorData();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-//                            edit.commit();
                     }
                 }, new Response.ErrorListener() {
 

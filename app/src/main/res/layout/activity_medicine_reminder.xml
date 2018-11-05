@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:divider="@android:color/transparent"
-            android:dividerHeight="10.0sp"></ListView>
+            android:dividerHeight="4.0sp"></ListView>
 
     </android.support.v4.widget.SwipeRefreshLayout>
 

@@ -12,7 +12,7 @@
         <menu>
 
             <item android:id="@+id/action_logout"
-                android:icon="@android:drawable/ic_menu_delete"
+                android:icon="@drawable/logout"
                 app:showAsAction="ifRoom"
                 android:title="Logout" />
 

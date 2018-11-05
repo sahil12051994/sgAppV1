@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
@@ -206,6 +207,7 @@ public class DoctorScreen extends AppCompatActivity {
                             barChart.groupBars(0.5f,groupSpace, barSpace); // perform the "explicit" grouping
                             barChart.setDragEnabled(true);
                             barChart.setScaleEnabled(true);
+                            barChart.getDescription().setEnabled(false);
                             barChart.invalidate();
                             barChart.animateXY(3000, 3000);
 
@@ -265,14 +267,43 @@ public class DoctorScreen extends AppCompatActivity {
 
                             PieData data = new PieData(dataSet);
                             pieChart.setDrawHoleEnabled(true);
+                            pieChart.getDescription().setEnabled(false);
                             data.setValueTextSize(13f);
                             data.setValueTextColor(Color.DKGRAY);
                             pieChart.setEntryLabelColor(Color.BLACK);
-                            dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
-                            dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                            pieChart.getLegend().setWordWrapEnabled(true);
+
+//                            dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+                            dataSet.setColors(new int[] { getResources().getColor(R.color.chart1), getResources().getColor(R.color.chart2), getResources().getColor(R.color.chart3), getResources().getColor(R.color.chart4), getResources().getColor(R.color.chart5), getResources().getColor(R.color.chart6) });
+                            int count = 0;
+                            if(analysis_obj.getInt("high_sys") == 0){
+                                count++;
+                            }
+                            if(analysis_obj.getInt("high_dys") == 0){
+                                count++;
+                            }
+                            if(analysis_obj.getInt("high_weight") == 0){
+                                count++;
+                            }
+                            if(analysis_obj.getInt("hyper_tension") == 0){
+                                count++;
+                            }
+                            if(analysis_obj.getInt("urine_albumin") == 0){
+                                count++;
+                            }
+                            if(analysis_obj.getInt("who_following") == 0){
+                                count++;
+                            }
+                            if(count>1){
+                                pieChart.setDrawSliceText(false);
+                            }else{
+                                dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+                            }
 //                            data.setValueFormatter(new PercentFormatter());
                             pieChart.setData(data);
                             pieChart.invalidate();
+                            pieChart.animateY(1500, Easing.EasingOption.EaseInOutCubic);
+//                            pieChart.spin( 1000,0,-360f, Easing.EasingOption.EaseInOutQuad);
 
                         } catch (JSONException e) {
                             e.printStackTrace();

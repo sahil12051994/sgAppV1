@@ -97,7 +97,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         // Set alert dialog width equal to screen width 80%
         int dialogWindowWidth = (int) (displayWidth * 0.8f);
         // Set alert dialog height equal to screen height 70%
-        int dialogWindowHeight = (int) (displayHeight * 0.40f);
+        int dialogWindowHeight = (int) (displayHeight * 0.50f);
         // Set the width and height for the layout parameters
         // This will bet the width and height of alert dialog
         layoutParams.width = dialogWindowWidth;

@@ -134,6 +134,7 @@
                                 android:layout_marginLeft="20dp"
                                 android:layout_weight="1"
                                 android:gravity="right"
+                                android:layout_gravity="start"
                                 android:textColor="@color/colorAccent" />
 
                         </LinearLayout>
@@ -231,7 +232,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:textColor="@color/colorAccent" />
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="start"/>
 
                         </LinearLayout>
 
@@ -303,7 +305,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:textColor="@color/colorAccent" />
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="start"/>
 
                         </LinearLayout>
 
@@ -374,7 +377,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:textColor="@color/colorAccent" />
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="start"/>
 
                         </LinearLayout>
 
@@ -440,7 +444,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:textColor="@color/colorAccent" />
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="start"/>
 
                         </LinearLayout>
 
@@ -505,7 +510,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:textColor="@color/colorAccent" />
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="start"/>
 
                         </LinearLayout>
 
@@ -570,7 +576,8 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="right"
-                                android:textColor="@color/colorAccent" />
+                                android:textColor="@color/colorAccent"
+                                android:layout_gravity="start"/>
 
                         </LinearLayout>
 
@@ -623,7 +630,8 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:gravity="right"
-                            android:textColor="@color/colorAccent" />
+                            android:textColor="@color/colorAccent"
+                            android:layout_gravity="start"/>
 
                     </LinearLayout>
 
@@ -639,16 +647,20 @@
 
             <Button
                 android:id="@+id/updateWhoData"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/my_btn"
+                android:drawableRight="@android:drawable/ic_menu_send"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:text="@string/update_my_data"
                 android:textAllCaps="false"
-                tools:text="Update My Data" />
+                tools:text="Update My Data"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
     </ScrollView>

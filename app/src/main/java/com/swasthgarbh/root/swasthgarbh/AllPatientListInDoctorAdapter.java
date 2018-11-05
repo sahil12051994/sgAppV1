@@ -113,7 +113,7 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                 chart.setGridBackgroundColor(Color.WHITE);
                                 chart.setNoDataText("User has not entered any data");
                                 chart.setBackgroundColor(Color.WHITE);
-
+                                chart.getDescription().setEnabled(false);
                                 LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
                                 set1.setAxisDependency(YAxis.AxisDependency.LEFT);
                                 LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");

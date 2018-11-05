@@ -3,12 +3,12 @@
     <string name="patient_register">Patient</string>
     <string name="doctor_register">Doctor</string>
     <string name="signin_button">SignIn</string>
-    <string name="copyright">Developed by CompBio Lab IIT Roorkee</string>
+    <string name="copyright">Developed by CompBio Lab, IIT Roorkee</string>
     <string name="statusOfPatientState">The complexity of this state</string>
     <string name="whoGraphDescription">Graph showing the women who follow the WHO Guidelines during their pregnancy</string>
-    <string name="PieChartDesc">Distribution of patients on various factors</string>
+    <string name="PieChartDesc">(Distribution of #patients on various factors)</string>
     <string name="PirChartDesc">This is Pie Chart</string>
-    <string name="or_register_as">Or register as</string>
+    <string name="or_register_as">or Register as</string>
     <string name="name">Name</string>
     <string name="doctor">Doctor</string>
     <string name="doctors_mobile">Doctors Mobile</string>
@@ -19,8 +19,8 @@
     <string name="medication">Medication</string>
     <string name="your_history">Your History</string>
     <string name="blood_pressure">Blood Pressure</string>
-    <string name="systole">Systole</string>
-    <string name="diastole">Diastole</string>
+    <string name="systole">Systolic BP</string>
+    <string name="diastole">Diastolic BP</string>
     <string name="headache">Headache</string>
     <string name="abdominal_pain">Abdominal Pain</string>
     <string name="visual_problems">Visual Problems</string>
@@ -40,7 +40,7 @@
     <string name="period">Period</string>
     <string name="starting_from">Starting from :</string>
     <string name="to_be_taken_till">To be taken till :</string>
-    <string name="diabetese">Diabetese</string>
+    <string name="diabetese">Diabetes</string>
     <string name="anaemia">Anaemia</string>
     <string name="hiv">HIV</string>
     <string name="ultrasound">Ultrasound</string>
@@ -49,7 +49,7 @@
     <string name="update_my_data">Update My Data</string>
     <string name="lmp">LMP</string>
     <string name="edd">EDD</string>
-
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBadggeNkbB7NwvBo_htgmzVEC2vmRJbNg</string>
     <string-array name="medicine_freq">
         <item>Daily</item>
         <item>Weekly</item>

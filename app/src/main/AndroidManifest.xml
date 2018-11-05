@@ -9,16 +9,24 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
     <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permisson.READ_GSERVICES"/>
 
     <application
         android:name=".ApplicationController"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/appicon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/appicon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
         <activity android:name=".MainActivity" />
         <activity android:name=".patient_registration" />
         <activity android:name=".ControllerActivity">
@@ -54,7 +62,8 @@
         <activity android:name=".PatientImages" />
         <activity android:name=".all_images_view" />
         <activity android:name=".AboutPreeclampsia" />
-        <activity android:name=".Disclaimer"></activity>
+        <activity android:name=".Disclaimer" />
+        <activity android:name=".NearbyHospitals"></activity>
     </application>
 
 </manifest>

@@ -61,32 +61,32 @@ public class all_images_view extends AppCompatActivity {
         getPatientImageData();
     }
 
-    private void logout(Context _c) {
-        session = new SessionManager(_c);
-        session.logoutUser();
-        Intent i = new Intent(all_images_view.this, ControllerActivity.class);
-        startActivity(i);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.patient_detail_in_doctor, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Intent i;
-        if (item.getItemId() == R.id.action_logout){
-            logout(this);
-            return true;
-        }
-        else if (item.getItemId() == R.id.patientImages){
-            i = new Intent(this, all_images_view.class);
-            startActivity(i);
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    private void logout(Context _c) {
+//        session = new SessionManager(_c);
+//        session.logoutUser();
+//        Intent i = new Intent(all_images_view.this, ControllerActivity.class);
+//        startActivity(i);
+//    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.patient_detail_in_doctor, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        Intent i;
+//        if (item.getItemId() == R.id.action_logout){
+//            logout(this);
+//            return true;
+//        }
+//        else if (item.getItemId() == R.id.patientImages){
+//            i = new Intent(this, all_images_view.class);
+//            startActivity(i);
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
     public void getPatientImageData(){
         String url = ApplicationController.get_base_url() + "api/allimages/" + clickedPatientId;

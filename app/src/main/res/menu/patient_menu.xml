@@ -12,27 +12,27 @@
         <menu>
 
             <item android:id="@+id/action_change_doctor"
-                android:icon="@android:drawable/ic_menu_add"
+                android:icon="@drawable/arrows"
                 app:showAsAction="ifRoom"
                 android:title="@string/change_doctor" />
 
             <item android:id="@+id/action_notification"
-                android:icon="@android:drawable/ic_menu_today"
+                android:icon="@drawable/bell"
                 app:showAsAction="ifRoom"
                 android:title="@string/notifications" />
 
             <item android:id="@+id/hospitalsNearYou"
-                android:icon="@android:drawable/ic_menu_today"
+                android:icon="@drawable/map"
                 app:showAsAction="ifRoom"
                 android:title="@string/nearby_hospitals" />
 
             <item android:id="@+id/aboutPre"
-                android:icon="@android:drawable/ic_menu_today"
+                android:icon="@drawable/faq"
                 app:showAsAction="ifRoom"
                 android:title="@string/about_preeclapmsia" />
 
             <item android:id="@+id/action_logout"
-                android:icon="@android:drawable/ic_menu_delete"
+                android:icon="@drawable/logout"
                 app:showAsAction="ifRoom"
                 android:title="@string/logout" />
 

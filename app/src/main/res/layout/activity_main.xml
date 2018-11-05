@@ -34,7 +34,7 @@
 
     <Button
         android:id="@+id/signin_modal"
-        android:layout_width="wrap_content"
+        android:layout_width="120sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="8dp"
@@ -43,6 +43,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:text="@string/signin_button"
         android:textAllCaps="false" />
 
@@ -90,6 +92,8 @@
             android:id="@+id/patient_registration"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp"
             android:layout_weight="1"
             android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
             android:text="@string/patient_register"
@@ -99,6 +103,8 @@
             android:id="@+id/doctor_registration"
             android:layout_width="0px"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="25sp"
+            android:layout_marginRight="25sp"
             android:layout_weight="1"
             android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
             android:text="@string/doctor_register"
@@ -112,7 +118,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/copyright"
         android:textColor="#fff" />
 

@@ -228,14 +228,22 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                 patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin") ,po.getInt("weight"), po.getBoolean("headache"), po.getBoolean("abdominal_pain"), po.getBoolean("visual_problems"), po.getDouble("bleeding_per_vaginum") , po.getBoolean("decreased_fetal_movements"), po.getBoolean("swelling_in_hands_or_face"), po.getString("extra_comments"));
                                 patientRowData.add(pr);
                                 Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
-
                                 yValues.add(new Entry(i, po.getInt("systolic")));
                                 y2Values.add(new Entry(i, po.getInt("diastolic")));
                                 y3Values.add(new Entry(i, po.getInt("weight")));
                             }
 
+//                            for (int i = patientBpData.length()-1; i >= 0; i--) {
+//                                JSONObject po = (JSONObject) patientBpData.get(i);
+//                                yValues.add(new Entry(i-(patientBpData.length()-1), po.getInt("systolic")));
+//                                y2Values.add(new Entry(i-(patientBpData.length()-1), po.getInt("diastolic")));
+//                                y3Values.add(new Entry(i-(patientBpData.length()-1), po.getInt("weight")));
+//                            }
+
+
                             chart.setDragEnabled(true);
                             chart.setScaleEnabled(true);
+                            chart.getDescription().setEnabled(false);
 
                             LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
                             set1.setAxisDependency(YAxis.AxisDependency.LEFT);
@@ -247,6 +255,9 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             set1.setFillAlpha(110);
                             set1.setLineWidth(3f);
                             set2.setLineWidth(2f);
+
+                            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+                            set2.setAxisDependency(YAxis.AxisDependency.LEFT);
 
                             set1.setColor(Color.rgb(36, 113, 163));
                             set2.setColor(Color.RED);
@@ -277,9 +288,9 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             l2.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(l2);
 
-//                            set1.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-//                            set2.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-                            set3.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+                            set1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                            set2.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                            set3.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
                             ArrayList<ILineDataSet> dataSets = new ArrayList<>();
                             dataSets.add(set1);
