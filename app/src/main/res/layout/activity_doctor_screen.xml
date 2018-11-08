@@ -172,12 +172,26 @@
                 android:layout_margin="5dp"
                 android:text="X Axis : ANC Level  |   Y Axis:  Number of patients" />
 
-
-            <com.github.mikephil.charting.charts.BarChart
-                android:id="@+id/whoChart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_margin="3dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/barPB"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    />
+
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/whoChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="3dp" />
+
+            </LinearLayout>
+
 
 
             <TextView
@@ -189,12 +203,26 @@
                 android:layout_marginBottom="5dp"
                 android:text="Number of patients in corresponding categories" />
 
-
-            <com.github.mikephil.charting.charts.PieChart
-                android:id="@+id/doc2chart"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:layout_margin="3dp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ProgressBar
+                    android:id="@+id/piePB"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/doc2chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="250dp"
+                    android:layout_margin="3dp" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </ScrollView>
 

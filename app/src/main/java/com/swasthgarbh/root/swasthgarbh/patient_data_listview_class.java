@@ -118,10 +118,10 @@ public class patient_data_listview_class {
     }
 
     public int getStatusId(){
-        if (bp_sys > 150 && bp_dys > 110){
+        if (bp_sys >= 160 && bp_dys >= 110){
             return R.drawable.flame;
         }
-        return R.drawable.health;
+        return R.drawable.heart;
     }
 
     private String get_time_period(String time) {

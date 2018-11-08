@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -31,6 +32,8 @@ public class WHOGuidelines extends AppCompatActivity {
 
     CheckBox anc1_diabtese, anc1_anemia, anc1_hiv, anc1_ultrasound, anc1_tetnus, anc1_urine, anc2_diabtese, anc2_anemia, anc3_diabtese, anc3_anemia, anc3_urine, anc4_diabtese, anc5_diabtese, anc5_urine, anc6_diabtese, anc6_anemia, anc7_diabtese, anc8_diabtese;
     int clickedPatientId;
+    ProgressBar pb;
+    Button updateWhoData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +83,8 @@ public class WHOGuidelines extends AppCompatActivity {
         anc8_diabtese = (CheckBox) findViewById(R.id.anc8dia);
 //        anc8_diabtese.setOnClickListener(this);
 
+        pb = (ProgressBar) findViewById(R.id.sendPB);
+        pb.setVisibility(View.GONE);
         getSupportActionBar().setTitle("WHO Guidlines");
 
         session = new SessionManager(this);
@@ -199,7 +204,7 @@ public class WHOGuidelines extends AppCompatActivity {
         };
         ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
 
-        Button updateWhoData = (Button) findViewById(R.id.updateWhoData);
+        updateWhoData = (Button) findViewById(R.id.updateWhoData);
 
         final HashMap<String, String> user = session.getUserDetails();
         if ("doctor".equals(user.get("type"))){
@@ -215,6 +220,8 @@ public class WHOGuidelines extends AppCompatActivity {
     }
 
     public void updateWhoData(){
+        pb.setVisibility(View.VISIBLE);
+        updateWhoData.setVisibility(View.GONE);
         String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + session.getUserDetails().get("id");
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PATCH,
                 url, null,
@@ -223,6 +230,7 @@ public class WHOGuidelines extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Intent i = new Intent(WHOGuidelines.this, patient_registration.class);
+                        pb.setVisibility(View.GONE);
                         startActivity(i);
                         finish();
                     }

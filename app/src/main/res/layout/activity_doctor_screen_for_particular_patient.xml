@@ -112,7 +112,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/chartPB"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            />
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/chart"
@@ -177,6 +185,13 @@
             android:padding="3dp"
             android:text="Patient's History"
             tools:text="Patient's History" />
+
+        <ProgressBar
+            android:id="@+id/listPB"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            />
 
         <ListView
             android:id="@+id/patient_data_list_view"

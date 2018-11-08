@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -38,12 +39,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 public class patientDataEntry extends AppCompatActivity {
 
-    TextView sysData, dysData, bodyWeight, extraComments, heartRate, bleedingVag, urineAlb;
+    EditText sysData, dysData, bodyWeight, extraComments, heartRate, bleedingVag, urineAlb;
     CheckBox headache, abdPain, visProb, decFea, swell, hyperT;
     SessionManager session;
     Button sendData, add_pic;
@@ -52,6 +55,7 @@ public class patientDataEntry extends AppCompatActivity {
     private int REQUEST_CAMERA = 0, SELECT_FILE = 1;
     String ImgBytes = "";
     ImageView loader;
+    String currentDateandTime;
 
 
     @Override
@@ -63,19 +67,19 @@ public class patientDataEntry extends AppCompatActivity {
         session = new SessionManager(this);
 
         session = new SessionManager(this);
-        sysData = (TextView) findViewById(R.id.sysData);
-        dysData = (TextView) findViewById(R.id.dysData);
-        heartRate = (TextView) findViewById(R.id.heartRate);
+        sysData = (EditText) findViewById(R.id.sysData);
+        dysData = (EditText) findViewById(R.id.dysData);
+        heartRate = (EditText) findViewById(R.id.heartRate);
         headache = (CheckBox) findViewById(R.id.headache);
         abdPain = (CheckBox) findViewById(R.id.abdPain);
         visProb = (CheckBox) findViewById(R.id.visProb);
         decFea = (CheckBox) findViewById(R.id.decFea);
         swell = (CheckBox) findViewById(R.id.swell);
         hyperT = (CheckBox) findViewById(R.id.hyperT);
-        bodyWeight = (TextView) findViewById(R.id.bodyWeight);
-        extraComments = (TextView) findViewById(R.id.extraComments);
-        urineAlb = (TextView)findViewById(R.id.urineAlbumin);
-        bleedingVag = (TextView)findViewById(R.id.bleedingVag);
+        bodyWeight = (EditText) findViewById(R.id.bodyWeight);
+        extraComments = (EditText) findViewById(R.id.extraComments);
+        urineAlb = (EditText)findViewById(R.id.urineAlbumin);
+        bleedingVag = (EditText)findViewById(R.id.bleedingVag);
 
         add_pic = (Button) findViewById(R.id.add_pic);
         add_pic.setOnClickListener(new View.OnClickListener() {
@@ -84,10 +88,62 @@ public class patientDataEntry extends AppCompatActivity {
                 selectImage();
             }
         });
-
+        currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
+        final ProgressBar pb = (ProgressBar) findViewById(R.id.sendPB);
+        pb.setVisibility(View.GONE);
         sendData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pb.setVisibility(View.VISIBLE);
+                final String str_weight = "" + sysData.getText().toString();
+                final String str_heart_rate = "" + heartRate.getText().toString();
+                final String str_systolic = "" + sysData.getText().toString();
+                final String str_diastolic = "" + dysData.getText().toString();
+                final Float str_bleedingVag;
+                if (bleedingVag.getText().length() == 0) {
+                    str_bleedingVag = 0f;
+                } else {
+                    str_bleedingVag = Float.parseFloat(bleedingVag.getText().toString());
+                }
+                final Float str_urine;
+                if (bleedingVag.getText().length() == 0) {
+                    str_urine = 0f;
+                } else {
+                    str_urine = Float.parseFloat(urineAlb.getText().toString());
+                }
+                if (str_weight.length() == 0) {
+                    Toast.makeText(patientDataEntry.this, "Enter your weight", Toast.LENGTH_LONG).show();
+                    pb.setVisibility(View.GONE);
+                    return;
+                }
+
+                if (str_heart_rate.length() == 0) {
+                    Toast.makeText(patientDataEntry.this, "Enter your heart_rate", Toast.LENGTH_LONG).show();
+                    pb.setVisibility(View.GONE);
+                    return;
+                }
+
+                if (str_diastolic.length() == 0) {
+                    Toast.makeText(patientDataEntry.this, "Enter your diastolic bp", Toast.LENGTH_LONG).show();
+                    pb.setVisibility(View.GONE);
+                    return;
+                }
+
+                if (str_systolic.length() == 0) {
+                    Toast.makeText(patientDataEntry.this, "Enter your systolic bp", Toast.LENGTH_LONG).show();
+                    pb.setVisibility(View.GONE);
+                    return;
+                }
+                if (str_urine > 9) {
+                    Toast.makeText(patientDataEntry.this, "Urine albumin should be below 10", Toast.LENGTH_LONG).show();
+                    pb.setVisibility(View.GONE);
+                    return;
+                }
+                if (str_bleedingVag > 9) {
+                    Toast.makeText(patientDataEntry.this, "Bleeding vaginum should be below 10", Toast.LENGTH_LONG).show();
+                    pb.setVisibility(View.GONE);
+                    return;
+                }
                 String url = ApplicationController.get_base_url() + "api/data";
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                         url, null,
@@ -96,6 +152,7 @@ public class patientDataEntry extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
 //                                Log.d("DATA", response.toString());
+//                                pb.setVisibility(View.GONE);
                                 Intent i = new Intent(patientDataEntry.this, patient_registration.class);
                                 startActivity(i);
                                 finish();
@@ -117,8 +174,9 @@ public class patientDataEntry extends AppCompatActivity {
                         try {
                             params.put("systolic", Integer.parseInt(sysData.getText().toString()));
                             params.put("diastolic", Integer.parseInt(dysData.getText().toString()));
-                            params.put("urine_albumin", Float.parseFloat(urineAlb.getText().toString()));
-                            params.put("bleeding_per_vaginum", Float.parseFloat(bleedingVag.getText().toString()));
+                            params.put("urine_albumin", str_urine);
+                            params.put("bleeding_per_vaginum", str_bleedingVag);
+
                             params.put("headache", headache.isChecked());
                             params.put("abdominal_pain", abdPain.isChecked());
                             params.put("visual_problems", visProb.isChecked());
@@ -126,9 +184,11 @@ public class patientDataEntry extends AppCompatActivity {
                             params.put("swelling_in_hands_or_face", swell.isChecked());
                             params.put("hyper_tension", hyperT.isChecked());
                             params.put("weight", Integer.parseInt(bodyWeight.getText().toString()));
+
                             params.put("extra_comments", extraComments.getText());
                             params.put("patient", session.getUserDetails().get("id"));
                             params.put("heart_rate", Integer.parseInt(heartRate.getText().toString()));
+//                            params.put("time_stamp",currentDateandTime);
                             Log.i("Boddddyyyyy", "getBody: " + params.toString());
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -161,6 +221,7 @@ public class patientDataEntry extends AppCompatActivity {
                                 Log.d("TAG", response.toString());
                                 Toast.makeText(patientDataEntry.this, "Image Sent!", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(patientDataEntry.this, patient_registration.class);
+                                pb.setVisibility(View.GONE);
                                 startActivity(i);
                                 finish();
                             }

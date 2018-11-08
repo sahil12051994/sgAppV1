@@ -18,6 +18,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -60,6 +61,7 @@ public class MedicineReminder extends AppCompatActivity {
     RadioButton radioGroupFReqDaily, radioGroupFReqWeekly, radioGroupFReqMonthly;
     FloatingActionButton fab;
     SwipeRefreshLayout mSwipeRefreshLayout;
+    ProgressBar listPB,addMedPB;
 
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
@@ -77,7 +79,7 @@ public class MedicineReminder extends AppCompatActivity {
 
         dateFormatterShow = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
         dateFormatterServer = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:dd'Z'");
-
+        listPB = (ProgressBar) findViewById(R.id.listPB);
         session = new SessionManager(this);
         clickedPatientId = getIntent().getIntExtra("EXTRA_PATIENT_ID", 0);
         Log.i("iiiidddd", "onCreate: " + clickedPatientId);
@@ -103,7 +105,6 @@ public class MedicineReminder extends AppCompatActivity {
 //        } else if ("patient".equals(user.get("type"))) {
 //            fab.hide();
 //        }
-
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -119,7 +120,8 @@ public class MedicineReminder extends AppCompatActivity {
         add_medicine_dialog.setContentView(R.layout.medicine_add_screen);
         add_medicine_dialog.setCancelable(true);
         add_medicine_dialog.show();
-
+        addMedPB = (ProgressBar) add_medicine_dialog.findViewById(R.id.addMedPB);
+        addMedPB.setVisibility(View.GONE);
         addMedButton = add_medicine_dialog.findViewById(R.id.addMedButton);
         medName = add_medicine_dialog.findViewById(R.id.medName);
 
@@ -168,6 +170,8 @@ public class MedicineReminder extends AppCompatActivity {
         addMedButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                addMedPB.setVisibility(View.VISIBLE);
+                addMedButton.setVisibility(View.GONE);
                 String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + clickedPatientId + "/med";
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                         url, null,
@@ -175,15 +179,17 @@ public class MedicineReminder extends AppCompatActivity {
 
                             @Override
                             public void onResponse(JSONObject response) {
-                                Intent i = new Intent(MedicineReminder.this, MedicineReminder.class);
-                                startActivity(i);
-                                finish();
+                                Log.i("reeeesponse", "onResponse: " + response);
+                                add_medicine_dialog.dismiss();
+                                getPatientData(clickedPatientId);
                             }
                         }, new Response.ErrorListener() {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Log.d("TAG", "Error Message: " + error.getMessage());
+                        addMedPB.setVisibility(View.GONE);
+                        addMedButton.setVisibility(View.VISIBLE);
                     }
                 }) {
 
@@ -233,6 +239,7 @@ public class MedicineReminder extends AppCompatActivity {
 
 
     public void getPatientData(int id) {
+        listPB.setVisibility(View.VISIBLE);
         String url = ApplicationController.get_base_url() + "swasthgarbh/patient/" + id;
         final ArrayList<MedicineListClass> medicineRowAdapter = new ArrayList<MedicineListClass>();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -242,6 +249,7 @@ public class MedicineReminder extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("apihit", response.toString());
+                        listPB.setVisibility(View.GONE);
                         try {
                             JSONArray medicineData = response.getJSONArray("medicines");
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -60,7 +61,8 @@ public class DoctorScreen extends AppCompatActivity {
     private int doctorId;
     TextView doctorName, doctorEmail, doctorTotalPatients, doctorHospital, doctorSpeciality;
     ImageView callDoctor;
-
+    ProgressBar barPB;
+    ProgressBar piePB;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.doctor_menu, menu);
@@ -100,7 +102,10 @@ public class DoctorScreen extends AppCompatActivity {
         doctorEmail = (TextView) findViewById(R.id.registeredDoctorEmail);
         doctorTotalPatients = (TextView) findViewById(R.id.registeredDoctorTotalPatients);
         doctorSpeciality = (TextView) findViewById(R.id.registeredDoctorSpeciality);
-
+        barPB = (ProgressBar) findViewById(R.id.barPB);
+        piePB = (ProgressBar) findViewById(R.id.piePB);
+        barPB.setVisibility(View.VISIBLE);
+        piePB.setVisibility(View.VISIBLE);
         getSupportActionBar().setTitle("Doctor");
 
         session = new SessionManager(this);
@@ -210,7 +215,7 @@ public class DoctorScreen extends AppCompatActivity {
                             barChart.getDescription().setEnabled(false);
                             barChart.invalidate();
                             barChart.animateXY(3000, 3000);
-
+                            barPB.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -304,7 +309,7 @@ public class DoctorScreen extends AppCompatActivity {
                             pieChart.invalidate();
                             pieChart.animateY(1500, Easing.EasingOption.EaseInOutCubic);
 //                            pieChart.spin( 1000,0,-360f, Easing.EasingOption.EaseInOutQuad);
-
+                            piePB.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

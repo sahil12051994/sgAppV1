@@ -111,17 +111,37 @@
         android:ems="10"
         android:hint="Extra Comments"/>
 
-    <Button
-
-        android:id="@+id/addMedButton"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="40dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="40dp"
-        android:layout_marginBottom="20dp"
-        android:text="Add Medicine"
-        android:textAllCaps="false"
-        android:background="@drawable/my_btn"/>
+        android:layout_height="90dp"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ProgressBar
+            android:id="@+id/addMedPB"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal" />
+
+        <Button
+            android:id="@+id/addMedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/my_btn"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Add Medicine"
+            android:textAllCaps="false"/>
+
+
+    </RelativeLayout>
+
 
 </LinearLayout>

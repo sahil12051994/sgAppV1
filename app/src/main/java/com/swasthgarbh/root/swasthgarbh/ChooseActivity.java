@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     EditText username, password;
     SessionManager session;
     TextView disclaimer;
+    ProgressBar signInPB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +75,8 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         username = sign_in_dialog.findViewById(R.id.username);
         password = sign_in_dialog.findViewById(R.id.password);
         sign_in_dialog.show();
-
+        signInPB = (ProgressBar) sign_in_dialog.findViewById(R.id.signInPB);
+        signInPB.setVisibility(View.GONE);
         // Get screen width and height in pixels
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -97,7 +100,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         // Set alert dialog width equal to screen width 80%
         int dialogWindowWidth = (int) (displayWidth * 0.8f);
         // Set alert dialog height equal to screen height 70%
-        int dialogWindowHeight = (int) (displayHeight * 0.50f);
+        int dialogWindowHeight = (int) (displayHeight * 0.37f);
         // Set the width and height for the layout parameters
         // This will bet the width and height of alert dialog
         layoutParams.width = dialogWindowWidth;
@@ -109,6 +112,8 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
 
             @Override
             public void onClick(View v) {
+                signInPB.setVisibility(View.VISIBLE);
+                login.setVisibility(View.GONE);
                 if (v.getId() == R.id.login) {
                     String str_username = "" + username.getText();
                     String str_password = "" + password.getText();
@@ -151,6 +156,8 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.d("TAG", "Error Message: " + error.getMessage());
+                            signInPB.setVisibility(View.GONE);
+                            login.setVisibility(View.VISIBLE);
                         }
                     }) {
 

@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -195,6 +196,10 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
      * */
     public void getPatientData(int pId){
         final ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
+        final ProgressBar listPB = (ProgressBar) findViewById(R.id.listPB);
+        final ProgressBar chartPB = (ProgressBar) findViewById(R.id.chartPB);
+        listPB.setVisibility(View.VISIBLE);
+        chartPB.setVisibility(View.VISIBLE);
         String url = ApplicationController.get_base_url() + "api/patient/" + pId ;
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
@@ -272,7 +277,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             set3.setDrawCircles(false);
 
                             YAxis leftAxis = chart.getAxisLeft();
-                            LimitLine ll = new LimitLine(140f, "Critical");
+                            LimitLine ll = new LimitLine(160f, "Critical");
                             ll.setLineColor(Color.rgb(36, 113, 163));
                             ll.setLineWidth(1f);
                             ll.setTextColor(Color.rgb(36, 113, 163));
@@ -310,6 +315,8 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             listView.setAdapter(itemsAdapter);
                             JSONObject device = (JSONObject) response.get("device");
                             to_fcm = device.getString("device_id");
+                            listPB.setVisibility(View.GONE);
+                            chartPB.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

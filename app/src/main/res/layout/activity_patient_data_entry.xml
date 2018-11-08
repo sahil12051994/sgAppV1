@@ -373,18 +373,30 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 >
-
-                <Button
-                    android:id="@+id/sendData"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="30dp"
-                    android:layout_marginBottom="50dp"
-                    android:background="@drawable/my_btn"
-                    android:text="@string/send"
-                    android:textAllCaps="false" />
+                    android:orientation="horizontal">
+
+                    <ProgressBar
+                        android:id="@+id/sendPB"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        />
+
+                    <Button
+                        android:id="@+id/sendData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="30dp"
+                        android:layout_marginBottom="50dp"
+                        android:background="@drawable/my_btn"
+                        android:text="@string/send"
+                        android:textAllCaps="false" />
+                </LinearLayout>
 
             </FrameLayout>
 

@@ -7,6 +7,13 @@
     android:layout_margin="10dp"
     android:orientation="vertical">
 
+    <ProgressBar
+        android:id="@+id/listPB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_vertical|center_horizontal" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swiperefreshMedicine"
         android:layout_width="match_parent"

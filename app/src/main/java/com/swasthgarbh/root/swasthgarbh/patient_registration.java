@@ -26,6 +26,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -441,7 +442,9 @@ public class patient_registration extends AppCompatActivity {
      * */
     public void getPatientData(){
         String url = ApplicationController.get_base_url() + "api/patient/" + session.getUserDetails().get("id");
-
+        final ProgressBar pb = (ProgressBar) findViewById(R.id.indeterminateBar);
+        final ProgressBar chartPB = (ProgressBar) findViewById(R.id.chartPB);
+        pb.setVisibility(View.VISIBLE);
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONObject>() {
@@ -504,7 +507,7 @@ public class patient_registration extends AppCompatActivity {
 
 
                                 YAxis leftAxis = chart.getAxisLeft();
-                                LimitLine ll = new LimitLine(140f, "Critical");
+                                LimitLine ll = new LimitLine(160f, "Critical");
                                 ll.setLineColor(Color.rgb(36, 113, 163));
                                 ll.setLineWidth(1f);
                                 ll.setTextColor(Color.rgb(36, 113, 163));
@@ -540,6 +543,8 @@ public class patient_registration extends AppCompatActivity {
                                 patientDataAdapter itemsAdapter = new patientDataAdapter(patient_registration.this, patientRowData);
                                 ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
                                 listView.setAdapter(itemsAdapter);
+                                pb.setVisibility(View.GONE);
+                                chartPB.setVisibility(View.GONE);
                             }
                             getDoctorData();
                         } catch (JSONException e) {
