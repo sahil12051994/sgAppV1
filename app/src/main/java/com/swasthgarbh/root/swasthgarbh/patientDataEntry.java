@@ -2,14 +2,22 @@ package com.swasthgarbh.root.swasthgarbh;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -46,6 +54,7 @@ import java.util.Map;
 
 public class patientDataEntry extends AppCompatActivity {
 
+    private NotificationManager mNotificationManager;
     EditText sysData, dysData, bodyWeight, extraComments, heartRate, bleedingVag, urineAlb;
     CheckBox headache, abdPain, visProb, decFea, swell, hyperT;
     SessionManager session;
@@ -56,7 +65,6 @@ public class patientDataEntry extends AppCompatActivity {
     String ImgBytes = "";
     ImageView loader;
     String currentDateandTime;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +96,35 @@ public class patientDataEntry extends AppCompatActivity {
                 selectImage();
             }
         });
+
+        final NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(this, "notify_001");
+        Intent ii = new Intent(this, patientDataEntry.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, ii, 0);
+
+        NotificationCompat.BigTextStyle bigText = new NotificationCompat.BigTextStyle();
+        bigText.bigText("Your Blood Pressure is above critical, Please contact your doctor");
+        bigText.setBigContentTitle("SwasthGarbh Alert");
+        bigText.setSummaryText("Automated Alert");
+
+        mBuilder.setContentIntent(pendingIntent);
+        mBuilder.setSmallIcon(R.drawable.logo);
+        mBuilder.setContentTitle("SwasthGarbh Alert");
+        mBuilder.setContentText("Your Blood Pressure is above critical, Please contact your doctor");
+        mBuilder.setPriority(Notification.PRIORITY_MAX);
+        mBuilder.setStyle(bigText);
+
+        mNotificationManager =
+                (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("notify_001",
+                    "Channel human readable title",
+                    NotificationManager.IMPORTANCE_DEFAULT);
+            mNotificationManager.createNotificationChannel(channel);
+        }
+
         currentDateandTime = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(new Date());
         final ProgressBar pb = (ProgressBar) findViewById(R.id.sendPB);
         pb.setVisibility(View.GONE);
@@ -153,6 +190,9 @@ public class patientDataEntry extends AppCompatActivity {
                             public void onResponse(JSONObject response) {
 //                                Log.d("DATA", response.toString());
 //                                pb.setVisibility(View.GONE);
+                                if(Integer.parseInt(sysData.getText().toString()) > 160 || Integer.parseInt(dysData.getText().toString()) > 110) {
+                                    mNotificationManager.notify(0, mBuilder.build());
+                                }
                                 Intent i = new Intent(patientDataEntry.this, patient_registration.class);
                                 startActivity(i);
                                 finish();
