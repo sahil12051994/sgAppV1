@@ -261,8 +261,8 @@ public class DoctorScreen extends AppCompatActivity {
                             JSONObject analysis_obj = (JSONObject) response.getJSONObject("analysis_object");
                             PieChart pieChart = (PieChart) findViewById(R.id.doc2chart);
                             ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-                            yvalues.add(new PieEntry(analysis_obj.getInt("high_sys"), "High Systole"));
-                            yvalues.add(new PieEntry(analysis_obj.getInt("high_dys"), "High Diastole"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("high_sys"), "High Systolic BP"));
+                            yvalues.add(new PieEntry(analysis_obj.getInt("high_dys"), "High Diastolic BP"));
                             yvalues.add(new PieEntry(analysis_obj.getInt("high_weight"), "Over Weight"));
                             yvalues.add(new PieEntry(analysis_obj.getInt("hyper_tension"), "Hypertensed"));
                             yvalues.add(new PieEntry(analysis_obj.getInt("urine_albumin"), "High Urine Albumin"));

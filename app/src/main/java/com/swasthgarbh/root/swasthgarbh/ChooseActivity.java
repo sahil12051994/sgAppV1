@@ -29,7 +29,7 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     Dialog sign_in_dialog;
     EditText username, password;
     SessionManager session;
-    TextView disclaimer;
+    TextView disclaimer,ancAssist;
     ProgressBar signInPB;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +40,12 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
         patient = (Button) findViewById(R.id.patient_registration);
         sign_in = (Button) findViewById(R.id.signin_modal);
         disclaimer = (TextView) findViewById(R.id.privacyPolicy);
+        ancAssist = (TextView) findViewById(R.id.offlineAnc);
         doctor.setOnClickListener(this);
         patient.setOnClickListener(this);
         sign_in.setOnClickListener(this);
         disclaimer.setOnClickListener(this);
+        ancAssist.setOnClickListener(this);
     }
 
     @Override
@@ -58,6 +60,9 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
             callLoginDialog();
         } else if (view.getId() == R.id.privacyPolicy) {
             Intent i = new Intent(this, Disclaimer.class);
+            startActivity(i);
+        } else if (view.getId() == R.id.offlineAnc) {
+            Intent i = new Intent(this, ANC_Assist.class);
             startActivity(i);
         }
 

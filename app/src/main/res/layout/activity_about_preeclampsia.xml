@@ -11,6 +11,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -53,28 +55,10 @@
             android:layout_margin="10dp"
             android:text="@string/aboutdef7"/>
 
-        <!--<TextView-->
+        <!--<WebView-->
             <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:text="Researchers continue to study ways to prevent preeclampsia, but so far, no clear strategies have emerged. Eating less salt, changing your activities, restricting calories, or consuming garlic or fish oil doesn't reduce your risk. Increasing your intake of vitamins C and E hasn't been shown to have a benefit.-->
-
-<!--Some studies have reported an association between vitamin D deficiency and an increased risk of preeclampsia. But while some studies have shown an association between taking vitamin D supplements and a lower risk of preeclampsia, others have failed to make the connection.-->
-
-<!--In certain cases, however, you may be able to reduce your risk of preeclampsia with:-->
-
-<!--Low-dose aspirin. If you meet certain risk factors — including a history of preeclampsia, a multiple pregnancy, chronic high blood pressure, kidney disease, diabetes or autoimmune disease — your doctor may recommend a daily low-dose aspirin (81 milligrams) beginning after 12 weeks of pregnancy.-->
-<!--Calcium supplements. In some populations, women who have calcium deficiency before pregnancy — and who don't get enough calcium during pregnancy through their diets — might benefit from calcium supplements to prevent preeclampsia. However, it's unlikely that women from the United States or other developed countries would have calcium deficiency to the degree that calcium supplements would benefit them."/>-->
-
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_margin="10dp"-->
-            <!--android:text="It's important that you don't take any medications, vitamins or supplements without first talking to your doctor.-->
-
-<!--Before you become pregnant, especially if you've had preeclampsia before, it's a good idea to be as healthy as you can be. Lose weight if you need to, and make sure other conditions, such as diabetes, are well-managed.-->
-
-<!--Once you're pregnant, take care of yourself — and your baby — through early and regular prenatal care. If preeclampsia is detected early, you and your doctor can work together to prevent complications and make the best choices for you and your baby."/>-->
+            <!--android:layout_height="match_parent"-->
+            <!--tools:ignore="WebViewLayout" />-->
 
     </LinearLayout>
 

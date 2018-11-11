@@ -82,7 +82,7 @@ public class MedicineReminder extends AppCompatActivity {
         listPB = (ProgressBar) findViewById(R.id.listPB);
         session = new SessionManager(this);
         clickedPatientId = getIntent().getIntExtra("EXTRA_PATIENT_ID", 0);
-        Log.i("iiiidddd", "onCreate: " + clickedPatientId);
+//        Log.i("iiiidddd", "onCreate: " + clickedPatientId);
         getPatientData(clickedPatientId);
 
         fab = findViewById(R.id.fab);

@@ -34,6 +34,7 @@ public class WHOGuidelines extends AppCompatActivity {
     int clickedPatientId;
     ProgressBar pb;
     Button updateWhoData;
+    Calendar newDate1 = Calendar.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,13 +123,10 @@ public class WHOGuidelines extends AppCompatActivity {
 
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                             Calendar c = Calendar.getInstance();
-                            c.add(Calendar.DATE, 280);
-                            String output = sdf.format(c.getTime());
-                            eddDate.setText(output);
+                            newDate1.set(Integer.parseInt(date_year), Integer.parseInt(date_month), Integer.parseInt(date_date));
 
-                            Calendar anc1c = Calendar.getInstance();
-                            anc1c.add(Calendar.DATE, 84);
-                            anc1Date.setText("12 Weeks - " + sdf.format(anc1c.getTime()));
+                            newDate1.add(Calendar.DATE, 84);
+                            anc1Date.setText("12 Weeks - " + sdf.format(newDate1.getTime()));
                             anc1_diabtese.setChecked(response.getBoolean("anc1_diabtese"));
                             anc1_anemia.setChecked(response.getBoolean("anc1_anemia"));
                             anc1_hiv.setChecked(response.getBoolean("anc1_hiv"));
@@ -137,51 +135,45 @@ public class WHOGuidelines extends AppCompatActivity {
                             anc1_urine.setChecked(response.getBoolean("anc1_urine"));
 
 
-                            Calendar anc2c = Calendar.getInstance();
-                            anc2c.add(Calendar.DATE, 140);
-                            anc2Date.setText("20 Weeks - " + sdf.format(anc2c.getTime()));
+                            newDate1.add(Calendar.DATE, 56);
+                            anc2Date.setText("20 Weeks - " + sdf.format(newDate1.getTime()));
                             anc2_diabtese.setChecked(response.getBoolean("anc2_diabtese"));
                             anc2_anemia.setChecked(response.getBoolean("anc2_anemia"));
 
 
-                            Calendar anc3c = Calendar.getInstance();
-                            anc3c.add(Calendar.DATE, 182);
-                            anc3Date.setText("26 Weeks - " + sdf.format(anc3c.getTime()));
+                            newDate1.add(Calendar.DATE, 42);
+                            anc3Date.setText("26 Weeks - " + sdf.format(newDate1.getTime()));
                             anc3_diabtese.setChecked(response.getBoolean("anc3_diabtese"));
                             anc3_anemia.setChecked(response.getBoolean("anc3_anemia"));
                             anc3_urine.setChecked(response.getBoolean("anc3_urine"));
 
 
-                            Calendar anc4c = Calendar.getInstance();
-                            anc4c.add(Calendar.DATE, 210);
-                            anc4Date.setText("30 Weeks - " + sdf.format(anc4c.getTime()));
+                            newDate1.add(Calendar.DATE, 28);
+                            anc4Date.setText("30 Weeks - " + sdf.format(newDate1.getTime()));
                             anc4_diabtese.setChecked(response.getBoolean("anc4_diabtese"));
 
 
-                            Calendar anc5c = Calendar.getInstance();
-                            anc5c.add(Calendar.DATE, 238);
-                            anc5Date.setText("34 Weeks - " + sdf.format(anc5c.getTime()));
+                            newDate1.add(Calendar.DATE, 28);
+                            anc5Date.setText("34 Weeks - " + sdf.format(newDate1.getTime()));
                             anc5_diabtese.setChecked(response.getBoolean("anc5_diabtese"));
                             anc5_urine.setChecked(response.getBoolean("anc5_urine"));
 
-                            Calendar anc6c = Calendar.getInstance();
-                            anc6c.add(Calendar.DATE, 266);
-                            anc6Date.setText("36 Weeks - " + sdf.format(anc6c.getTime()));
+                            newDate1.add(Calendar.DATE, 14);
+                            anc6Date.setText("36 Weeks - " + sdf.format(newDate1.getTime()));
                             anc6_diabtese.setChecked(response.getBoolean("anc6_diabtese"));
                             anc6_anemia.setChecked(response.getBoolean("anc6_anemia"));
 
 
-                            Calendar anc7c = Calendar.getInstance();
-                            anc7c.add(Calendar.DATE, 280);
-                            anc7Date.setText("38 Weeks - " + sdf.format(anc7c.getTime()));
+                            newDate1.add(Calendar.DATE, 14);
+                            anc7Date.setText("38 Weeks - " + sdf.format(newDate1.getTime()));
                             anc7_diabtese.setChecked(response.getBoolean("anc7_diabtese"));
 
 
-                            Calendar anc8c = Calendar.getInstance();
-                            anc8c.add(Calendar.DATE, 84);
-                            anc8Date.setText("40 Weeks - " + sdf.format(anc8c.getTime()));
+                            newDate1.add(Calendar.DATE, 14);
+                            anc8Date.setText("40 Weeks - " + sdf.format(newDate1.getTime()));
                             anc8_diabtese.setChecked(response.getBoolean("anc8_diabtese"));
 
+                            eddDate.setText(sdf.format(newDate1.getTime()));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
