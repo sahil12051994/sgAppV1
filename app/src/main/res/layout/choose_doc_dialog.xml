@@ -62,7 +62,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:textAllCaps="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="--No Data--"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -78,7 +79,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:textAllCaps="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="--No Data--"/>
 
             <TextView
                 android:layout_width="match_parent"
@@ -94,7 +96,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginBottom="10dp"
                 android:textAllCaps="false"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:text="--No Data--"/>
 
         </LinearLayout>
 
@@ -116,7 +119,8 @@
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:text="Change"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:background="@drawable/my_btn"/>
     </LinearLayout>
 
 
