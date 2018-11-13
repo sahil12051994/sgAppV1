@@ -64,8 +64,125 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="40px" />
+                    android:textSize="40px"
+                    android:inputType="none"/>
             </LinearLayout>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Physical Examinations:"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Collection of (mother's) medical history"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Checking (mother's) blood pressure"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; (Mother's) height and weight"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Pelvic exam"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Doppler fetal heart rate monitoring"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; (Mother's) blood and urine tests"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="First visit  8-12 weeks:  before  "
+                            android:textStyle="italic" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/firstvisit"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Examination: Complete general, and obstetrical examination, BP"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Screening: Haemoglobin, Syphilis, HIV and Proteinuria"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Treatments: Syphilis, ARV if eligible, Treat bacteriuria if indicated*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Preventive Measures: Tetanus toxoid, Iron and folate+"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Advice : Self-care, alcohol and tobacco use, nutrition, safe sex, rest, sleeping under ITN"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Develop a birth and emergency plan"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
@@ -144,37 +261,37 @@
                             android:id="@+id/anc1dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                         <TextView
                             android:id="@+id/anc1ana"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/anaemia" />
+                            android:text="@string/anaemiaAssist" />
 
                         <TextView
                             android:id="@+id/anc1hiv"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/hiv" />
+                            android:text="@string/hivAssist" />
 
                         <TextView
                             android:id="@+id/anc1ult"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/ultrasound" />
+                            android:text="@string/ultrasoundAssist" />
 
                         <TextView
                             android:id="@+id/anc1tet"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/tetnus" />
+                            android:text="@string/tetnusAssist" />
 
                         <TextView
                             android:id="@+id/anc1uri"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/urine_test" />
+                            android:text="@string/urine_testAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -242,16 +359,91 @@
                             android:id="@+id/anc2dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                         <TextView
                             android:id="@+id/anc2ult"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/ultrasound" />
+                            android:text="@string/ultrasoundAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Second visit  24-26 weeks:  before  "
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/secondvisit"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Assess maternal and fetal well-being"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Check record for previous complications and treatments during the pregnancy"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Examination: Anaemia, BP, fetal growth, and movements"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Screening: Bacteriuria*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Treatments: Antihelminthic**, ARV if eligible, Treat bacteriuria if indicated*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Exclude PIH and anaemia"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Preventive measures : Tetanus toxoid, Iron and folate, IPTp, ARV"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Birth and emergency plan, reinforcement of previous advice"/>
+
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -315,19 +507,19 @@
                             android:id="@+id/anc3dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                         <TextView
                             android:id="@+id/anc3ana"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/anaemia" />
+                            android:text="@string/anaemiaAssist" />
 
                         <TextView
                             android:id="@+id/anc3uri"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/urine_test" />
+                            android:text="@string/urine_testAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -387,10 +579,75 @@
                             android:id="@+id/anc4dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Third visit  32 weeks:  before  "
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/thirdvisit"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Assess maternal and fetal well-being"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Examination: Anaemia, BP, fetal growth, multiple pregnancy, PIH"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Screening: Bacteriuria*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Treatments: ARV if eligible, Treat bacteriuria if indicated*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Preventive measures: Iron and folate, IPTp, ARV"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Review birth and emergency plan, infant feeding, postpartum/postnatal care, pregnancy spacing, reinforcement of previous advice"/>
+
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -454,13 +711,13 @@
                             android:id="@+id/anc5dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                         <TextView
                             android:id="@+id/anc5uri"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/urine_test" />
+                            android:text="@string/urine_testAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -520,16 +777,82 @@
                             android:id="@+id/anc6dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                         <TextView
                             android:id="@+id/anc6ana"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/anaemia" />
+                            android:text="@string/anaemiaAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fourth visit  36-38 weeks:  before  "
+                            android:textStyle="italic" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/fourthvisit"
+                            android:textStyle="italic" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Assess significant symptoms. Check record for previous complications and treatments during the pregnancy."/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Examination: Anaemia, BP, fetal growth and movements, multiple pregnancy, malpresentation"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Screening: Bacteriuria*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Treatments: ARV if eligible, If breech, ECV or referral for ECV, Treat bacteriuria if indicated*"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Preventive measures: Iron and folate, ARV"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#9900; Birth and emergency plan, infant feeding, postpartum/postnatalcare, pregnancy spacing, reinforcement of previous advice"/>
+
+
+                </LinearLayout>
+
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
@@ -586,7 +909,7 @@
                             android:id="@+id/anc7dia"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/diabetese" />
+                            android:text="@string/diabeteseAssist" />
 
                     </LinearLayout>
                 </LinearLayout>
@@ -640,7 +963,47 @@
                         android:id="@+id/anc8dia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/diabetese" />
+                        android:text="@string/diabeteseAssist" />
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="&#10686; Acronyms: \nEDD = estimated date of delivery; \nBP = blood pressure; \nPIH = pregnancy induced hypertension; \nARV = antiretroviral drugs for HIV/AIDS; \nECV = external cephalic version; \nIPTp = intermittent preventive treatment for malaria during pregnancy; \nITN = insecticide treated bednet;"
+                        android:textStyle="italic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="*Additional intervention for use in referral centres but not recommended as routine for resource-limited settings"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="** Should not be given in first trimester, but if first visit occurs after 16 weeks, it can be given at first visit"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="+Should also be prescribed as treatment if anaemia is diagnosed"/>
 
                 </LinearLayout>
 

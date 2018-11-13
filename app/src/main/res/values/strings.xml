@@ -46,6 +46,14 @@
     <string name="ultrasound">Ultrasound</string>
     <string name="tetnus">Tetnus</string>
     <string name="urine_test">Urine Test</string>
+
+    <string name="diabeteseAssist" translatable="false">&#9900; Diabetes</string>
+    <string name="anaemiaAssist" translatable="false">&#9900; Anaemia</string>
+    <string name="hivAssist" translatable="false">&#9900; HIV</string>
+    <string name="ultrasoundAssist" translatable="false">&#9900; Ultrasound</string>
+    <string name="tetnusAssist" translatable="false">&#9900; Tetnus</string>
+    <string name="urine_testAssist" translatable="false">&#9900; Urine Test</string>
+
     <string name="update_my_data">Update My Data</string>
     <string name="lmp">LMP</string>
     <string name="edd">EDD</string>

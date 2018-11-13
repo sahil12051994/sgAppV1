@@ -233,17 +233,15 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                 patient_data_listview_class pr = new patient_data_listview_class(po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin") ,po.getInt("weight"), po.getBoolean("headache"), po.getBoolean("abdominal_pain"), po.getBoolean("visual_problems"), po.getDouble("bleeding_per_vaginum") , po.getBoolean("decreased_fetal_movements"), po.getBoolean("swelling_in_hands_or_face"), po.getString("extra_comments"));
                                 patientRowData.add(pr);
                                 Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
-                                yValues.add(new Entry(i, po.getInt("systolic")));
-                                y2Values.add(new Entry(i, po.getInt("diastolic")));
-                                y3Values.add(new Entry(i, po.getInt("weight")));
                             }
 
-//                            for (int i = patientBpData.length()-1; i >= 0; i--) {
-//                                JSONObject po = (JSONObject) patientBpData.get(i);
-//                                yValues.add(new Entry(i-(patientBpData.length()-1), po.getInt("systolic")));
-//                                y2Values.add(new Entry(i-(patientBpData.length()-1), po.getInt("diastolic")));
-//                                y3Values.add(new Entry(i-(patientBpData.length()-1), po.getInt("weight")));
-//                            }
+                            for (int i = patientBpData.length()-1; i>=0; i--) {
+                                JSONObject po = (JSONObject) patientBpData.get(i);
+
+                                yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
+                            }
 
 
                             chart.setDragEnabled(true);

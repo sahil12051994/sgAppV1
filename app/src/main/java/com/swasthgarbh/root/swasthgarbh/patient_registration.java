@@ -43,6 +43,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.google.android.gms.common.util.ArrayUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -475,11 +476,15 @@ public class patient_registration extends AppCompatActivity {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
                                     patient_data_listview_class pr = new patient_data_listview_class(po.getInt("pk"), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
                                     patientRowData.add(pr);
-                                    Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
 
-                                    yValues.add(new Entry(i, po.getInt("systolic")));
-                                    y2Values.add(new Entry(i, po.getInt("diastolic")));
-                                    y3Values.add(new Entry(i, po.getInt("weight")));
+                                }
+
+                                for (int i = patientBpData.length()-1; i>=0; i--) {
+                                    JSONObject po = (JSONObject) patientBpData.get(i);
+
+                                    yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                    y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
                                 }
 
                                 chart.setDragEnabled(true);

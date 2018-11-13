@@ -101,10 +101,17 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
 
                             Log.d("The length check", "onResponse: " + patientBpData.length());
                             if(patientBpData.length() != 0){
-                                for (int i = 0; i < patientBpData.length(); i++) {
+//                                for (int i = 0; i < patientBpData.length(); i++) {
+//                                    JSONObject po = (JSONObject) patientBpData.get(i);
+//                                    yValues.add(new Entry(i, po.getInt("systolic")));
+//                                    y2Values.add(new Entry(i, po.getInt("diastolic")));
+//                                }
+
+                                for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-                                    yValues.add(new Entry(i, po.getInt("systolic")));
-                                    y2Values.add(new Entry(i, po.getInt("diastolic")));
+
+                                    yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
                                 }
 
                                 chart.setDragEnabled(true);
@@ -128,6 +135,8 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                 set2.setColor(Color.RED);
                                 set2.setDrawValues(false);
                                 set2.setDrawCircles(false);
+                                set1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                                set2.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
 
                                 YAxis leftAxis = chart.getAxisLeft();
                                 LimitLine ll = new LimitLine(140f, "Critical");
@@ -153,6 +162,7 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                 LineData data = new LineData(dataSets);
                                 chart.setData(data);
                                 chart.invalidate();
+                                chart.animateXY(1000, 1000);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

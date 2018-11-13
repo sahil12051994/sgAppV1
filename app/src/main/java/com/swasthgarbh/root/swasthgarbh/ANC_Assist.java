@@ -59,7 +59,12 @@ public class ANC_Assist extends AppCompatActivity {
         final TextView anc7Date = (TextView) findViewById(R.id.anc7Date);
         final TextView anc8Date = (TextView) findViewById(R.id.anc8Date);
 
-        dateFormatterShow = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+        final TextView firstvisit = (TextView) findViewById(R.id.firstvisit);
+        final TextView secondvisit = (TextView) findViewById(R.id.secondvisit);
+        final TextView thirdvisit = (TextView) findViewById(R.id.thirdvisit);
+        final TextView fourthvisit = (TextView) findViewById(R.id.fourthvisit);
+
+        dateFormatterShow = new SimpleDateFormat("dd-MMMM-yyyy", Locale.US);
         final Calendar newCalendar = Calendar.getInstance();
 
         lmpDate.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +83,7 @@ public class ANC_Assist extends AppCompatActivity {
                 newDate1.add(Calendar.DATE, 84);
                 anc1_date = dateFormatterShow.format(newDate1.getTime());
                 anc1Date.setText("12 Weeks: " + dateFormatterShow.format(newDate1.getTime()));
+                firstvisit.setText(dateFormatterShow.format(newDate1.getTime()));
 
                 newDate1.add(Calendar.DATE, 56);
                 anc2_date = dateFormatterShow.format(newDate1.getTime());
@@ -86,6 +92,7 @@ public class ANC_Assist extends AppCompatActivity {
                 newDate1.add(Calendar.DATE, 42);
                 anc3_date = dateFormatterShow.format(newDate1.getTime());
                 anc3Date.setText("26 Weeks: " + dateFormatterShow.format(newDate1.getTime()));
+                secondvisit.setText(dateFormatterShow.format(newDate1.getTime()));
 
                 newDate1.add(Calendar.DATE, 28);
                 and4_date = dateFormatterShow.format(newDate1.getTime());
@@ -94,6 +101,7 @@ public class ANC_Assist extends AppCompatActivity {
                 newDate1.add(Calendar.DATE, 28);
                 anc5_date = dateFormatterShow.format(newDate1.getTime());
                 anc5Date.setText("34 Weeks: " + dateFormatterShow.format(newDate1.getTime()));
+                thirdvisit.setText(dateFormatterShow.format(newDate1.getTime()));
 
                 newDate1.add(Calendar.DATE, 14);
                 anc6_date = dateFormatterShow.format(newDate1.getTime());
@@ -102,6 +110,7 @@ public class ANC_Assist extends AppCompatActivity {
                 newDate1.add(Calendar.DATE, 14);
                 anc7_date = dateFormatterShow.format(newDate1.getTime());
                 anc7Date.setText("38 Weeks: " + dateFormatterShow.format(newDate1.getTime()));
+                fourthvisit.setText(dateFormatterShow.format(newDate1.getTime()));
 
                 newDate1.add(Calendar.DATE, 14);
                 anc8_date = dateFormatterShow.format(newDate1.getTime());

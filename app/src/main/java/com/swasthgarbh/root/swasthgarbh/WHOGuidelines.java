@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -119,11 +120,12 @@ public class WHOGuidelines extends AppCompatActivity {
                             String lmpDateString = date_date + "/" + date_month + "/" + date_year;
                             String eddDateString = date_year + "/" + date_month + "/" + date_date;
 
-                            lmpDate.setText(lmpDateString);
-
                             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                             Calendar c = Calendar.getInstance();
-                            newDate1.set(Integer.parseInt(date_year), Integer.parseInt(date_month), Integer.parseInt(date_date));
+//                            newDate1.set(Integer.parseInt(date_year), Integer.parseInt(date_month), Integer.parseInt(date_date));
+                            Date d = sdf.parse(lmpDateString);
+                            newDate1.setTime(d);
+                            lmpDate.setText(sdf.format(d));
 
                             newDate1.add(Calendar.DATE, 84);
                             anc1Date.setText("12 Weeks - " + sdf.format(newDate1.getTime()));
@@ -175,6 +177,8 @@ public class WHOGuidelines extends AppCompatActivity {
 
                             eddDate.setText(sdf.format(newDate1.getTime()));
                         } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
                             e.printStackTrace();
                         }
 //                            edit.commit();
