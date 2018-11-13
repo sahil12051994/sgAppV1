@@ -126,9 +126,9 @@ public class patient_data_listview_class {
 
     private String get_time_period(String time) {
         if (Integer.parseInt(time.split(":")[0]) > 12) {
-            return "P.M";
+            return "PM";
         } else {
-            return "A.M";
+            return "AM";
         }
     }
 

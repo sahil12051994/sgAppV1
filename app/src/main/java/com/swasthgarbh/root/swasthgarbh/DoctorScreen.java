@@ -26,7 +26,9 @@ import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.LimitLine;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -37,6 +39,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
@@ -197,6 +200,10 @@ public class DoctorScreen extends AppCompatActivity {
                             entriesGroup1.add(new BarEntry(8, anc8Count));
                             entriesGroup2.add(new BarEntry(8,total_ladies-anc8Count));
 
+//                            List<String> xValues = "ANC1","ANC2","ANC3","ANC4","ANC5","ANC6","ANC7","ANC8";
+//
+//                            XAxis xAxis = barChart.getXAxis();
+//                            xAxis.setValueFormatter(new MyValueFormatterPie(xValues));
                             BarDataSet set1 = new BarDataSet(entriesGroup1, "Following WHO Guidelines");
                             BarDataSet set2 = new BarDataSet(entriesGroup2, "Not Following WHO Guidelines");
                             set2.setColor(Color.RED);
@@ -207,6 +214,7 @@ public class DoctorScreen extends AppCompatActivity {
 //                          (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
 
                             BarData data = new BarData(set1, set2);
+                            data.setValueFormatter(new MyValueFormatterPie());
                             data.setBarWidth(barWidth); // set the width of each bar
                             barChart.setData(data);
                             barChart.groupBars(0.5f,groupSpace, barSpace); // perform the "explicit" grouping
@@ -261,16 +269,23 @@ public class DoctorScreen extends AppCompatActivity {
                             JSONObject analysis_obj = (JSONObject) response.getJSONObject("analysis_object");
                             PieChart pieChart = (PieChart) findViewById(R.id.doc2chart);
                             ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
-                            yvalues.add(new PieEntry(analysis_obj.getInt("high_sys"), "High Systolic BP"));
-                            yvalues.add(new PieEntry(analysis_obj.getInt("high_dys"), "High Diastolic BP"));
-                            yvalues.add(new PieEntry(analysis_obj.getInt("high_weight"), "Over Weight"));
-                            yvalues.add(new PieEntry(analysis_obj.getInt("hyper_tension"), "Hypertensed"));
-                            yvalues.add(new PieEntry(analysis_obj.getInt("urine_albumin"), "High Urine Albumin"));
-                            yvalues.add(new PieEntry(analysis_obj.getInt("who_following"), "Following WHO"));
+                            if(analysis_obj.getInt("high_sys")!=0)
+                                yvalues.add(new PieEntry(analysis_obj.getInt("high_sys"), "High Systolic BP"));
+                            if(analysis_obj.getInt("high_dys")!=0)
+                                yvalues.add(new PieEntry(analysis_obj.getInt("high_dys"), "High Diastolic BP"));
+                            if(analysis_obj.getInt("high_weight")!=0)
+                                yvalues.add(new PieEntry(analysis_obj.getInt("high_weight"), "Over Weight"));
+                            if(analysis_obj.getInt("hyper_tension")!=0)
+                                yvalues.add(new PieEntry(analysis_obj.getInt("hyper_tension"), "Hypertensed"));
+                            if(analysis_obj.getInt("urine_albumin")!=0)
+                                yvalues.add(new PieEntry(analysis_obj.getInt("urine_albumin"), "High Urine Albumin"));
+                            if(analysis_obj.getInt("who_following")!=0)
+                                yvalues.add(new PieEntry(analysis_obj.getInt("who_following"), "Following WHO"));
 
                             PieDataSet dataSet = new PieDataSet(yvalues, getString(R.string.PieChartDesc));
 
                             PieData data = new PieData(dataSet);
+                            data.setValueFormatter(new MyValueFormatterPie());
                             pieChart.setDrawHoleEnabled(true);
                             pieChart.getDescription().setEnabled(false);
                             data.setValueTextSize(13f);
@@ -280,30 +295,33 @@ public class DoctorScreen extends AppCompatActivity {
 
 //                            dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
                             dataSet.setColors(new int[] { getResources().getColor(R.color.chart1), getResources().getColor(R.color.chart2), getResources().getColor(R.color.chart3), getResources().getColor(R.color.chart4), getResources().getColor(R.color.chart5), getResources().getColor(R.color.chart6) });
-                            int count = 0;
-                            if(analysis_obj.getInt("high_sys") == 0){
-                                count++;
-                            }
-                            if(analysis_obj.getInt("high_dys") == 0){
-                                count++;
-                            }
-                            if(analysis_obj.getInt("high_weight") == 0){
-                                count++;
-                            }
-                            if(analysis_obj.getInt("hyper_tension") == 0){
-                                count++;
-                            }
-                            if(analysis_obj.getInt("urine_albumin") == 0){
-                                count++;
-                            }
-                            if(analysis_obj.getInt("who_following") == 0){
-                                count++;
-                            }
-                            if(count>1){
-                                pieChart.setDrawSliceText(false);
-                            }else{
-                                dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-                            }
+//                            int count = 0;
+//                            if(analysis_obj.getInt("high_sys") == 0){
+//                                count++;
+//                            }
+//                            if(analysis_obj.getInt("high_dys") == 0){
+//                                count++;
+//                            }
+//                            if(analysis_obj.getInt("high_weight") == 0){
+//                                count++;
+//                            }
+//                            if(analysis_obj.getInt("hyper_tension") == 0){
+//                                count++;
+//                            }
+//                            if(analysis_obj.getInt("urine_albumin") == 0){
+//                                count++;
+//                            }
+//                            if(analysis_obj.getInt("who_following") == 0){
+//                                count++;
+//                            }
+//                            if(count>1){
+//                                pieChart.setDrawSliceText(false);
+//                            }else{
+//                                dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+//                            }
+
+                            dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+
 //                            data.setValueFormatter(new PercentFormatter());
                             pieChart.setData(data);
                             pieChart.invalidate();

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -93,9 +94,9 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
     private String get_time_period(String time) {
         if (Integer.parseInt(time.split(":")[0]) > 12) {
-            return "P.M";
+            return "PM";
         } else {
-            return "A.M";
+            return "AM";
         }
     }
 
@@ -225,7 +226,9 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             LineChart chart = (LineChart) findViewById(R.id.chart);
 
                             ArrayList<Entry> yValues = new ArrayList<Entry>();
+                            ArrayList<Integer> colorssys = new ArrayList<Integer>();
                             ArrayList<Entry> y2Values = new ArrayList<Entry>();
+                            ArrayList<Integer> colorsdys = new ArrayList<Integer>();
                             ArrayList<Entry> y3Values = new ArrayList<Entry>();
 
                             for (int i = 0; i < patientBpData.length(); i++) {
@@ -239,10 +242,26 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                 JSONObject po = (JSONObject) patientBpData.get(i);
 
                                 yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+
+                                if(po.getInt("systolic") >=160){
+                                    colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
+                                } else if (po.getInt("systolic") >= 140 && po.getInt("systolic") < 160){
+                                    colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart4)) ;
+                                } else if (po.getInt("systolic") < 140){
+                                    colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartsys)) ;
+                                }
+
+                                if(po.getInt("diastolic") >=110){
+                                    colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
+                                } else if (po.getInt("diastolic") < 110 && po.getInt("diastolic") >= 90){
+                                    colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart4)) ;
+                                } else {
+                                    colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartdys)) ;
+                                }
+
                                 y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
                                 y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
                             }
-
 
                             chart.setDragEnabled(true);
                             chart.setScaleEnabled(true);
@@ -257,36 +276,35 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
                             set1.setFillAlpha(110);
                             set1.setLineWidth(3f);
-                            set2.setLineWidth(2f);
-
-                            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            set2.setAxisDependency(YAxis.AxisDependency.LEFT);
-
-                            set1.setColor(Color.rgb(36, 113, 163));
-                            set2.setColor(Color.RED);
-                            set3.setColor(Color.rgb(40, 180, 99));
-
+                            set1.setColor(Color.rgb(171, 235, 198));
                             set1.setDrawValues(false);
-                            set2.setDrawValues(false);
-                            set3.setDrawValues(false);
+//                                set1.setDrawCircles(false);
+                            set1.setCircleColors(colorssys);
 
-                            set1.setDrawCircles(false);
-                            set2.setDrawCircles(false);
+                            set2.setLineWidth(2f);
+                            set2.setColor(Color.rgb(19, 141, 117));
+                            set2.setDrawValues(false);
+//                                set2.setDrawCircles(false);
+                            set2.setCircleColors(colorsdys);
+
+                            set3.setColor(Color.rgb(93, 173, 226));
+                            set3.setLineWidth(2f);
+                            set3.setDrawValues(false);
                             set3.setDrawCircles(false);
 
                             YAxis leftAxis = chart.getAxisLeft();
                             LimitLine ll = new LimitLine(160f, "Critical");
-                            ll.setLineColor(Color.rgb(36, 113, 163));
+                            ll.setLineColor(Color.rgb(171, 235, 198));
                             ll.setLineWidth(1f);
-                            ll.setTextColor(Color.rgb(36, 113, 163));
+                            ll.setTextColor(Color.rgb(171, 235, 198));
                             ll.setTextSize(12f);
                             ll.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(ll);
 
                             LimitLine l2 = new LimitLine(90f, "Critical");
-                            l2.setLineColor(Color.RED);
+                            l2.setLineColor(Color.rgb(19, 141, 117));
                             l2.setLineWidth(1f);
-                            l2.setTextColor(Color.RED);
+                            l2.setTextColor(Color.rgb(19, 141, 117));
                             l2.setTextSize(12f);
                             l2.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(l2);
