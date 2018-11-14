@@ -215,6 +215,15 @@ public class DoctorScreen extends AppCompatActivity {
 
                             BarData data = new BarData(set1, set2);
                             data.setValueFormatter(new MyValueFormatterPie());
+
+                            // Code to convert yaxis labels to integers
+                            barChart.getAxisLeft().setLabelCount(total_ladies  + 2, true);
+                            barChart.getAxisLeft().setAxisMinValue(0f);
+                            barChart.getAxisLeft().setAxisMaxValue(total_ladies  + 1);
+                            barChart.getAxisRight().setLabelCount(total_ladies  + 2, true);
+                            barChart.getAxisRight().setAxisMinValue(0f);
+                            barChart.getAxisRight().setAxisMaxValue(total_ladies  + 1);
+
                             data.setBarWidth(barWidth); // set the width of each bar
                             barChart.setData(data);
                             barChart.groupBars(0.5f,groupSpace, barSpace); // perform the "explicit" grouping
