@@ -52,14 +52,14 @@ public class PatientListRowInDoctorClass {
     public String getEDD() throws ParseException {
 
         endDate = "";
-        String isoDatePattern = "yyyy-MM-dd'T'HH:mm:ddZ";
-        SimpleDateFormat dateFormatterServer = new SimpleDateFormat(isoDatePattern);
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MMMM-yyyy");
+        Date d = sdf.parse(patientLmp);
         Calendar c = Calendar.getInstance();
-        c.setTime(dateFormatterServer.parse(patientLmp));
+        c.setTime(d);
         c.add(Calendar.DAY_OF_MONTH, 280);
-        endDate = dateFormatterServer.format(c.getTime());
+        endDate = sdf2.format(c.getTime());
         return endDate;
-
     }
 
     public int getPatientId() {return patientId; }
