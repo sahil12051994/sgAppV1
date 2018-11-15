@@ -47,12 +47,12 @@
     <string name="tetnus">Tetnus</string>
     <string name="urine_test">Urine Test</string>
 
-    <string name="diabeteseAssist" translatable="false">&#9900; Diabetes</string>
-    <string name="anaemiaAssist" translatable="false">&#9900; Anaemia</string>
-    <string name="hivAssist" translatable="false">&#9900; HIV</string>
-    <string name="ultrasoundAssist" translatable="false">&#9900; Ultrasound</string>
-    <string name="tetnusAssist" translatable="false">&#9900; Tetnus</string>
-    <string name="urine_testAssist" translatable="false">&#9900; Urine Test</string>
+    <string name="diabeteseAssist">&#9900; Diabetes</string>
+    <string name="anaemiaAssist">&#9900; Anaemia</string>
+    <string name="hivAssist">&#9900; HIV</string>
+    <string name="ultrasoundAssist">&#9900; Ultrasound</string>
+    <string name="tetnusAssist">⚬ Tetanus</string>
+    <string name="urine_testAssist">&#9900; Urine Test</string>
 
     <string name="update_my_data">Update My Data</string>
     <string name="lmp">LMP</string>
@@ -107,7 +107,7 @@
 
     <string name="channel_name" translatable="false"></string>
     <string name="channel_description" translatable="false"></string>
-    <string name="title_activity_anc__assist" translatable="false">ANC Assist</string>
+    <string name="title_activity_anc__assist">ANC Assist</string>
 
     <string name="action_settings" translatable="false">Settings</string>
 </resources>

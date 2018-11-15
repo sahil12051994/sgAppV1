@@ -205,6 +205,7 @@ public class WHOGuidelines extends AppCompatActivity {
         final HashMap<String, String> user = session.getUserDetails();
         if ("doctor".equals(user.get("type"))){
             updateWhoData.setVisibility(View.GONE);
+            pb.setVisibility(View.GONE);
 //            anc8_diabtese.setEnabled(false);
         }
         updateWhoData.setOnClickListener(new View.OnClickListener() {

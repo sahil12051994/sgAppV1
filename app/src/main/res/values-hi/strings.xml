@@ -112,4 +112,11 @@
         <item>साप्ताहिक</item>
         <item>महीने के</item>
     </string-array>
+    <string name="title_activity_anc__assist" translatable="false">एएनसी सहायक</string>
+    <string name="diabeteseAssist" translatable="false">⚬ मधुमेह</string>
+    <string name="anaemiaAssist" translatable="false">⚬ खून की कमी</string>
+    <string name="hivAssist" translatable="false">⚬ एचआईवी</string>
+    <string name="ultrasoundAssist" translatable="false">⚬ अल्ट्रासाउंड</string>
+    <string name="tetnusAssist" translatable="false">⚬ धनुस्तंभ</string>
+    <string name="urine_testAssist" translatable="false">⚬ मूत्र परीक्षण</string>
 </resources>

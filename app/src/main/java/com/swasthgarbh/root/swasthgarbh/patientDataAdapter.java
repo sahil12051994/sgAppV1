@@ -139,6 +139,10 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
             }
         }
 
+        Log.i("List position", "getView: " + (current_patient_data.getTotalPatients() - position));
+        TextView listItemNumber = (TextView)listItemView.findViewById(R.id.listItemNumber);
+        listItemNumber.setText(Integer.toString((current_patient_data.getTotalPatients() - position - 1)));
+
         TextView bpSysTextView = (TextView)listItemView.findViewById(R.id.sysValue);
         bpSysTextView.setText("Systolic BP:\t" + Integer.toString(current_patient_data.bpSysValue()));
 
@@ -149,10 +153,10 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
         heartRateTextView.setText("Weight:\t" + Integer.toString(current_patient_data.weightValue()));
 
         TextView urineAlbumin = (TextView)listItemView.findViewById(R.id.urineAlValue);
-        urineAlbumin.setText("Urine Albumin:\t" + Double.toString(current_patient_data.urineAlValue()));
+        urineAlbumin.setText("Urine Albumin:\t" + Double.toString(current_patient_data.urineAlValue()) + "+");
 
         TextView bleedingVag = (TextView)listItemView.findViewById(R.id.bleedingVag);
-        bleedingVag.setText("Bleeding/vaginum:\t" + Double.toString(current_patient_data.bleedingValue()));
+        bleedingVag.setText("Bleeding/vaginum:\t" + Double.toString(current_patient_data.bleedingValue()) + "+");
 
         TextView datePatientRow = (TextView)listItemView.findViewById(R.id.dateRow);
         String[] dateSuff = {"", "st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"};

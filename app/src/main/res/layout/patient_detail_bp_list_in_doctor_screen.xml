@@ -11,11 +11,19 @@
     android:paddingStart="5dp">
 
     <LinearLayout
+        android:id="@+id/dateData"
         android:layout_width="70dp"
         android:layout_height="100dp"
         android:orientation="vertical"
-        android:gravity="center"
-        android:id="@+id/dateData">
+        android:paddingTop="0dp">
+
+        <TextView
+            android:id="@+id/listItemNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:text="1"
+            android:textSize="10sp"/>
 
         <TextView
             android:id="@+id/dateRow"
@@ -24,7 +32,8 @@
             android:text="30th"
             android:textColor="#EB1C23"
             android:textSize="30sp"
-            tools:layout_editor_absoluteX="5dp" />
+            tools:layout_editor_absoluteX="5dp"
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/monthRow"
@@ -34,7 +43,8 @@
             android:textColor="#EB1C23"
             android:textSize="10sp"
             tools:layout_editor_absoluteX="13dp"
-            tools:layout_editor_absoluteY="53dp" />
+            tools:layout_editor_absoluteY="53dp"
+            android:layout_gravity="center_horizontal"/>
 
         <TextView
             android:id="@+id/timeRow"
@@ -44,7 +54,8 @@
             android:textColor="#EB1C23"
             android:textSize="10sp"
             tools:layout_editor_absoluteX="14dp"
-            tools:layout_editor_absoluteY="78dp" />
+            tools:layout_editor_absoluteY="78dp"
+            android:layout_gravity="center_horizontal"/>
 
 
     </LinearLayout>
@@ -83,7 +94,7 @@
             android:id="@+id/bleedingVag"
             android:layout_width="match_parent"
             android:layout_height="20dp"
-            android:text="Bleeding/Vag : 3" />
+            android:text="Text 5" />
 
     </LinearLayout>
 

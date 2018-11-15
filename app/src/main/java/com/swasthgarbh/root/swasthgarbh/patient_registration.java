@@ -477,9 +477,8 @@ public class patient_registration extends AppCompatActivity {
 
                                 for (int i = 0; i < patientBpData.length(); i++) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-                                    patient_data_listview_class pr = new patient_data_listview_class(po.getInt("pk"), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
+                                    patient_data_listview_class pr = new patient_data_listview_class(patientBpData.length(), po.getInt("pk"), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
                                     patientRowData.add(pr);
-
                                 }
 
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
