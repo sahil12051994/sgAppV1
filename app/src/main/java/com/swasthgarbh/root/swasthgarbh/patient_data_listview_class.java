@@ -10,10 +10,10 @@ public class patient_data_listview_class {
     private int bp_sys;
     private int bp_dys, weight, dataId, totalPatients;
     private Double urine_albumin, bleedingVag;
-    public String date_date, date_month, date_year, time_hour, time_min, time_period, time, timeExtracted;
+    private String date_date, date_month, date_year, time_hour, time_min, time_period, time, timeExtracted;
 
-    Boolean headache, abdominal_pain, visual_problems, decreased_fetal_movements, swelling_in_hands_or_face;
-    String extra_comments;
+    private Boolean headache, abdominal_pain, visual_problems, decreased_fetal_movements, swelling_in_hands_or_face;
+    private String extra_comments;
     int bleeding_per_vaginum =0;
 
     public patient_data_listview_class(int totalPatients, int dataId, String date,int bp_sysArg, int bp_dysArg, Double urine_albuminArg, int weight, Double bleedingVag) {

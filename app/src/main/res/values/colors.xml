@@ -13,6 +13,6 @@
     <color name="chart5">#FF5733</color>
     <color name="chart6">#C70039</color>
 
-    <color name="chartsys">#ABEBC6</color>
-    <color name="chartdys">#138D75</color>
+    <color name="chartsys">#138D75</color>
+    <color name="chartdys">#ABEBC6</color>
 </resources>

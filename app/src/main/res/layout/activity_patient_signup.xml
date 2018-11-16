@@ -55,7 +55,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
+                    android:layout_weight="5"
                     android:backgroundTint="@color/colortheme"
                     android:gravity="center"
                     android:text="@string/last_mesntural_period" />
@@ -66,8 +66,8 @@
                     android:layout_height="60dp"
                     android:layout_weight="5"
                     android:backgroundTint="@color/colortheme"
-                    android:hint="@string/date"
                     android:focusable="false"
+                    android:hint="@string/date"
                     android:inputType="none" />
 
             </LinearLayout>
@@ -165,7 +165,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="5dp"
                         android:text="@string/your_credentials"
-                        android:textSize="15sp"/>
+                        android:textSize="15sp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -187,9 +187,10 @@
                             android:layout_height="60dp"
                             android:layout_marginRight="3dp"
                             android:layout_weight="5"
-                            android:backgroundTint="@color/colortheme"
+                            android:background="@drawable/rounded_edit_text"
                             android:hint="@string/mobile"
-                            android:inputType="phone" />
+                            android:inputType="phone"
+                            android:paddingLeft="10dp" />
 
 
                     </LinearLayout>
@@ -199,24 +200,29 @@
                         android:id="@+id/editText6"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_margin="5dp"
-                        android:backgroundTint="@color/colortheme"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="@drawable/rounded_edit_text"
                         android:ems="10"
                         android:hint="@string/password"
-                        android:inputType="textPassword" />
+                        android:inputType="textPassword"
+                        android:paddingLeft="10dp" />
+
                     <EditText
                         android:id="@+id/editText4"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:backgroundTint="@color/colortheme"
-                        android:ems="10"
                         android:layout_margin="5dp"
+                        android:ems="10"
+                        android:backgroundTint="@color/colortheme"
                         android:hint="@string/email_optional"
                         android:inputType="textEmailAddress" />
                 </LinearLayout>
 
 
             </android.support.v7.widget.CardView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -237,6 +243,7 @@
                     android:layout_height="60dp"
                     android:layout_weight="5"
                     android:hint="@string/doctor_s_number"
+                    android:backgroundTint="@color/colortheme"
                     android:inputType="phone" />
 
 

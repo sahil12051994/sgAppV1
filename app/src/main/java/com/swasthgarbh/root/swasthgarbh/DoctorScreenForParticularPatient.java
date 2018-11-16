@@ -273,16 +273,17 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             set2.setAxisDependency(YAxis.AxisDependency.LEFT);
                             LineDataSet set3 = new LineDataSet(y3Values, "Weight");
                             set3.setAxisDependency(YAxis.AxisDependency.LEFT);
-
+                            // Color.rgb(171, 235, 198) sys
+                            // Color.rgb(19, 141, 117) dys
                             set1.setFillAlpha(110);
-                            set1.setLineWidth(3f);
-                            set1.setColor(Color.rgb(171, 235, 198));
+                            set1.setLineWidth(3.5f);
+                            set1.setColor(Color.rgb(19, 141, 117));
                             set1.setDrawValues(false);
 //                                set1.setDrawCircles(false);
                             set1.setCircleColors(colorssys);
 
                             set2.setLineWidth(2f);
-                            set2.setColor(Color.rgb(19, 141, 117));
+                            set2.setColor(Color.rgb(171, 235, 198));
                             set2.setDrawValues(false);
 //                                set2.setDrawCircles(false);
                             set2.setCircleColors(colorsdys);
@@ -294,17 +295,17 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
                             YAxis leftAxis = chart.getAxisLeft();
                             LimitLine ll = new LimitLine(160f, "Critical");
-                            ll.setLineColor(Color.rgb(171, 235, 198));
+                            ll.setLineColor(Color.rgb(19, 141, 117));
                             ll.setLineWidth(1f);
-                            ll.setTextColor(Color.rgb(171, 235, 198));
+                            ll.setTextColor(Color.rgb(19, 141, 117));
                             ll.setTextSize(12f);
                             ll.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(ll);
 
                             LimitLine l2 = new LimitLine(90f, "Critical");
-                            l2.setLineColor(Color.rgb(19, 141, 117));
+                            l2.setLineColor(Color.rgb(171, 235, 198));
                             l2.setLineWidth(1f);
-                            l2.setTextColor(Color.rgb(19, 141, 117));
+                            l2.setTextColor(Color.rgb(171, 235, 198));
                             l2.setTextSize(12f);
                             l2.enableDashedLine(4, 2, 0);
                             leftAxis.addLimitLine(l2);
