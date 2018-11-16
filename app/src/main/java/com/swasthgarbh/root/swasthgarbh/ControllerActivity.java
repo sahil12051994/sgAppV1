@@ -34,10 +34,12 @@ public class ControllerActivity extends Activity {
                 fcm.onTokenRefresh();
                 if ("doctor".equals(user.get("type"))) {
                     Intent i = new Intent(ControllerActivity.this, DoctorScreen.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     finish();
                 } else if ("patient".equals(user.get("type"))) {
                     Intent i = new Intent(ControllerActivity.this, patient_registration.class);
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(i);
                     finish();
                 }

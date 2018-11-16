@@ -21,6 +21,11 @@
                 app:showAsAction="ifRoom"
                 android:title="Refresh" />
 
+            <item android:id="@+id/offlineAnc"
+                android:icon="@drawable/checkup"
+                app:showAsAction="ifRoom"
+                android:title="ANC Assist" />
+
             <item android:id="@+id/action_logout"
                 android:icon="@drawable/logout"
                 app:showAsAction="ifRoom"

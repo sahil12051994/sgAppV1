@@ -38,12 +38,10 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
     int u_id, id;
     SessionManager session;
     CheckBox highbp, histPree, motherPre, histObes, moreThanOneBaby, diseases;
-    private DatePickerDialog lmpDatePickerDialog;
-
-    private SimpleDateFormat dateFormatterShow, dateFormatterServer;
     String lmpTime;
-
     Calendar newDate1 = Calendar.getInstance();
+    private DatePickerDialog lmpDatePickerDialog;
+    private SimpleDateFormat dateFormatterShow, dateFormatterServer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +106,8 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
             String str_address = "" + address.getText();
             String str_dob = "" + date_of_birth.getText();
             String str_doctor_mobile = "" + doctor_number.getText();
-            String str_doc_name = "" +doctor_name.getText();
-            String str_lmpDate = ""+lmpDate.getText();
+            String str_doc_name = "" + doctor_name.getText();
+            String str_lmpDate = "" + lmpDate.getText();
             if (str_name.length() == 0) {
                 Toast.makeText(PatientSignup.this, "Enter your name", Toast.LENGTH_LONG).show();
                 return;
@@ -131,7 +129,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
             }
 
             if (str_dob.length() == 0) {
-                Toast.makeText(PatientSignup.this, "Enter your date of birth", Toast.LENGTH_LONG).show();
+                Toast.makeText(PatientSignup.this, "Enter your age", Toast.LENGTH_LONG).show();
                 return;
             }
 
@@ -140,11 +138,11 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                 return;
             }
 
-            if (str_doc_name.length() == 0 ) {
+            if (str_doc_name.length() == 0) {
                 Toast.makeText(PatientSignup.this, "Enter a valid doctor's number", Toast.LENGTH_LONG).show();
                 return;
             }
-            if(str_lmpDate.length() == 0){
+            if (str_lmpDate.length() == 0) {
                 Toast.makeText(PatientSignup.this, "Enter your LMP date", Toast.LENGTH_LONG).show();
                 return;
             }
@@ -214,9 +212,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                     return params.toString().getBytes();
-
                 }
             };
             ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
@@ -253,7 +249,6 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                                 e.printStackTrace();
                                 doctor_name.setText("");
                                 Toast.makeText(PatientSignup.this, "No doctor with this mobile number is registered", Toast.LENGTH_SHORT).show();
-
                             }
                         }
                     }, new Response.ErrorListener() {

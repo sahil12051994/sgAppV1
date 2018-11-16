@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -66,6 +68,7 @@ public class DoctorScreen extends AppCompatActivity {
     ImageView callDoctor;
     ProgressBar barPB;
     ProgressBar piePB;
+    boolean doubleBackToExitPressedOnce = false;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.doctor_menu, menu);
@@ -84,6 +87,9 @@ public class DoctorScreen extends AppCompatActivity {
         } else if (item.getItemId() == R.id.action_refresh){
             getDoctorData();
             getDoctorAllPatientsData();
+        } else if (item.getItemId() == R.id.offlineAnc) {
+            i = new Intent(this, ANC_Assist.class);
+            startActivity(i);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -93,6 +99,29 @@ public class DoctorScreen extends AppCompatActivity {
         session.logoutUser();
         Intent i = new Intent(DoctorScreen.this, ControllerActivity.class);
         startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+//            logout(patient_registration.this);
+            Intent intent = new Intent(Intent.ACTION_MAIN);
+            intent.addCategory(Intent.CATEGORY_HOME);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 
     @Override

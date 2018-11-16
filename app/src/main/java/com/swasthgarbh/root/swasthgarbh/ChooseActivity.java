@@ -49,6 +49,14 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.doctor_registration) {
             Intent i = new Intent(this, DoctorSignup.class);
@@ -69,7 +77,6 @@ public class ChooseActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void callLoginDialog() {
-
 
         sign_in_dialog = new Dialog(this);
         sign_in_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
