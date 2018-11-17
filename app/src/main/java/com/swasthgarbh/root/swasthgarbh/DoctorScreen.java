@@ -108,7 +108,7 @@ public class DoctorScreen extends AppCompatActivity {
 //            logout(patient_registration.this);
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             startActivity(intent);
             return;
         }
@@ -237,9 +237,9 @@ public class DoctorScreen extends AppCompatActivity {
                             BarDataSet set2 = new BarDataSet(entriesGroup2, "Not Following WHO Guidelines");
                             set2.setColor(Color.RED);
 
-                            float groupSpace = 0.06f;
-                            float barSpace = 0.02f; // x2 dataset
-                            float barWidth = 0.45f; // x2 dataset
+                            float groupSpace = 0.12f;
+                            float barSpace = 0.07f; // x2 dataset
+                            float barWidth = 0.37f; // x2 dataset
 //                          (0.02 + 0.45) * 2 + 0.06 = 1.00 -> interval per "group"
 
                             BarData data = new BarData(set1, set2);
@@ -259,6 +259,9 @@ public class DoctorScreen extends AppCompatActivity {
                             barChart.setDragEnabled(true);
                             barChart.setScaleEnabled(true);
                             barChart.getDescription().setEnabled(false);
+                            barChart.getAxisLeft().setDrawGridLines(false);
+                            barChart.getXAxis().setDrawGridLines(false);
+                            barChart.getAxisRight().setDrawGridLines(false);
                             barChart.invalidate();
                             barChart.animateXY(3000, 3000);
                             barPB.setVisibility(View.GONE);

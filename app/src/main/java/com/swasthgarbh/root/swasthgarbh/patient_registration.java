@@ -63,7 +63,6 @@ public class patient_registration extends AppCompatActivity {
     EditText doc_number;
     TextView doc_name, docHospital, docSpeciality;
     static SessionManager session;
-    ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
     ListView patient_list_view;
     patientDataAdapter adapter;
     private int doctorId;
@@ -329,7 +328,7 @@ public class patient_registration extends AppCompatActivity {
 //            logout(patient_registration.this);
             Intent intent = new Intent(Intent.ACTION_MAIN);
             intent.addCategory(Intent.CATEGORY_HOME);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
             startActivity(intent);
             return;
         }
@@ -470,6 +469,7 @@ public class patient_registration extends AppCompatActivity {
         String url = ApplicationController.get_base_url() + "api/patient/" + session.getUserDetails().get("id");
         final ProgressBar pb = (ProgressBar) findViewById(R.id.indeterminateBar);
         final ProgressBar chartPB = (ProgressBar) findViewById(R.id.chartPB);
+        final ArrayList<patient_data_listview_class> patientRowData = new ArrayList<patient_data_listview_class>();
         pb.setVisibility(View.VISIBLE);
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,

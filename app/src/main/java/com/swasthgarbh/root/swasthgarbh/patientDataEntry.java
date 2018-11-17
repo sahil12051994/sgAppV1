@@ -212,8 +212,36 @@ public class patientDataEntry extends AppCompatActivity {
                     public byte[] getBody() {
                         JSONObject params = new JSONObject();
                         try {
-                            params.put("systolic", Integer.parseInt(sysData.getText().toString()));
-                            params.put("diastolic", Integer.parseInt(dysData.getText().toString()));
+                            int sys,dys,hrtrate,weight;
+
+                            if(sysData.getText().length()==0){
+                                sys = 0;
+                            } else {
+                                sys = Integer.parseInt(sysData.getText().toString());
+                            }
+                            params.put("systolic", sys);
+
+                            if(dysData.getText().length()==0){
+                                dys = 0;
+                            } else {
+                                dys = Integer.parseInt(dysData.getText().toString());
+                            }
+                            params.put("diastolic", dys);
+
+                            if(heartRate.getText().length()==0){
+                                hrtrate = 0;
+                            } else {
+                                hrtrate = Integer.parseInt(heartRate.getText().toString());
+                            }
+                            params.put("heart_rate", hrtrate);
+
+                            if(bodyWeight.getText().length()==0){
+                                weight = 0;
+                            } else {
+                                weight = Integer.parseInt(bodyWeight.getText().toString());
+                            }
+                            params.put("weight", weight);
+
                             params.put("urine_albumin", str_urine);
                             params.put("bleeding_per_vaginum", str_bleedingVag);
 
@@ -223,11 +251,16 @@ public class patientDataEntry extends AppCompatActivity {
                             params.put("decreased_fetal_movements", decFea.isChecked());
                             params.put("swelling_in_hands_or_face", swell.isChecked());
                             params.put("hyper_tension", hyperT.isChecked());
-                            params.put("weight", Integer.parseInt(bodyWeight.getText().toString()));
 
-                            params.put("extra_comments", extraComments.getText());
+                            String extraComm = "";
+                            if(extraComments.getText().length()==0){
+                                extraComm = "No Comments";
+                            } else {
+                                extraComm = extraComments.getText().toString();
+                            }
+                            params.put("extra_comments", extraComm);
+
                             params.put("patient", session.getUserDetails().get("id"));
-                            params.put("heart_rate", Integer.parseInt(heartRate.getText().toString()));
 //                            params.put("time_stamp",currentDateandTime);
                             Log.i("Boddddyyyyy", "getBody: " + params.toString());
                         } catch (JSONException e) {

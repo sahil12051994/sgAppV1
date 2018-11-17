@@ -15,12 +15,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -78,16 +80,18 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
                                 public void onClick(DialogInterface dialog, int which) {
                                     // continue with delete
                                     String url = ApplicationController.get_base_url() + "api/data/" + current_patient_data.getDataId();
-
-                                    JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.DELETE,
-                                            url, null,
-                                            new Response.Listener<JSONObject>() {
+                                    Log.i("Delete", "onResponse: Started deleted");
+                                    StringRequest jsonObjReq = new StringRequest(Request.Method.DELETE,
+                                            url,
+                                            new Response.Listener<String>() {
 
                                                 @Override
-                                                public void onResponse(JSONObject response) {
+                                                public void onResponse(String   response) {
                                                     Log.i("Delete", "onResponse: Data deleted");
-                                                    Intent intent = new Intent(v.getContext(), patient_registration.class);
-                                                    v.getContext().startActivity(intent);
+                                                    Toast.makeText(v.getContext(), "Data deleted successfully", Toast.LENGTH_SHORT).show();
+                                                    ((patient_registration)v.getContext()).getPatientData();
+//                                                    Intent intent = new Intent(v.getContext(), patient_registration.class);
+//                                                    v.getContext().startActivity(intent);
                                                 }
                                             }, new Response.ErrorListener() {
 
