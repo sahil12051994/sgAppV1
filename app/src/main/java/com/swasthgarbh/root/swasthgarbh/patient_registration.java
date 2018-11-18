@@ -486,6 +486,26 @@ public class patient_registration extends AppCompatActivity {
                             pregStartDate.setText(date);
 //                            Log.i("whoooooo", "onResponse: " + response.getString("who_following"));
                             JSONArray patientBpData = response.getJSONArray("data");
+                            if(patientBpData.length()==0){
+                                //dummy data for new patient
+                                Random rand = new Random();
+                                JSONArray ja = new JSONArray();
+                                for (int i=0;i<30;i++){
+                                    JSONObject jo = new JSONObject();
+                                    jo.put("systolic", (int)(Math.random() * ((170 - 110) + 1)) + 110);
+                                    jo.put("diastolic", (int)(Math.random() * ((115 - 60) + 1)) + 60);
+                                    jo.put("urine_albumin", (double) (Math.random() * 4 + 1));
+                                    jo.put("weight", (int)(Math.random() * ((80 - 50) + 1)) + 50);
+                                    jo.put("bleeding_per_vaginum", (double) (Math.random() * 4 + 1));
+
+                                    jo.put("time_stamp", "2018-" + String.valueOf((int)(Math.random() * 12 + 1)) + "-" + String.valueOf((int)(Math.random() * 30 + 1)) + "T01:25:37.199340+05:30");
+                                    jo.put("pk", session.getUserDetails().get("id"));
+                                    ja.put(jo);
+                                }
+                                Log.i("dataaaaaaa", "onResponse: " + ja);
+                                patientBpData = ja;
+                                Toast.makeText(patient_registration.this, "Dummy Data", Toast.LENGTH_LONG).show();
+                            }
                             if(patientBpData.length()!=0){
 //                                parentView.removeView(TextWhenNoData);
                                 /******************************

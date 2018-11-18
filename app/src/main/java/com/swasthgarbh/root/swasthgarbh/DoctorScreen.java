@@ -55,6 +55,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class DoctorScreen extends AppCompatActivity {
 
@@ -175,8 +176,45 @@ public class DoctorScreen extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         int anc1Count, anc2Count, anc3Count, anc4Count, anc5Count, anc6Count, anc7Count, anc8Count;
                         anc1Count = anc2Count = anc3Count = anc4Count = anc5Count = anc6Count = anc7Count = anc8Count = 0;
-                        Log.d("apihit", response.toString());
+                        Log.d("anc response", response.toString());
                         try {
+                            Random rand = new Random();
+                            JSONArray ja = new JSONArray();
+                            if(response.length() == 0){
+                                for (int i=0;i<30;i++){
+                                    JSONObject jo = new JSONObject();
+                                    jo.put("anc1_diabtese", rand.nextBoolean());
+                                    jo.put("anc1_anemia", rand.nextBoolean());
+                                    jo.put("anc1_hiv", rand.nextBoolean());
+                                    jo.put("anc1_ultrasound", rand.nextBoolean());
+                                    jo.put("anc1_anemia", rand.nextBoolean());
+                                    jo.put("anc1_tetnus", rand.nextBoolean());
+                                    jo.put("anc1_urine", rand.nextBoolean());
+
+                                    jo.put("anc2_diabtese", rand.nextBoolean());
+                                    jo.put("anc2_anemia", rand.nextBoolean());
+
+                                    jo.put("anc3_urine", rand.nextBoolean());
+                                    jo.put("anc3_anemia", rand.nextBoolean());
+                                    jo.put("anc3_diabtese", rand.nextBoolean());
+
+                                    jo.put("anc4_diabtese", rand.nextBoolean());
+
+                                    jo.put("anc5_diabtese", rand.nextBoolean());
+                                    jo.put("anc5_urine", rand.nextBoolean());
+
+                                    jo.put("anc6_diabtese", rand.nextBoolean());
+                                    jo.put("anc6_anemia", rand.nextBoolean());
+
+                                    jo.put("anc7_diabtese", rand.nextBoolean());
+
+                                    jo.put("anc8_diabtese", rand.nextBoolean());
+                                    ja.put(jo);
+                                }
+                                Log.i("dataaaaaaa", "onResponse: " + ja);
+                                response = ja;
+                                Toast.makeText(DoctorScreen.this, "Dummy Data", Toast.LENGTH_LONG).show();
+                            }
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject po = response.getJSONObject(i);
                                 if (po.getBoolean("anc1_diabtese") || po.getBoolean("anc1_anemia") || po.getBoolean("anc1_hiv") || po.getBoolean("anc1_ultrasound") || po.getBoolean("anc1_anemia") || po.getBoolean("anc1_tetnus") || po.getBoolean("anc1_urine")) {
@@ -308,6 +346,23 @@ public class DoctorScreen extends AppCompatActivity {
                             doctorSpeciality.setText(response.getString("speciality"));
 
                             JSONObject analysis_obj = (JSONObject) response.getJSONObject("analysis_object");
+                            if(analysis_obj.getInt("high_sys") ==0 && analysis_obj.getInt("high_dys") ==0 && analysis_obj.getInt("high_weight") ==0 && analysis_obj.getInt("hyper_tension") ==0 && analysis_obj.getInt("urine_albumin") ==0 && analysis_obj.getInt("who_following") ==0){
+                                //dummy data for new doctor
+                                JSONObject jo = new JSONObject();
+                                Random rand = new Random();
+                                for (int i=0;i<30;i++){
+                                    jo.put("high_sys", (int)(Math.random() * ((30 - 10) + 1)) + 10);
+                                    jo.put("high_dys", (int)(Math.random() * ((30 - 10) + 1)) + 10);
+                                    jo.put("high_weight", (int)(Math.random() * ((30 - 10) + 1)) + 10);
+                                    jo.put("hyper_tension", (int)(Math.random() * ((30 - 10) + 1)) + 10);
+                                    jo.put("urine_albumin", (int)(Math.random() * ((30 - 10) + 1)) + 10);
+                                    jo.put("who_following", (int)(Math.random() * ((30 - 10) + 1)) + 10);
+                                }
+                                doctorTotalPatients.setText("30");
+                                Log.i("dataaaaaaa", "onResponse: " + jo);
+                                analysis_obj = jo;
+                                Toast.makeText(DoctorScreen.this, "Dummy Data", Toast.LENGTH_LONG).show();
+                            }
                             PieChart pieChart = (PieChart) findViewById(R.id.doc2chart);
                             ArrayList<PieEntry> yvalues = new ArrayList<PieEntry>();
                             if(analysis_obj.getInt("high_sys")!=0)
@@ -336,33 +391,7 @@ public class DoctorScreen extends AppCompatActivity {
 
 //                            dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
                             dataSet.setColors(new int[] { getResources().getColor(R.color.chart1), getResources().getColor(R.color.chart2), getResources().getColor(R.color.chart3), getResources().getColor(R.color.chart4), getResources().getColor(R.color.chart5), getResources().getColor(R.color.chart6) });
-//                            int count = 0;
-//                            if(analysis_obj.getInt("high_sys") == 0){
-//                                count++;
-//                            }
-//                            if(analysis_obj.getInt("high_dys") == 0){
-//                                count++;
-//                            }
-//                            if(analysis_obj.getInt("high_weight") == 0){
-//                                count++;
-//                            }
-//                            if(analysis_obj.getInt("hyper_tension") == 0){
-//                                count++;
-//                            }
-//                            if(analysis_obj.getInt("urine_albumin") == 0){
-//                                count++;
-//                            }
-//                            if(analysis_obj.getInt("who_following") == 0){
-//                                count++;
-//                            }
-//                            if(count>1){
-//                                pieChart.setDrawSliceText(false);
-//                            }else{
-//                                dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-//                            }
-
                             dataSet.setXValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
-
 //                            data.setValueFormatter(new PercentFormatter());
                             pieChart.setData(data);
                             pieChart.invalidate();
