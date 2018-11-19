@@ -434,10 +434,11 @@ public class patient_registration extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("apihit", response.toString());
+                        Log.d("doctor details", response.toString());
                         try {
                             doctorName.setText(response.getString("name"));
-                            doctorMobile.setText(String.valueOf(response.getInt("mobile")));
+                            Log.i("mobilee", "onResponse: " + response.getLong("mobile"));
+                            doctorMobile.setText(Long.toString(response.getLong("mobile")));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

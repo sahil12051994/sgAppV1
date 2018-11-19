@@ -175,6 +175,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.d("TAG", "Error Message: " + error.getMessage());
+                    Toast.makeText(PatientSignup.this, "Some error occurred", Toast.LENGTH_LONG).show();
                 }
             }) {
 

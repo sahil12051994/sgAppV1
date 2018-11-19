@@ -40,7 +40,6 @@ public class AllPatientListActivity extends AppCompatActivity {
 
 //    private Button whoGuideLines, logOutButton;
     static SessionManager session;
-    ArrayList<PatientListRowInDoctorClass> patientRowData = new ArrayList<PatientListRowInDoctorClass>();
     ListView patient_list_view;
     AllPatientListInDoctorAdapter adapter;
 
@@ -58,8 +57,10 @@ public class AllPatientListActivity extends AppCompatActivity {
         if (item.getItemId() == R.id.action_logout){
             logout(this);
             return true;
-        } else if (item.getItemId() == R.id.action_notification){
-            i = new Intent(this, PatientNotifications.class);
+        } else if (item.getItemId() == R.id.action_refresh){
+            getAllPatientList();
+        } else if (item.getItemId() == R.id.offlineAnc) {
+            i = new Intent(this, ANC_Assist.class);
             startActivity(i);
         }
         return super.onOptionsItemSelected(item);
@@ -90,6 +91,7 @@ public class AllPatientListActivity extends AppCompatActivity {
      * */
     public void getAllPatientList(){
         String url = ApplicationController.get_base_url() + "api/doctor/" + session.getUserDetails().get("id");
+        final ArrayList<PatientListRowInDoctorClass> patientRowData = new ArrayList<PatientListRowInDoctorClass>();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,

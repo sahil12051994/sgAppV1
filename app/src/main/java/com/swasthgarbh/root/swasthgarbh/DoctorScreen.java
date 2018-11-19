@@ -166,7 +166,7 @@ public class DoctorScreen extends AppCompatActivity {
 
 
     public void getDoctorAllPatientsData() {
-        String url = ApplicationController.get_base_url() + "swasthgarbh/patient";
+        String url = ApplicationController.get_base_url() + "swasthgarbh/doc/" + session.getUserDetails().get("id");
 
         JsonArrayRequest jsonObjReq = new JsonArrayRequest(Request.Method.GET,
                 url, null,
@@ -181,8 +181,8 @@ public class DoctorScreen extends AppCompatActivity {
                             Random rand = new Random();
                             JSONArray ja = new JSONArray();
                             if(response.length() == 0){
+                                JSONObject jo = new JSONObject();
                                 for (int i=0;i<30;i++){
-                                    JSONObject jo = new JSONObject();
                                     jo.put("anc1_diabtese", rand.nextBoolean());
                                     jo.put("anc1_anemia", rand.nextBoolean());
                                     jo.put("anc1_hiv", rand.nextBoolean());
@@ -211,12 +211,13 @@ public class DoctorScreen extends AppCompatActivity {
                                     jo.put("anc8_diabtese", rand.nextBoolean());
                                     ja.put(jo);
                                 }
-                                Log.i("dataaaaaaa", "onResponse: " + ja);
+//                                Log.i("aaaaaaa", "onResponse: " + jo);
                                 response = ja;
                                 Toast.makeText(DoctorScreen.this, "Dummy Data", Toast.LENGTH_LONG).show();
                             }
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject po = response.getJSONObject(i);
+                                Log.i("data in array", "onResponse: " + po);
                                 if (po.getBoolean("anc1_diabtese") || po.getBoolean("anc1_anemia") || po.getBoolean("anc1_hiv") || po.getBoolean("anc1_ultrasound") || po.getBoolean("anc1_anemia") || po.getBoolean("anc1_tetnus") || po.getBoolean("anc1_urine")) {
                                     anc1Count++;
                                 }

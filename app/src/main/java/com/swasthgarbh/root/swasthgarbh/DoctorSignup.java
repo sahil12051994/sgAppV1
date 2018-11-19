@@ -21,7 +21,7 @@ import org.json.JSONObject;
 public class DoctorSignup extends AppCompatActivity implements View.OnClickListener {
 
     Button register, signin;
-    EditText name, mobile, hospital, email, password;
+    EditText name, mobile, hospital, email, password, docSpeciality;
     Spinner pre_mobile;
     SessionManager session;
 
@@ -40,6 +40,7 @@ public class DoctorSignup extends AppCompatActivity implements View.OnClickListe
         email = (EditText) findViewById(R.id.editText15);
         hospital = (EditText) findViewById(R.id.editText16);
         password = (EditText) findViewById(R.id.editText12);
+        docSpeciality = (EditText) findViewById(R.id.docSpeciality);
         register.setOnClickListener(this);
         session = new SessionManager(this);
     }
@@ -129,6 +130,7 @@ public class DoctorSignup extends AppCompatActivity implements View.OnClickListe
                         params.put("mobile", mobile.getText());
                         params.put("email", "" + email.getText());
                         params.put("hospital", "" + hospital.getText());
+                        params.put("speciality", "" + docSpeciality.getText());
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

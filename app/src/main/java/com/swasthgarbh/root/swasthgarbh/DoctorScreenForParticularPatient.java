@@ -43,6 +43,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class DoctorScreenForParticularPatient extends AppCompatActivity implements View.OnClickListener{
 
@@ -214,126 +215,155 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             doctorId = response.getInt("doctor");
                             patientName.setText(response.getString("name"));
                             patientEmail.setText(response.getString("email"));
-                            patientMobile.setText(String.valueOf(response.getInt("mobile")));
+                            patientMobile.setText(String.valueOf(response.getLong("mobile")));
                             whoFollowing.setText(response.getString("who_following"));
                             String date = response.getString("lmp").split("T")[0].split("-")[2] + "-" + response.getString("lmp").split("T")[0].split("-")[1] + "-" + response.getString("lmp").split("T")[0].split("-")[0];
                             pregStartDate.setText(date);
                             JSONArray patientBpData = response.getJSONArray("data");
 
+                            if(patientBpData.length()==0){
+                                //dummy data for new patient
+                                Random rand = new Random();
+                                JSONArray ja = new JSONArray();
+                                for (int i=0;i<30;i++){
+                                    JSONObject jo = new JSONObject();
+                                    jo.put("systolic", (int)(Math.random() * ((170 - 110) + 1)) + 110);
+                                    jo.put("diastolic", (int)(Math.random() * ((115 - 60) + 1)) + 60);
+                                    jo.put("urine_albumin", (int) (Math.random() * 4 + 1));
+                                    jo.put("weight", (int)(Math.random() * ((80 - 50) + 1)) + 50);
+                                    jo.put("bleeding_per_vaginum", (int) (Math.random() * 4 + 1));
+
+                                    jo.put("headache", Boolean.TRUE);
+                                    jo.put("abdominal_pain", Boolean.TRUE);
+                                    jo.put("visual_problems", Boolean.TRUE);
+                                    jo.put("decreased_fetal_movements", Boolean.TRUE);
+                                    jo.put("swelling_in_hands_or_face", Boolean.TRUE);
+                                    jo.put("extra_comments", "No comments");
+
+                                    jo.put("time_stamp", "2018-" + String.valueOf((int)(Math.random() * 12 + 1)) + "-" + String.valueOf((int)(Math.random() * 30 + 1)) + "T01:25:37.199340+05:30");
+                                    jo.put("pk", session.getUserDetails().get("id"));
+                                    ja.put(jo);
+                                }
+                                Log.i("dataaaaaaa", "onResponse: " + ja);
+                                patientBpData = ja;
+                                Toast.makeText(DoctorScreenForParticularPatient.this, "Dummy Data", Toast.LENGTH_LONG).show();
+                            }
+                            if(patientBpData.length()!=0) {
+
+                                LineChart chart = (LineChart) findViewById(R.id.chart);
+
+                                ArrayList<Entry> yValues = new ArrayList<Entry>();
+                                ArrayList<Integer> colorssys = new ArrayList<Integer>();
+                                ArrayList<Entry> y2Values = new ArrayList<Entry>();
+                                ArrayList<Integer> colorsdys = new ArrayList<Integer>();
+                                ArrayList<Entry> y3Values = new ArrayList<Entry>();
+                                for (int i = 0; i < patientBpData.length(); i++) {
+                                    JSONObject po = (JSONObject) patientBpData.get(i);
+                                    patient_data_listview_class pr = new patient_data_listview_class(patientBpData.length(), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin") ,po.getInt("weight"), po.getBoolean("headache"), po.getBoolean("abdominal_pain"), po.getBoolean("visual_problems"), po.getDouble("bleeding_per_vaginum") , po.getBoolean("decreased_fetal_movements"), po.getBoolean("swelling_in_hands_or_face"), po.getString("extra_comments"));
+                                    patientRowData.add(pr);
+                                    Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
+                                }
+
+                                for (int i = patientBpData.length()-1; i>=0; i--) {
+                                    JSONObject po = (JSONObject) patientBpData.get(i);
+
+                                    yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+
+                                    if(po.getInt("systolic") >=160){
+                                        colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
+                                    } else if (po.getInt("systolic") >= 140 && po.getInt("systolic") < 160){
+                                        colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart4)) ;
+                                    } else if (po.getInt("systolic") < 140){
+                                        colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartsys)) ;
+                                    }
+
+                                    if(po.getInt("diastolic") >=110){
+                                        colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
+                                    } else if (po.getInt("diastolic") < 110 && po.getInt("diastolic") >= 90){
+                                        colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart4)) ;
+                                    } else {
+                                        colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartdys)) ;
+                                    }
+
+                                    y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                    y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
+                                }
+
+                                chart.setDragEnabled(true);
+                                chart.setScaleEnabled(true);
+                                chart.getDescription().setEnabled(false);
+
+                                LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
+                                set1.setAxisDependency(YAxis.AxisDependency.LEFT);
+                                LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");
+                                set2.setAxisDependency(YAxis.AxisDependency.LEFT);
+                                LineDataSet set3 = new LineDataSet(y3Values, "Weight");
+                                set3.setAxisDependency(YAxis.AxisDependency.LEFT);
+                                // Color.rgb(171, 235, 198) sys
+                                // Color.rgb(19, 141, 117) dys
+                                set1.setFillAlpha(110);
+                                set1.setLineWidth(3.5f);
+                                set1.setColor(Color.rgb(19, 141, 117));
+                                set1.setDrawValues(false);
+//                                set1.setDrawCircles(false);
+                                set1.setCircleColors(colorssys);
+
+                                set2.setLineWidth(2f);
+                                set2.setColor(Color.rgb(171, 235, 198));
+                                set2.setDrawValues(false);
+//                                set2.setDrawCircles(false);
+                                set2.setCircleColors(colorsdys);
+
+                                set3.setColor(Color.rgb(93, 173, 226));
+                                set3.setLineWidth(2f);
+                                set3.setDrawValues(false);
+                                set3.setDrawCircles(false);
+
+                                YAxis leftAxis = chart.getAxisLeft();
+                                LimitLine ll = new LimitLine(160f, "Critical");
+                                ll.setLineColor(Color.rgb(19, 141, 117));
+                                ll.setLineWidth(1f);
+                                ll.setTextColor(Color.rgb(19, 141, 117));
+                                ll.setTextSize(12f);
+                                ll.enableDashedLine(4, 2, 0);
+                                leftAxis.addLimitLine(ll);
+
+                                LimitLine l2 = new LimitLine(90f, "Critical");
+                                l2.setLineColor(Color.rgb(171, 235, 198));
+                                l2.setLineWidth(1f);
+                                l2.setTextColor(Color.rgb(171, 235, 198));
+                                l2.setTextSize(12f);
+                                l2.enableDashedLine(4, 2, 0);
+                                leftAxis.addLimitLine(l2);
+
+                                set1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                                set2.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+                                set3.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+
+                                ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+                                dataSets.add(set1);
+                                dataSets.add(set2);
+                                dataSets.add(set3);
+
+                                LineData data = new LineData(dataSets);
+                                chart.setData(data);
+                                chart.invalidate();
+                                chart.animateXY(3000, 3000);
+                                /*
+                                 * To set the charts
+                                 ******************************/
+
+                                patientDataAdapter itemsAdapter = new patientDataAdapter(DoctorScreenForParticularPatient.this, patientRowData);
+                                ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
+                                listView.setAdapter(itemsAdapter);
+                                JSONObject device = (JSONObject) response.get("device");
+                                to_fcm = device.getString("device_id");
+                            }
+                            listPB.setVisibility(View.GONE);
+                            chartPB.setVisibility(View.GONE);
                             /******************************
                              * To set the charts
                              */
-                            LineChart chart = (LineChart) findViewById(R.id.chart);
-
-                            ArrayList<Entry> yValues = new ArrayList<Entry>();
-                            ArrayList<Integer> colorssys = new ArrayList<Integer>();
-                            ArrayList<Entry> y2Values = new ArrayList<Entry>();
-                            ArrayList<Integer> colorsdys = new ArrayList<Integer>();
-                            ArrayList<Entry> y3Values = new ArrayList<Entry>();
-
-                            for (int i = 0; i < patientBpData.length(); i++) {
-                                JSONObject po = (JSONObject) patientBpData.get(i);
-                                patient_data_listview_class pr = new patient_data_listview_class(patientBpData.length(), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin") ,po.getInt("weight"), po.getBoolean("headache"), po.getBoolean("abdominal_pain"), po.getBoolean("visual_problems"), po.getDouble("bleeding_per_vaginum") , po.getBoolean("decreased_fetal_movements"), po.getBoolean("swelling_in_hands_or_face"), po.getString("extra_comments"));
-                                patientRowData.add(pr);
-                                Log.i("Data in array", "" + String.valueOf(patientBpData.get(i)));
-                            }
-
-                            for (int i = patientBpData.length()-1; i>=0; i--) {
-                                JSONObject po = (JSONObject) patientBpData.get(i);
-
-                                yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
-
-                                if(po.getInt("systolic") >=160){
-                                    colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
-                                } else if (po.getInt("systolic") >= 140 && po.getInt("systolic") < 160){
-                                    colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart4)) ;
-                                } else if (po.getInt("systolic") < 140){
-                                    colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartsys)) ;
-                                }
-
-                                if(po.getInt("diastolic") >=110){
-                                    colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
-                                } else if (po.getInt("diastolic") < 110 && po.getInt("diastolic") >= 90){
-                                    colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart4)) ;
-                                } else {
-                                    colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartdys)) ;
-                                }
-
-                                y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
-                                y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
-                            }
-
-                            chart.setDragEnabled(true);
-                            chart.setScaleEnabled(true);
-                            chart.getDescription().setEnabled(false);
-
-                            LineDataSet set1 = new LineDataSet(yValues, "Systolic BP");
-                            set1.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            LineDataSet set2 = new LineDataSet(y2Values, "Diastolic BP");
-                            set2.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            LineDataSet set3 = new LineDataSet(y3Values, "Weight");
-                            set3.setAxisDependency(YAxis.AxisDependency.LEFT);
-                            // Color.rgb(171, 235, 198) sys
-                            // Color.rgb(19, 141, 117) dys
-                            set1.setFillAlpha(110);
-                            set1.setLineWidth(3.5f);
-                            set1.setColor(Color.rgb(19, 141, 117));
-                            set1.setDrawValues(false);
-//                                set1.setDrawCircles(false);
-                            set1.setCircleColors(colorssys);
-
-                            set2.setLineWidth(2f);
-                            set2.setColor(Color.rgb(171, 235, 198));
-                            set2.setDrawValues(false);
-//                                set2.setDrawCircles(false);
-                            set2.setCircleColors(colorsdys);
-
-                            set3.setColor(Color.rgb(93, 173, 226));
-                            set3.setLineWidth(2f);
-                            set3.setDrawValues(false);
-                            set3.setDrawCircles(false);
-
-                            YAxis leftAxis = chart.getAxisLeft();
-                            LimitLine ll = new LimitLine(160f, "Critical");
-                            ll.setLineColor(Color.rgb(19, 141, 117));
-                            ll.setLineWidth(1f);
-                            ll.setTextColor(Color.rgb(19, 141, 117));
-                            ll.setTextSize(12f);
-                            ll.enableDashedLine(4, 2, 0);
-                            leftAxis.addLimitLine(ll);
-
-                            LimitLine l2 = new LimitLine(90f, "Critical");
-                            l2.setLineColor(Color.rgb(171, 235, 198));
-                            l2.setLineWidth(1f);
-                            l2.setTextColor(Color.rgb(171, 235, 198));
-                            l2.setTextSize(12f);
-                            l2.enableDashedLine(4, 2, 0);
-                            leftAxis.addLimitLine(l2);
-
-                            set1.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-                            set2.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-                            set3.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-
-                            ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-                            dataSets.add(set1);
-                            dataSets.add(set2);
-                            dataSets.add(set3);
-
-                            LineData data = new LineData(dataSets);
-                            chart.setData(data);
-                            chart.invalidate();
-                            chart.animateXY(3000, 3000);
-                            /*
-                             * To set the charts
-                             ******************************/
-
-                            patientDataAdapter itemsAdapter = new patientDataAdapter(DoctorScreenForParticularPatient.this, patientRowData);
-                            ListView listView = (ListView) findViewById(R.id.patient_data_list_view);
-                            listView.setAdapter(itemsAdapter);
-                            JSONObject device = (JSONObject) response.get("device");
-                            to_fcm = device.getString("device_id");
-                            listPB.setVisibility(View.GONE);
-                            chartPB.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
