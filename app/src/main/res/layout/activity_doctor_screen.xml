@@ -156,6 +156,13 @@
 
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="* Dummy data for educational purpose"
+        android:textColor="@color/chart5"
+        android:gravity="center"
+        android:id="@+id/dummyData"/>
 
     <ScrollView
         android:layout_width="match_parent"

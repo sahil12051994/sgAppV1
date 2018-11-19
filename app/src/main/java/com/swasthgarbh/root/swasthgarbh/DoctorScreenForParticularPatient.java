@@ -53,7 +53,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
     ListView patient_list_view;
     patientDataAdapter adapter;
     private int doctorId, clickedPatientId;
-    TextView doctorName, patientName, pregStartDate, patientMobile, whoFollowing, patientEmail;
+    TextView doctorName, patientName, pregStartDate, patientMobile, whoFollowing, patientEmail, dummyData;
     ImageView callDoctor;
     Button notify, send;
     Dialog notify_dialog;
@@ -140,7 +140,8 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
         pregStartDate = (TextView) findViewById(R.id.pregStartDate);
         whoFollowing = (TextView) findViewById(R.id.whoFollowing);
         callDoctor = (ImageView)  findViewById(R.id.callDoctor);
-
+        dummyData = (TextView)  findViewById(R.id.dummyData);
+        dummyData.setVisibility(View.GONE);
 //        Button logOutButton = (Button) findViewById(R.id.analyseResult);
 //        logOutButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -233,11 +234,11 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                     jo.put("weight", (int)(Math.random() * ((80 - 50) + 1)) + 50);
                                     jo.put("bleeding_per_vaginum", (int) (Math.random() * 4 + 1));
 
-                                    jo.put("headache", Boolean.TRUE);
-                                    jo.put("abdominal_pain", Boolean.TRUE);
-                                    jo.put("visual_problems", Boolean.TRUE);
-                                    jo.put("decreased_fetal_movements", Boolean.TRUE);
-                                    jo.put("swelling_in_hands_or_face", Boolean.TRUE);
+                                    jo.put("headache", rand.nextBoolean());
+                                    jo.put("abdominal_pain", rand.nextBoolean());
+                                    jo.put("visual_problems", rand.nextBoolean());
+                                    jo.put("decreased_fetal_movements", rand.nextBoolean());
+                                    jo.put("swelling_in_hands_or_face", rand.nextBoolean());
                                     jo.put("extra_comments", "No comments");
 
                                     jo.put("time_stamp", "2018-" + String.valueOf((int)(Math.random() * 12 + 1)) + "-" + String.valueOf((int)(Math.random() * 30 + 1)) + "T01:25:37.199340+05:30");
@@ -247,6 +248,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                 Log.i("dataaaaaaa", "onResponse: " + ja);
                                 patientBpData = ja;
                                 Toast.makeText(DoctorScreenForParticularPatient.this, "Dummy Data", Toast.LENGTH_LONG).show();
+                                dummyData.setVisibility(View.VISIBLE);
                             }
                             if(patientBpData.length()!=0) {
 

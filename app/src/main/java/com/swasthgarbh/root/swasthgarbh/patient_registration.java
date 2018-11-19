@@ -66,7 +66,7 @@ public class patient_registration extends AppCompatActivity {
     ListView patient_list_view;
     patientDataAdapter adapter;
     private int doctorId;
-    TextView doctorName, patientName, pregStartDate, doctorMobile, whoFollowing;
+    TextView doctorName, patientName, pregStartDate, doctorMobile, whoFollowing, dummyData;
     LinearLayout TextWhenNoData, parentView, chartLayout;
     ImageView callDoctor;
     SwipeRefreshLayout mSwipeRefreshLayout;
@@ -355,7 +355,8 @@ public class patient_registration extends AppCompatActivity {
         pregStartDate = (TextView) findViewById(R.id.pregStartDate);
         whoFollowing = (TextView) findViewById(R.id.whoFollowing);
         callDoctor = (ImageView)  findViewById(R.id.callDoctor);
-
+        dummyData = (TextView)  findViewById(R.id.dummyData);
+        dummyData.setVisibility(View.GONE);
 //        TextWhenNoData = (LinearLayout) findViewById(R.id.viewIfNoData);
 //        parentView = (LinearLayout) findViewById(R.id.parentView);
 //        chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
@@ -487,6 +488,7 @@ public class patient_registration extends AppCompatActivity {
                             pregStartDate.setText(date);
 //                            Log.i("whoooooo", "onResponse: " + response.getString("who_following"));
                             JSONArray patientBpData = response.getJSONArray("data");
+                            int dummyDataVariable = 0;
                             if(patientBpData.length()==0){
                                 //dummy data for new patient
                                 Random rand = new Random();
@@ -495,9 +497,9 @@ public class patient_registration extends AppCompatActivity {
                                     JSONObject jo = new JSONObject();
                                     jo.put("systolic", (int)(Math.random() * ((170 - 110) + 1)) + 110);
                                     jo.put("diastolic", (int)(Math.random() * ((115 - 60) + 1)) + 60);
-                                    jo.put("urine_albumin", (double) (Math.random() * 4 + 1));
+                                    jo.put("urine_albumin", (int) (Math.random() * 4 + 1));
                                     jo.put("weight", (int)(Math.random() * ((80 - 50) + 1)) + 50);
-                                    jo.put("bleeding_per_vaginum", (double) (Math.random() * 4 + 1));
+                                    jo.put("bleeding_per_vaginum", (int) (Math.random() * 4 + 1));
 
                                     jo.put("time_stamp", "2018-" + String.valueOf((int)(Math.random() * 12 + 1)) + "-" + String.valueOf((int)(Math.random() * 30 + 1)) + "T01:25:37.199340+05:30");
                                     jo.put("pk", session.getUserDetails().get("id"));
@@ -506,6 +508,8 @@ public class patient_registration extends AppCompatActivity {
                                 Log.i("dataaaaaaa", "onResponse: " + ja);
                                 patientBpData = ja;
                                 Toast.makeText(patient_registration.this, "Dummy Data", Toast.LENGTH_LONG).show();
+                                dummyData.setVisibility(View.VISIBLE);
+                                dummyDataVariable = 1;
                             }
                             if(patientBpData.length()!=0){
 //                                parentView.removeView(TextWhenNoData);
@@ -522,7 +526,7 @@ public class patient_registration extends AppCompatActivity {
 
                                 for (int i = 0; i < patientBpData.length(); i++) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-                                    patient_data_listview_class pr = new patient_data_listview_class(patientBpData.length(), po.getInt("pk"), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
+                                    patient_data_listview_class pr = new patient_data_listview_class(dummyDataVariable, patientBpData.length(), po.getInt("pk"), po.getString("time_stamp"),po.getInt("systolic"), po.getInt("diastolic"), po.getDouble("urine_albumin"), po.getInt("weight"), po.getDouble("bleeding_per_vaginum"));
                                     patientRowData.add(pr);
                                 }
 

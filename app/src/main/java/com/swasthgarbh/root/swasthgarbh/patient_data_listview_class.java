@@ -15,8 +15,9 @@ public class patient_data_listview_class {
     private Boolean headache, abdominal_pain, visual_problems, decreased_fetal_movements, swelling_in_hands_or_face;
     private String extra_comments;
     int bleeding_per_vaginum =0;
+    int dummyData = 0;
 
-    public patient_data_listview_class(int totalPatients, int dataId, String date,int bp_sysArg, int bp_dysArg, Double urine_albuminArg, int weight, Double bleedingVag) {
+    public patient_data_listview_class(int dummyData, int totalPatients, int dataId, String date,int bp_sysArg, int bp_dysArg, Double urine_albuminArg, int weight, Double bleedingVag) {
         this.bp_sys = bp_sysArg;
         this.bp_dys = bp_dysArg;
         this.urine_albumin = urine_albuminArg;
@@ -33,6 +34,7 @@ public class patient_data_listview_class {
         this.dataId = dataId;
         this.docScreen_or_pScreen=0;
         this.totalPatients = totalPatients;
+        this.dummyData = dummyData;
     }
 
     public patient_data_listview_class(int totalPatients, String date,int bp_sysArg, int bp_dysArg, Double urine_albuminArg, int weight, Boolean headache, Boolean abdominal_pain, Boolean visual_problems, Double bleedingVag, Boolean decreased_fetal_movements, Boolean swelling_in_hands_or_face, String extra_comments) {
@@ -119,6 +121,10 @@ public class patient_data_listview_class {
 
     public Boolean getDecreased_fetal_movements() {
         return decreased_fetal_movements;
+    }
+
+    public int getDummyData() {
+        return dummyData;
     }
 
     public int getStatusId(){

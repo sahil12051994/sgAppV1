@@ -64,6 +64,10 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
             statusImage.setImageResource(current_patient_data.getStatusId());
 
             ImageView dataDelete = (ImageView)listItemView.findViewById(R.id.deletePatientData);
+
+            if(current_patient_data.getDummyData() == 1){
+                dataDelete.setVisibility(View.GONE);
+            }
             dataDelete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(final View v) {
