@@ -7,6 +7,8 @@ import android.os.Handler;
 import android.util.Log;
 import android.widget.Button;
 
+import com.google.firebase.FirebaseApp;
+
 import java.util.HashMap;
 
 public class ControllerActivity extends Activity {

@@ -170,19 +170,39 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
         listItemNumber.setText(Integer.toString((current_patient_data.getTotalPatients() - position - 1)));
 
         TextView bpSysTextView = (TextView)listItemView.findViewById(R.id.sysValue);
-        bpSysTextView.setText("Systolic BP:\t" + Integer.toString(current_patient_data.bpSysValue()));
+        if(current_patient_data.bpSysValue() == 0){
+            bpSysTextView.setText("Systolic BP:\t" + "N/A");
+        }else{
+            bpSysTextView.setText("Systolic BP:\t" + Integer.toString(current_patient_data.bpSysValue()));
+        }
 
         TextView bpDysTextView = (TextView)listItemView.findViewById(R.id.dysValue);
-        bpDysTextView.setText("Diastolic BP:\t" + Integer.toString(current_patient_data.bpDysValue()));
+        if(current_patient_data.bpDysValue() == 0){
+            bpDysTextView.setText("Diastolic BP:\t" + "N/A");
+        }else{
+            bpDysTextView.setText("Diastolic BP:\t" + Integer.toString(current_patient_data.bpDysValue()));
+        }
 
         TextView heartRateTextView = (TextView)listItemView.findViewById(R.id.weightVal);
-        heartRateTextView.setText("Weight:\t" + Integer.toString(current_patient_data.weightValue()));
+        if(current_patient_data.weightValue() == 0){
+            heartRateTextView.setText("Weight:\t" + "N/A");
+        }else{
+            heartRateTextView.setText("Weight:\t" + Integer.toString(current_patient_data.weightValue()));
+        }
 
         TextView urineAlbumin = (TextView)listItemView.findViewById(R.id.urineAlValue);
-        urineAlbumin.setText("Urine Albumin:\t" + Double.toString(current_patient_data.urineAlValue()) + "+");
+        if(current_patient_data.urineAlValue() == 0){
+            urineAlbumin.setText("Urine Albumin:\t" + "N/A");
+        }else{
+            urineAlbumin.setText("Urine Albumin:\t" + Double.toString(current_patient_data.urineAlValue()) + "+");
+        }
 
         TextView bleedingVag = (TextView)listItemView.findViewById(R.id.bleedingVag);
-        bleedingVag.setText("Bleeding/vaginum:\t" + Double.toString(current_patient_data.bleedingValue()) + "+");
+        if(current_patient_data.bleedingValue() == 0){
+            bleedingVag.setText("Bleeding/vaginum:\t" + "N/A");
+        }else{
+            bleedingVag.setText("Bleeding/vaginum:\t" + Double.toString(current_patient_data.bleedingValue()) + "+");
+        }
 
         TextView datePatientRow = (TextView)listItemView.findViewById(R.id.dateRow);
         String[] dateSuff = {"", "st","nd","rd","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","th","st","nd","rd","th","th","th","th","th","th","th","st"};

@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -201,11 +203,13 @@ public class WHOGuidelines extends AppCompatActivity {
         ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
 
         updateWhoData = (Button) findViewById(R.id.updateWhoData);
-
+        LinearLayout a = (LinearLayout)findViewById(R.id.linearLayoutForAll);
+        RelativeLayout b = (RelativeLayout)findViewById(R.id.updateButtonLayout);
         final HashMap<String, String> user = session.getUserDetails();
         if ("doctor".equals(user.get("type"))){
-            updateWhoData.setVisibility(View.GONE);
-            pb.setVisibility(View.GONE);
+            a.removeView(b);
+//            updateWhoData.setVisibility(View.GONE);
+//            pb.setVisibility(View.GONE);
 //            anc8_diabtese.setEnabled(false);
         }
         updateWhoData.setOnClickListener(new View.OnClickListener() {

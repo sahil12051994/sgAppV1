@@ -132,7 +132,7 @@ public class patientDataEntry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 pb.setVisibility(View.VISIBLE);
-                final String str_weight = "" + sysData.getText().toString();
+                final String str_weight = "" + bodyWeight.getText().toString();
                 final String str_heart_rate = "" + heartRate.getText().toString();
                 final String str_systolic = "" + sysData.getText().toString();
                 final String str_diastolic = "" + dysData.getText().toString();
@@ -148,39 +148,39 @@ public class patientDataEntry extends AppCompatActivity {
                 } else {
                     str_urine = Float.parseFloat(urineAlb.getText().toString());
                 }
-                if (str_weight.length() == 0) {
-                    Toast.makeText(patientDataEntry.this, "Enter your weight", Toast.LENGTH_LONG).show();
-                    pb.setVisibility(View.GONE);
-                    return;
-                }
-
-                if (str_heart_rate.length() == 0) {
-                    Toast.makeText(patientDataEntry.this, "Enter your heart_rate", Toast.LENGTH_LONG).show();
-                    pb.setVisibility(View.GONE);
-                    return;
-                }
-
-                if (str_diastolic.length() == 0) {
-                    Toast.makeText(patientDataEntry.this, "Enter your diastolic bp", Toast.LENGTH_LONG).show();
-                    pb.setVisibility(View.GONE);
-                    return;
-                }
-
-                if (str_systolic.length() == 0) {
-                    Toast.makeText(patientDataEntry.this, "Enter your systolic bp", Toast.LENGTH_LONG).show();
-                    pb.setVisibility(View.GONE);
-                    return;
-                }
-                if (str_urine > 9) {
-                    Toast.makeText(patientDataEntry.this, "Urine albumin should be below 10", Toast.LENGTH_LONG).show();
-                    pb.setVisibility(View.GONE);
-                    return;
-                }
-                if (str_bleedingVag > 9) {
-                    Toast.makeText(patientDataEntry.this, "Bleeding vaginum should be below 10", Toast.LENGTH_LONG).show();
-                    pb.setVisibility(View.GONE);
-                    return;
-                }
+//                if (str_weight.length() == 0) {
+//                    Toast.makeText(patientDataEntry.this, "Enter your weight", Toast.LENGTH_LONG).show();
+//                    pb.setVisibility(View.GONE);
+//                    return;
+//                }
+//
+//                if (str_heart_rate.length() == 0) {
+//                    Toast.makeText(patientDataEntry.this, "Enter your heart_rate", Toast.LENGTH_LONG).show();
+//                    pb.setVisibility(View.GONE);
+//                    return;
+//                }
+//
+//                if (str_diastolic.length() == 0) {
+//                    Toast.makeText(patientDataEntry.this, "Enter your diastolic bp", Toast.LENGTH_LONG).show();
+//                    pb.setVisibility(View.GONE);
+//                    return;
+//                }
+//
+//                if (str_systolic.length() == 0) {
+//                    Toast.makeText(patientDataEntry.this, "Enter your systolic bp", Toast.LENGTH_LONG).show();
+//                    pb.setVisibility(View.GONE);
+//                    return;
+//                }
+//                if (str_urine > 9) {
+//                    Toast.makeText(patientDataEntry.this, "Urine albumin should be below 10", Toast.LENGTH_LONG).show();
+//                    pb.setVisibility(View.GONE);
+//                    return;
+//                }
+//                if (str_bleedingVag > 9) {
+//                    Toast.makeText(patientDataEntry.this, "Bleeding vaginum should be below 10", Toast.LENGTH_LONG).show();
+//                    pb.setVisibility(View.GONE);
+//                    return;
+//                }
                 String url = ApplicationController.get_base_url() + "api/data";
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                         url, null,
@@ -196,9 +196,6 @@ public class patientDataEntry extends AppCompatActivity {
                                 Intent i = new Intent(patientDataEntry.this, patient_registration.class);
                                 startActivity(i);
                                 finish();
-//                                Log.d("DATA", response.toString());
-//
-                                //                            edit.commit();
                             }
                         }, new Response.ErrorListener() {
 

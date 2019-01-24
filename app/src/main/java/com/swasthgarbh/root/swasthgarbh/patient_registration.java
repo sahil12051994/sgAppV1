@@ -532,8 +532,9 @@ public class patient_registration extends AppCompatActivity {
 
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-
-                                    yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    if(po.getInt("systolic") != 0){
+                                        yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    }
 
                                     if(po.getInt("systolic") >=160){
                                         colorssys.add(ContextCompat.getColor(patient_registration.this, R.color.chart6)) ;
@@ -551,8 +552,12 @@ public class patient_registration extends AppCompatActivity {
                                         colorsdys.add(ContextCompat.getColor(patient_registration.this, R.color.chartdys)) ;
                                     }
 
-                                    y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
-                                    y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
+                                    if(po.getInt("diastolic") != 0){
+                                        y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                    }
+                                    if(po.getInt("weight") != 0){
+                                        y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
+                                    }
                                 }
 
                                 chart.setDragEnabled(true);

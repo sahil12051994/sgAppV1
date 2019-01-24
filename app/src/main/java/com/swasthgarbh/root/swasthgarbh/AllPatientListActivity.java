@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -42,7 +43,7 @@ public class AllPatientListActivity extends AppCompatActivity {
     static SessionManager session;
     ListView patient_list_view;
     AllPatientListInDoctorAdapter adapter;
-
+    ProgressBar pb;
     public int clickedPatientId;
 
     @Override
@@ -79,7 +80,8 @@ public class AllPatientListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_all_patient_list);
 
         getSupportActionBar().setTitle("All Patients");
-
+        pb = (ProgressBar) findViewById(R.id.listPB);
+        pb.setVisibility(View.VISIBLE);
         session = new SessionManager(this);
 
         getAllPatientList();
@@ -92,7 +94,7 @@ public class AllPatientListActivity extends AppCompatActivity {
     public void getAllPatientList(){
         String url = ApplicationController.get_base_url() + "api/doctor/" + session.getUserDetails().get("id");
         final ArrayList<PatientListRowInDoctorClass> patientRowData = new ArrayList<PatientListRowInDoctorClass>();
-
+        pb.setVisibility(View.VISIBLE);
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 url, null,
                 new Response.Listener<JSONObject>() {
@@ -113,6 +115,7 @@ public class AllPatientListActivity extends AppCompatActivity {
                             AllPatientListInDoctorAdapter itemsAdapter = new AllPatientListInDoctorAdapter(AllPatientListActivity.this, patientRowData);
                             ListView listView = (ListView) findViewById(R.id.allPatientsDoctorListView);
                             listView.setAdapter(itemsAdapter);
+                            pb.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

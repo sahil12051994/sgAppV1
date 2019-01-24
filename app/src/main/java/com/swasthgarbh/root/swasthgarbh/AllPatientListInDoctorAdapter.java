@@ -114,7 +114,9 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
 
-                                    yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    if(po.getInt("systolic") != 0){
+                                        yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    }
 
                                     if(po.getInt("systolic") >=160){
                                         colorssys.add(ContextCompat.getColor(getContext(), R.color.chart6)) ;
@@ -132,7 +134,9 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                         colorsdys.add(ContextCompat.getColor(getContext(), R.color.chartdys)) ;
                                     }
 
-                                    y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                    if(po.getInt("diastolic") != 0){
+                                        y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                    }
                                 }
 
                                 chart.setDragEnabled(true);

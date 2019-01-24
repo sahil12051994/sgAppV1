@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -99,10 +100,18 @@ public class all_images_view extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
 //                        Log.d("AllPatientList", response.toString());
                         try {
-
+                            if(response.length()==0){
+                                Toast.makeText(all_images_view.this, "No Images Uploaded", Toast.LENGTH_LONG).show();
+                            }
                             for (int i = 0; i < response.length(); i++) {
+//                                Log.i("imageee", "WholeImagesListClass: " + response);
                                 JSONObject po = (JSONObject) response.get(i);
-                                WholeImagesListClass pr = new WholeImagesListClass(po.getString("extra_comments_image"), po.getString("time_stamp"));
+                                WholeImagesListClass pr;
+                                if(po.has("byte")){
+                                     pr = new WholeImagesListClass(po.getString("extra_comments_image"), po.getString("time_stamp"), po.getString("byte"), po.getInt("id"));
+                                }else{
+                                     pr = new WholeImagesListClass(po.getString("extra_comments_image"), po.getString("time_stamp"), po.getInt("id"));
+                                }
                                 imageRowAdapter.add(pr);
                             }
 
@@ -131,5 +140,4 @@ public class all_images_view extends AppCompatActivity {
         };
         ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
     }
-
 }

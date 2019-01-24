@@ -8,6 +8,13 @@
     android:orientation="vertical"
     tools:context=".AllPatientListActivity">
 
+    <ProgressBar
+        android:id="@+id/listPB"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        />
+
     <ListView
         android:id="@+id/allPatientsDoctorListView"
         android:layout_width="match_parent"

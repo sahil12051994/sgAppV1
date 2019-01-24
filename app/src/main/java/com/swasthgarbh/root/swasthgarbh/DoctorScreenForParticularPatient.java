@@ -269,7 +269,9 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
 
-                                    yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    if(po.getInt("systolic") != 0){
+                                        yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    }
 
                                     if(po.getInt("systolic") >=160){
                                         colorssys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chart6)) ;
@@ -287,8 +289,12 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                         colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartdys)) ;
                                     }
 
-                                    y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
-                                    y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
+                                    if(po.getInt("diastolic") != 0){
+                                        y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
+                                    }
+                                    if(po.getInt("weight") != 0){
+                                        y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
+                                    }
                                 }
 
                                 chart.setDragEnabled(true);
@@ -483,8 +489,5 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                 }
             }
         });
-
-
     }
-
 }
