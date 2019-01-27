@@ -126,7 +126,6 @@ public class image_view_modal extends AppCompatActivity {
                 out.flush();
                 out.close();
                 Toast.makeText(v, "Image Downloaded", Toast.LENGTH_SHORT).show();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
