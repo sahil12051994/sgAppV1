@@ -79,17 +79,23 @@
                 <TextView
                     android:id="@+id/registeredDoctorName"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/registeredDoctorHospital"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/registeredDoctorSpeciality"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,7 +111,10 @@
                 <TextView
                     android:id="@+id/registeredDoctorEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp" />
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:autoLink = "email"/>
 
             </LinearLayout>
 

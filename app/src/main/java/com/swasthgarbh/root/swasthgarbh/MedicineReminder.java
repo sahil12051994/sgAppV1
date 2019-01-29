@@ -248,11 +248,12 @@ public class MedicineReminder extends AppCompatActivity {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("apihit", response.toString());
-                        listPB.setVisibility(View.GONE);
+                        Log.d("apihit1", response.toString());
                         try {
                             JSONArray medicineData = response.getJSONArray("medicines");
-
+                            if(medicineData.length()==0){
+                                Toast.makeText(MedicineReminder.this, "No Medicines Added", Toast.LENGTH_LONG).show();
+                            }
                             for (int i = 0; i < medicineData.length(); i++) {
                                 JSONObject po = (JSONObject) medicineData.get(i);
                                 MedicineListClass pr = new MedicineListClass(po.getString("medicine_name"), po.getString("medicine_start"), po.getString("medicine_end"), po.getString("medicine_freq"), po.getString("medicine_extra_comments"));
@@ -262,6 +263,7 @@ public class MedicineReminder extends AppCompatActivity {
                             MedicineAdapter itemsAdapter = new MedicineAdapter(MedicineReminder.this, medicineRowAdapter);
                             ListView listView = (ListView) findViewById(R.id.patient_medicine_list);
                             listView.setAdapter(itemsAdapter);
+                            listPB.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         } catch (ParseException e) {

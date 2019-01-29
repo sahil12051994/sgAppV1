@@ -360,6 +360,7 @@ public class DoctorScreen extends AppCompatActivity {
                             doctorName.setText(response.getString("name"));
                             doctorHospital.setText(response.getString("hospital"));
                             doctorEmail.setText(response.getString("email"));
+//                            doctorEmail.setText("vatsala.dhadwal@gmail.com");
                             doctorTotalPatients.setText(String.valueOf(response.getJSONArray("patients").length()));
                             doctorSpeciality.setText(response.getString("speciality"));
 

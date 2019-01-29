@@ -70,17 +70,22 @@
                 <TextView
                     android:id="@+id/patientName"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/pregStartDate"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
                 <TextView
                     android:id="@+id/patientEmail"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp"
+                    android:autoLink = "email"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -103,7 +108,9 @@
                 <TextView
                     android:id="@+id/whoFollowing"
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"/>
+                    android:layout_height="20dp"
+                    android:ellipsize="end"
+                    android:maxLines="1"/>
 
             </LinearLayout>
 
