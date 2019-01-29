@@ -140,6 +140,10 @@ public class patient_registration extends AppCompatActivity {
         } else if (item.getItemId() == R.id.action_notification){
             i = new Intent(this, PatientNotifications.class);
             startActivity(i);
+        }  else if (item.getItemId() == R.id.patientImages){
+            Intent intent = new Intent(this, all_images_view.class);
+            intent.putExtra("EXTRA_PATIENT_ID", Integer.parseInt(session.getUserDetails().get("id")));
+            startActivity(intent);
         } else if (item.getItemId() == R.id.hospitalsNearYou){
 //            String url = "https://www.google.co.in/search?q=hospitals+near+you&oq=hospitals+near+you&aqs=chrome..69i57.4099j0j9&client=ms-android-samsung&sourceid=chrome-mobile&ie=UTF-8#istate=lrl:xpd";
 //            Intent webIntent = new Intent(Intent.ACTION_VIEW);
@@ -357,16 +361,7 @@ public class patient_registration extends AppCompatActivity {
         callDoctor = (ImageView)  findViewById(R.id.callDoctor);
         dummyData = (TextView)  findViewById(R.id.dummyData);
         dummyData.setVisibility(View.GONE);
-//        TextWhenNoData = (LinearLayout) findViewById(R.id.viewIfNoData);
-//        parentView = (LinearLayout) findViewById(R.id.parentView);
-//        chartLayout = (LinearLayout) findViewById(R.id.chartLayout);
-//        Button logOutButton = (Button) findViewById(R.id.analyseResult);
-//        logOutButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                logout(patient_registration.this);
-//            }
-//        });
+
         Button whoGuidelines = (Button) findViewById(R.id.who_button);
         whoGuidelines.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -468,6 +463,7 @@ public class patient_registration extends AppCompatActivity {
      * API for doctor details
      * */
     public void getPatientData(){
+        Log.i("reload", "getPatientData: called");
         String url = ApplicationController.get_base_url() + "api/patient/" + session.getUserDetails().get("id");
         final ProgressBar pb = (ProgressBar) findViewById(R.id.indeterminateBar);
         final ProgressBar chartPB = (ProgressBar) findViewById(R.id.chartPB);

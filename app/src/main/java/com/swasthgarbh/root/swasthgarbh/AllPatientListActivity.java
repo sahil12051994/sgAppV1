@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -106,6 +107,9 @@ public class AllPatientListActivity extends AppCompatActivity {
 
                             JSONArray allPatientsArray = response.getJSONArray("patients");
 
+                            if(allPatientsArray.length()==0){
+                                Toast.makeText(AllPatientListActivity.this, "No Patients", Toast.LENGTH_LONG).show();
+                            }
                             for (int i = 0; i < allPatientsArray.length(); i++) {
                                 JSONObject po = (JSONObject) allPatientsArray.get(i);
                                 PatientListRowInDoctorClass pr = new PatientListRowInDoctorClass(po.getInt("pk"),po.getString("name"), po.getString("lmp"));

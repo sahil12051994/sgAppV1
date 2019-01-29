@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -107,6 +108,11 @@ public class PatientNotifications extends AppCompatActivity {
                         try {
                             List<String> data = new ArrayList<String>();
                             JSONArray notifications = response.getJSONArray("notifications");
+
+                            if(notifications.length()==0){
+                                Toast.makeText(PatientNotifications.this, "No Notifications", Toast.LENGTH_LONG).show();
+                            }
+
                             for (int i = 0; i < notifications.length(); i++) {
                                 JSONObject no = (JSONObject) notifications.get(i);
                                 String n = no.getString("text");

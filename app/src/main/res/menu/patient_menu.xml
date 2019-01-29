@@ -11,10 +11,6 @@
 
         <menu>
 
-            <item android:id="@+id/action_change_doctor"
-                android:icon="@drawable/arrows"
-                app:showAsAction="ifRoom"
-                android:title="@string/change_doctor" />
 
             <item android:id="@+id/action_notification"
                 android:icon="@drawable/bell"
@@ -25,6 +21,16 @@
                 android:icon="@drawable/map"
                 app:showAsAction="ifRoom"
                 android:title="@string/nearby_hospitals" />
+
+            <item android:id="@+id/patientImages"
+                android:icon="@drawable/imagemenu"
+                app:showAsAction="ifRoom"
+                android:title="Complication Images" />
+
+            <item android:id="@+id/action_change_doctor"
+                android:icon="@drawable/arrows"
+                app:showAsAction="ifRoom"
+                android:title="@string/change_doctor" />
 
             <item android:id="@+id/aboutPre"
                 android:icon="@drawable/faq"

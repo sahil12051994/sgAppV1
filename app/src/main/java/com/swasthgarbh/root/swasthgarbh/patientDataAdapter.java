@@ -84,7 +84,6 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
                                 public void onClick(DialogInterface dialog, int which) {
                                     // continue with delete
                                     String url = ApplicationController.get_base_url() + "api/data/" + current_patient_data.getDataId();
-                                    Log.i("Delete", "onResponse: Started deleted");
                                     StringRequest jsonObjReq = new StringRequest(Request.Method.DELETE,
                                             url,
                                             new Response.Listener<String>() {

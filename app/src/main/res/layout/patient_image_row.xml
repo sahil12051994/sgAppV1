@@ -33,7 +33,7 @@
 
             <TextView
                 android:id="@+id/image_date"
-                android:layout_width="match_parent"
+                android:layout_width="294dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="4dp"
@@ -42,6 +42,15 @@
                 android:text="Image - 22 Dec 2017"
                 android:textColor="#EB1C23"
                 android:textSize="25sp" />
+
+            <ImageView
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/dustbin"
+                android:id="@+id/deleteImageData"/>
 
         </LinearLayout>
 

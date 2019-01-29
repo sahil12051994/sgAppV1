@@ -7,44 +7,47 @@
     android:orientation="vertical"
     android:weightSum="1"
     >
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <ProgressBar
-            android:id="@+id/imagePb"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            />
-
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/compImage"
+            <ProgressBar
+                android:id="@+id/imagePb"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="center"/>
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                />
 
-            <Button
-                android:id="@+id/downloadImage"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:background="@drawable/my_btn"
-                android:drawableRight="@android:drawable/ic_menu_save"
-                android:text="Download"
-                android:textAllCaps="false" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/compImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="center"/>
+
+                <Button
+                    android:id="@+id/downloadImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/my_btn"
+                    android:drawableRight="@android:drawable/ic_menu_save"
+                    android:text="Download"
+                    android:textAllCaps="false" />
+
+            </LinearLayout>
 
         </LinearLayout>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

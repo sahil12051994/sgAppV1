@@ -1,5 +1,6 @@
 package com.swasthgarbh.root.swasthgarbh;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Notification;
@@ -12,12 +13,16 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Base64;
@@ -66,6 +71,8 @@ public class patientDataEntry extends AppCompatActivity {
     ImageView loader;
     String currentDateandTime;
 
+    String pathImage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +103,7 @@ public class patientDataEntry extends AppCompatActivity {
                 selectImage();
             }
         });
+        ivImage = (ImageView) findViewById(R.id.ivImage);
 
         final NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this, "notify_001");
@@ -136,6 +144,7 @@ public class patientDataEntry extends AppCompatActivity {
                 final String str_heart_rate = "" + heartRate.getText().toString();
                 final String str_systolic = "" + sysData.getText().toString();
                 final String str_diastolic = "" + dysData.getText().toString();
+                final int proceed = 0;
                 final Float str_bleedingVag;
                 if (bleedingVag.getText().length() == 0) {
                     str_bleedingVag = 0f;
@@ -148,39 +157,7 @@ public class patientDataEntry extends AppCompatActivity {
                 } else {
                     str_urine = Float.parseFloat(urineAlb.getText().toString());
                 }
-//                if (str_weight.length() == 0) {
-//                    Toast.makeText(patientDataEntry.this, "Enter your weight", Toast.LENGTH_LONG).show();
-//                    pb.setVisibility(View.GONE);
-//                    return;
-//                }
-//
-//                if (str_heart_rate.length() == 0) {
-//                    Toast.makeText(patientDataEntry.this, "Enter your heart_rate", Toast.LENGTH_LONG).show();
-//                    pb.setVisibility(View.GONE);
-//                    return;
-//                }
-//
-//                if (str_diastolic.length() == 0) {
-//                    Toast.makeText(patientDataEntry.this, "Enter your diastolic bp", Toast.LENGTH_LONG).show();
-//                    pb.setVisibility(View.GONE);
-//                    return;
-//                }
-//
-//                if (str_systolic.length() == 0) {
-//                    Toast.makeText(patientDataEntry.this, "Enter your systolic bp", Toast.LENGTH_LONG).show();
-//                    pb.setVisibility(View.GONE);
-//                    return;
-//                }
-//                if (str_urine > 9) {
-//                    Toast.makeText(patientDataEntry.this, "Urine albumin should be below 10", Toast.LENGTH_LONG).show();
-//                    pb.setVisibility(View.GONE);
-//                    return;
-//                }
-//                if (str_bleedingVag > 9) {
-//                    Toast.makeText(patientDataEntry.this, "Bleeding vaginum should be below 10", Toast.LENGTH_LONG).show();
-//                    pb.setVisibility(View.GONE);
-//                    return;
-//                }
+
                 String url = ApplicationController.get_base_url() + "api/data";
                 JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                         url, null,
@@ -189,12 +166,83 @@ public class patientDataEntry extends AppCompatActivity {
                             @Override
                             public void onResponse(JSONObject response) {
 //                                Log.d("DATA", response.toString());
-//                                pb.setVisibility(View.GONE);
-                                if(Integer.parseInt(sysData.getText().toString()) > 160 || Integer.parseInt(dysData.getText().toString()) > 110) {
-                                    mNotificationManager.notify(0, mBuilder.build());
+                                Toast.makeText(patientDataEntry.this, "Data Uploaded!", Toast.LENGTH_SHORT).show();
+
+                                // Add Image
+                                if(ImgBytes.length() == 0){
+
+                                    pb.setVisibility(View.GONE);
+                                    if(Integer.parseInt(sysData.getText().toString()) > 160 || Integer.parseInt(dysData.getText().toString()) > 110) {
+                                        mNotificationManager.notify(0, mBuilder.build());
+                                    }
+                                    Intent i = new Intent(patientDataEntry.this, patient_registration.class);
+                                    startActivity(i);
+                                    return;
+
+                                } else {
+
+                                    String url2 = ApplicationController.get_base_url() + "/api/image";
+                                    JsonObjectRequest jsonObjReq2 = new JsonObjectRequest(Request.Method.POST,
+                                            url2, null,
+                                            new Response.Listener<JSONObject>() {
+
+                                                @Override
+                                                public void onResponse(JSONObject response) {
+                                                    Log.d("TAG", response.toString());
+                                                    Toast.makeText(patientDataEntry.this, "Image Uploaded!", Toast.LENGTH_SHORT).show();
+                                                    pb.setVisibility(View.GONE);
+                                                    finish();
+                                                }
+                                            }, new Response.ErrorListener() {
+
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.d("TAG", "Error Message: " + error.getMessage());
+                                            Toast.makeText(patientDataEntry.this, "Image not Uploaded", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }) {
+
+                                        @Override
+                                        public byte[] getBody() {
+                                            JSONObject params = new JSONObject();
+
+                                            try {
+                                                String extraComm = "";
+                                                if(extraComments.getText().length()==0){
+                                                    extraComm = "No Comments";
+                                                } else {
+                                                    extraComm = extraComments.getText().toString();
+                                                }
+                                                HashMap<String, String> user = session.getUserDetails();
+                                                params.put("byte", ImgBytes);
+                                                params.put("extra_comments_image",extraComm);
+                                                params.put("patient", Integer.parseInt(user.get("id")));
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            return params.toString().getBytes();
+
+                                        }
+
+                                        @Override
+                                        public Map<String, String> getHeaders() throws AuthFailureError {
+                                            Map<String, String> params = new HashMap<String, String>();
+                                            params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
+                                            Log.d("TAG", "Token " + session.getUserDetails().get("Token"));
+                                            return params;
+                                        }
+                                    };
+                                    ApplicationController.getInstance().addToRequestQueue(jsonObjReq2);
+                                    if(sysData.getText().length() != 0 && dysData.getText().length() != 0){
+                                        if(Integer.parseInt(sysData.getText().toString()) > 160 || Integer.parseInt(dysData.getText().toString()) > 110) {
+                                            mNotificationManager.notify(0, mBuilder.build());
+                                        }
+                                    }
+                                    Intent i = new Intent(patientDataEntry.this, patient_registration.class);
+                                    startActivity(i);
                                 }
-                                Intent i = new Intent(patientDataEntry.this, patient_registration.class);
-                                startActivity(i);
+
+
                                 finish();
                             }
                         }, new Response.ErrorListener() {
@@ -275,62 +323,6 @@ public class patientDataEntry extends AppCompatActivity {
                     }
                 };
                 ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
-
-                // Add Image
-                if(ImgBytes.length() == 0){
-                    return;
-                }
-
-                String url2 = ApplicationController.get_base_url() + "/api/image";
-                JsonObjectRequest jsonObjReq2 = new JsonObjectRequest(Request.Method.POST,
-                        url2, null,
-                        new Response.Listener<JSONObject>() {
-
-                            @Override
-                            public void onResponse(JSONObject response) {
-                                Log.d("TAG", response.toString());
-                                Toast.makeText(patientDataEntry.this, "Image Sent!", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(patientDataEntry.this, patient_registration.class);
-                                pb.setVisibility(View.GONE);
-                                startActivity(i);
-                                finish();
-                            }
-                        }, new Response.ErrorListener() {
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.d("TAG", "Error Message: " + error.getMessage());
-                    }
-                }) {
-
-                    @Override
-                    public byte[] getBody() {
-                        JSONObject params = new JSONObject();
-
-                        try {
-                            HashMap<String, String> user = session.getUserDetails();
-                            params.put("byte", ImgBytes);
-                            params.put("extra_comments_image",extraComments.getText());
-                            params.put("patient", Integer.parseInt(user.get("id")));
-//                            String d = "" + date.getText();
-//                            String t = "" + time.getText();
-//                            params.put("time_stamp", d + " " + t);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        return params.toString().getBytes();
-
-                    }
-
-                    @Override
-                    public Map<String, String> getHeaders() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<String, String>();
-                        params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
-                        Log.d("TAG", "Token " + session.getUserDetails().get("Token"));
-                        return params;
-                    }
-                };
-                ApplicationController.getInstance().addToRequestQueue(jsonObjReq2);
             }
         });
 
@@ -340,39 +332,49 @@ public class patientDataEntry extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
+            if (requestCode == SELECT_FILE){
                 onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
+            } else if (requestCode == REQUEST_CAMERA) {
                 onCaptureImageResult(data);
+            }
         }
     }
 
     private void onCaptureImageResult(Intent data) {
         Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-        File destination = new File(Environment.getExternalStorageDirectory(),
-                System.currentTimeMillis() + ".jpg");
-        FileOutputStream fo;
-        try {
-            destination.createNewFile();
-            fo = new FileOutputStream(destination);
-            fo.write(bytes.toByteArray());
-            fo.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        if (ContextCompat.checkSelfPermission(patientDataEntry.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            // Do the file write
+            String root = Environment.getExternalStorageDirectory().toString();
+            File myDir = new File(root + "/SwasthGarbh");
+            myDir.mkdirs();
+
+            String fname = "Image" + System.currentTimeMillis() +".jpg";
+
+            File file = new File (myDir, fname);
+            if (file.exists ()) file.delete ();
+            try {
+                FileOutputStream out = new FileOutputStream(file);
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                out.flush();
+                out.close();
+
+                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+                byte[] ba  = bytes.toByteArray();
+                ImgBytes = Base64.encodeToString(ba, 0);
+                ivImage.setImageBitmap(thumbnail);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            ActivityCompat.requestPermissions(patientDataEntry.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
         }
-        byte[] ba  = bytes.toByteArray();
-        ImgBytes = Base64.encodeToString(ba, 0);
-        ivImage.setImageBitmap(thumbnail);
     }
 
     private void onSelectFromGalleryResult(Intent data) {
-        ivImage = (ImageView) findViewById(R.id.ivImage);
         Bitmap bm=null;
-
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
@@ -384,7 +386,6 @@ public class patientDataEntry extends AppCompatActivity {
         bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
         byte[] ba  = bytes.toByteArray();
         ImgBytes = Base64.encodeToString(ba, 0);
-        Log.e("TAG", ImgBytes);
         ivImage.setImageBitmap(bm);
     }
 

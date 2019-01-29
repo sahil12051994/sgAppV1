@@ -58,7 +58,7 @@ public class all_images_view extends AppCompatActivity {
         });
 
         clickedPatientId= getIntent().getIntExtra("EXTRA_PATIENT_ID", 1);
-        getSupportActionBar().setTitle("Patient Images");
+        getSupportActionBar().setTitle("Uploaded Images");
         getPatientImageData();
     }
 
