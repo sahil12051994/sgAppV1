@@ -71,7 +71,8 @@ public class patientDataEntry extends AppCompatActivity {
     ImageView loader;
     String currentDateandTime;
 
-    String pathImage;
+    Uri ImageUri;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -332,49 +333,32 @@ public class patientDataEntry extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE){
+            if (requestCode == SELECT_FILE)
                 onSelectFromGalleryResult(data);
-            } else if (requestCode == REQUEST_CAMERA) {
+            else if (requestCode == REQUEST_CAMERA)
                 onCaptureImageResult(data);
-            }
         }
     }
 
     private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-
-        if (ContextCompat.checkSelfPermission(patientDataEntry.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            // Do the file write
-            String root = Environment.getExternalStorageDirectory().toString();
-            File myDir = new File(root + "/SwasthGarbh");
-            myDir.mkdirs();
-
-            String fname = "Image" + System.currentTimeMillis() +".jpg";
-
-            File file = new File (myDir, fname);
-            if (file.exists ()) file.delete ();
-            try {
-                FileOutputStream out = new FileOutputStream(file);
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                out.flush();
-                out.close();
-
-                thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
-                byte[] ba  = bytes.toByteArray();
-                ImgBytes = Base64.encodeToString(ba, 0);
-                ivImage.setImageBitmap(thumbnail);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            ActivityCompat.requestPermissions(patientDataEntry.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+        try {
+            Bitmap thumbnail = MediaStore.Images.Media.getBitmap(
+                    getContentResolver(), ImageUri);
+            ivImage.setImageBitmap(thumbnail);
+            ivImage.setVisibility(View.VISIBLE);
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            thumbnail.compress(Bitmap.CompressFormat.JPEG, 80, bytes);
+            byte[] ba  = bytes.toByteArray();
+            ImgBytes = Base64.encodeToString(ba, 0);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
     private void onSelectFromGalleryResult(Intent data) {
+
         Bitmap bm=null;
+
         if (data != null) {
             try {
                 bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
@@ -383,10 +367,11 @@ public class patientDataEntry extends AppCompatActivity {
             }
         }
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
+        bm.compress(Bitmap.CompressFormat.JPEG, 80, bytes);
         byte[] ba  = bytes.toByteArray();
         ImgBytes = Base64.encodeToString(ba, 0);
         ivImage.setImageBitmap(bm);
+        ivImage.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -408,7 +393,7 @@ public class patientDataEntry extends AppCompatActivity {
     private void selectImage() {
         final CharSequence[] items = { "Take Photo", "Choose from Library",
                 "Cancel" };
-        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(patientDataEntry.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(patientDataEntry.this);
         builder.setTitle("Add Photo!");
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
@@ -439,7 +424,13 @@ public class patientDataEntry extends AppCompatActivity {
     }
 
     private void cameraIntent() {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.TITLE, "New Picture");
+        values.put(MediaStore.Images.Media.DESCRIPTION, "From your Camera");
+        ImageUri = getContentResolver().insert(
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, ImageUri);
         startActivityForResult(intent, REQUEST_CAMERA);
     }
 }
