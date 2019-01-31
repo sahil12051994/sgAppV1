@@ -274,8 +274,8 @@ public class patient_registration extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                if (v.getId() == R.id.login) {
-
+                Log.i("changeee", "onClick: inside change doc");
+//                if (v.getId() == R.id.login) {
 
                     String url = ApplicationController.get_base_url() + "api/patient/" + session.getUserDetails().get("id");
                     JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
@@ -319,8 +319,8 @@ public class patient_registration extends AppCompatActivity {
                         }
                     };
                     ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
-                }
-
+//                }
+                getPatientData();
             }
         });
     }
@@ -528,7 +528,8 @@ public class patient_registration extends AppCompatActivity {
 
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-                                    if(po.getInt("systolic") != 0){
+                                    int len = patientBpData.length();
+                                    if(po.getInt("systolic") != 0 || len == 1){
                                         yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
                                     }
 
@@ -548,10 +549,10 @@ public class patient_registration extends AppCompatActivity {
                                         colorsdys.add(ContextCompat.getColor(patient_registration.this, R.color.chartdys)) ;
                                     }
 
-                                    if(po.getInt("diastolic") != 0){
+                                    if(po.getInt("diastolic") != 0 || len == 1){
                                         y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
                                     }
-                                    if(po.getInt("weight") != 0){
+                                    if(po.getInt("weight") != 0 || len == 1){
                                         y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
                                     }
                                 }

@@ -32,13 +32,21 @@ public class SessionManager {
     public static final String KEY_FCM = "fcm";
 
     public SessionManager(Context context){
-        this._context = context;
-        pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
-        editor = pref.edit();
+        Log.i("contexttt1", "SessionManager: " + context);
+        if(context != null){
+            this._context = context;
+            pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+            editor = pref.edit();
+        } else {
+            // if null
+//            Context c = new ControllerActivity();
+            this._context = context;
+            pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
+            editor = pref.edit();
+        }
     }
 
     public void createLoginSession(String token, int u_id, String type, int id){
-        Log.i("hahahahaha", "createLoginSession: hahahahahah");
 
         editor.putBoolean(IS_LOGIN, true);
 
@@ -61,9 +69,6 @@ public class SessionManager {
         }
 
     }
-
-
-
 
     public HashMap<String, String> getUserDetails(){
         HashMap<String, String> user = new HashMap<String, String>();
@@ -95,6 +100,6 @@ public class SessionManager {
 
 
     public boolean isLoggedIn(){
-        return pref.getBoolean(IS_LOGIN, false);
+            return pref.getBoolean(IS_LOGIN, false);
     }
 }

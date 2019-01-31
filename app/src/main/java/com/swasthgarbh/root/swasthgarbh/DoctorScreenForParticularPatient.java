@@ -268,8 +268,8 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
 
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-
-                                    if(po.getInt("systolic") != 0){
+                                    int len = patientBpData.length();
+                                    if(po.getInt("systolic") != 0 || len == 1){
                                         yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
                                     }
 
@@ -289,10 +289,10 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                                         colorsdys.add(ContextCompat.getColor(DoctorScreenForParticularPatient.this, R.color.chartdys)) ;
                                     }
 
-                                    if(po.getInt("diastolic") != 0){
+                                    if(po.getInt("diastolic") != 0 || len == 1){
                                         y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
                                     }
-                                    if(po.getInt("weight") != 0){
+                                    if(po.getInt("weight") != 0 || len == 1){
                                         y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
                                     }
                                 }

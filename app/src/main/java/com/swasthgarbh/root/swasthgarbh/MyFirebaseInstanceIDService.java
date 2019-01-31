@@ -26,6 +26,7 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     }
 
     public  MyFirebaseInstanceIDService(Context context) {
+        Log.i("contexttt2", "SessionManager: " + context);
         _context = context;
     }
 
@@ -36,12 +37,12 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         // Get updated InstanceID token.
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("TAG", "Refreshed token: " + refreshedToken);
-
-        session = new SessionManager(_context);
-        session.checkLogin();
-        user = new HashMap<String, String>();
-        user = session.getUserDetails();
-
+        if(_context != null){
+            session = new SessionManager(_context);
+            session.checkLogin();
+            user = new HashMap<String, String>();
+            user = session.getUserDetails();
+        }
         if (refreshedToken != null) {
             sendRegistrationToServer(refreshedToken);
         }
