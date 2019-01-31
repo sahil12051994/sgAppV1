@@ -223,43 +223,73 @@
 
             </android.support.v7.widget.CardView>
 
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_margin="5dp">
 
-                <TextView
-                    android:id="@+id/spinner2"
-                    android:layout_width="0dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:backgroundTint="@color/colortheme"
-                    android:gravity="center"
-                    android:text="+91 -" />
+                    android:orientation="vertical">
 
-                <EditText
-                    android:id="@+id/editText7"
-                    android:layout_width="0dp"
-                    android:layout_height="60dp"
-                    android:layout_weight="5"
-                    android:hint="@string/doctor_s_number"
-                    android:backgroundTint="@color/colortheme"
-                    android:inputType="phone" />
+                    <Switch
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="2dp"
+                        android:text="AI Doctor"
+                        android:id="@+id/aiDoc"
+                        android:backgroundTint="@color/colortheme"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:id="@+id/normalDoc">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
 
-            </LinearLayout>
+                            <TextView
+                                android:id="@+id/spinner2"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:backgroundTint="@color/colortheme"
+                                android:gravity="center"
+                                android:text="+91 -" />
+
+                            <EditText
+                                android:id="@+id/editText7"
+                                android:layout_width="0dp"
+                                android:layout_height="60dp"
+                                android:layout_weight="5"
+                                android:hint="@string/doctor_s_number"
+                                android:backgroundTint="@color/colortheme"
+                                android:inputType="phone" />
 
 
-            <EditText
-                android:id="@+id/editText10"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:backgroundTint="@color/colortheme"
-                android:clickable="false"
-                android:ems="10"
-                android:focusable="false"
-                android:hint="@string/doctor_s_name"
-                android:inputType="none" />
+                        </LinearLayout>
+
+
+                        <EditText
+                            android:id="@+id/editText10"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:backgroundTint="@color/colortheme"
+                            android:clickable="false"
+                            android:ems="10"
+                            android:focusable="false"
+                            android:hint="@string/doctor_s_name"
+                            android:inputType="none" />
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
 
 
             <Button

@@ -32,18 +32,9 @@ public class SessionManager {
     public static final String KEY_FCM = "fcm";
 
     public SessionManager(Context context){
-        Log.i("contexttt1", "SessionManager: " + context);
-        if(context != null){
             this._context = context;
             pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
             editor = pref.edit();
-        } else {
-            // if null
-//            Context c = new ControllerActivity();
-            this._context = context;
-            pref = _context.getSharedPreferences(PREF_NAME, PRIVATE_MODE);
-            editor = pref.edit();
-        }
     }
 
     public void createLoginSession(String token, int u_id, String type, int id){

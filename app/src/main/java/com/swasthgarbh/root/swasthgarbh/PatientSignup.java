@@ -12,9 +12,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,8 +35,9 @@ import java.util.Locale;
 public class PatientSignup extends AppCompatActivity implements View.OnClickListener, TextWatcher {
     Button register;
     EditText date_of_birth, name, address, email, mobile, password, doctor_number, doctor_name, lmpDate;
-
+    Switch aiDoc;
     int doc_id;
+    LinearLayout normalDoc;
     String token, type;
     int u_id, id;
     SessionManager session;
@@ -70,6 +74,20 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
         histObes = (CheckBox) findViewById(R.id.histObes);
         moreThanOneBaby = (CheckBox) findViewById(R.id.moreThanOneBaby);
         diseases = (CheckBox) findViewById(R.id.diseases);
+
+        aiDoc = (Switch)findViewById(R.id.aiDoc);
+        normalDoc = (LinearLayout)findViewById(R.id.normalDoc);
+        aiDoc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if(isChecked){
+                    normalDoc.setVisibility(View.GONE);
+                }else{
+                    normalDoc.setVisibility(View.VISIBLE);
+                }
+            }
+        });
 
         register = (Button) findViewById(R.id.register);
         register.setOnClickListener(this);
