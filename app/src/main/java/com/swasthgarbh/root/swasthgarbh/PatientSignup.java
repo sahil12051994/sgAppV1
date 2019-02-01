@@ -37,6 +37,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
     EditText date_of_birth, name, address, email, mobile, password, doctor_number, doctor_name, lmpDate;
     Switch aiDoc;
     int doc_id;
+    Boolean docRequried = Boolean.TRUE;
     LinearLayout normalDoc;
     String token, type;
     int u_id, id;
@@ -83,8 +84,10 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                 // true if the switch is in the On position
                 if(isChecked){
                     normalDoc.setVisibility(View.GONE);
+                    docRequried = Boolean.FALSE;
                 }else{
                     normalDoc.setVisibility(View.VISIBLE);
+                    docRequried = Boolean.TRUE;
                 }
             }
         });
@@ -150,15 +153,16 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(PatientSignup.this, "Enter your age", Toast.LENGTH_LONG).show();
                 return;
             }
+            if(docRequried == Boolean.TRUE){
+                if (str_doctor_mobile.length() == 0) {
+                    Toast.makeText(PatientSignup.this, "Enter your doctor's number", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
-            if (str_doctor_mobile.length() == 0) {
-                Toast.makeText(PatientSignup.this, "Enter your doctor's number", Toast.LENGTH_LONG).show();
-                return;
-            }
-
-            if (str_doc_name.length() == 0) {
-                Toast.makeText(PatientSignup.this, "Enter a valid doctor's number", Toast.LENGTH_LONG).show();
-                return;
+                if (str_doc_name.length() == 0) {
+                    Toast.makeText(PatientSignup.this, "Enter a valid doctor's number", Toast.LENGTH_LONG).show();
+                    return;
+                }
             }
             if (str_lmpDate.length() == 0) {
                 Toast.makeText(PatientSignup.this, "Enter your LMP date", Toast.LENGTH_LONG).show();
@@ -216,7 +220,11 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                         params.put("password", "" + password.getText());
                         params.put("mobile", mobile.getText());
                         params.put("email", "" + email.getText());
-                        params.put("doctor", doc_id);
+                        if(docRequried == Boolean.TRUE){
+                            params.put("doctor", doc_id);
+                        } else {
+                            params.put("doctor", "");
+                        }
                         params.put("date_of_birth", date_of_birth.getText());
                         params.put("gender", 0);
 

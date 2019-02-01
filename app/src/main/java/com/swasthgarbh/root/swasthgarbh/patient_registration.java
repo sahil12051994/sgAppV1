@@ -284,10 +284,11 @@ public class patient_registration extends AppCompatActivity {
 
                                 @Override
                                 public void onResponse(JSONObject response) {
-                                    Log.d("TAG", response.toString());
+                                    Log.d("change doc api resp", response.toString());
+                                    doctorId = doc_id;
                                     choose_doc.dismiss();
                                     Toast.makeText(patient_registration.this, "Doctor changed", Toast.LENGTH_LONG).show();
-
+                                    getPatientData();
                                 }
                             }, new Response.ErrorListener() {
 
@@ -319,8 +320,6 @@ public class patient_registration extends AppCompatActivity {
                         }
                     };
                     ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
-//                }
-                getPatientData();
             }
         });
     }
@@ -422,40 +421,45 @@ public class patient_registration extends AppCompatActivity {
     * API for doctor details
     * */
     public void getDoctorData(){
-        String url = ApplicationController.get_base_url() + "api/doctor/" + doctorId;
+        if(doctorId != 0){
+            String url = ApplicationController.get_base_url() + "api/doctor/" + doctorId;
 
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
-                new Response.Listener<JSONObject>() {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                    url, null,
+                    new Response.Listener<JSONObject>() {
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("doctor details", response.toString());
-                        try {
-                            doctorName.setText(response.getString("name"));
-                            Log.i("mobilee", "onResponse: " + response.getLong("mobile"));
-                            doctorMobile.setText(Long.toString(response.getLong("mobile")));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.d("doctor details", response.toString());
+                            try {
+                                doctorName.setText(response.getString("name"));
+                                Log.i("mobilee", "onResponse: " + response.getLong("mobile"));
+                                doctorMobile.setText(Long.toString(response.getLong("mobile")));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 //                            edit.commit();
-                    }
-                }, new Response.ErrorListener() {
+                        }
+                    }, new Response.ErrorListener() {
 
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("TAG", "Error Message: " + error.getMessage());
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json");
-                params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
-                return params;
-            }
-        };
-        ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.d("TAG", "Error Message: " + error.getMessage());
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("Content-Type", "application/json");
+                    params.put("Authorization", "Token " + session.getUserDetails().get("Token"));
+                    return params;
+                }
+            };
+            ApplicationController.getInstance().addToRequestQueue(jsonObjReq);
+        } else {
+            doctorName.setText("No Doctor");
+            doctorMobile.setText("- - - -");
+        }
     }
 
     /*
@@ -477,7 +481,11 @@ public class patient_registration extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         Log.d("apihit", response.toString());
                         try {
-                            doctorId = response.getInt("doctor");
+                            if(response.getString("doctor") == "null"){
+                                doctorId = 0;
+                            }else{
+                                doctorId = response.getInt("doctor");
+                            }
                             patientName.setText(response.getString("name"));
                             whoFollowing.setText(response.getString("who_following"));
                             String date = response.getString("lmp").split("T")[0].split("-")[2] + "-" + response.getString("lmp").split("T")[0].split("-")[1] + "-" + response.getString("lmp").split("T")[0].split("-")[0];

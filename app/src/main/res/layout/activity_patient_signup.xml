@@ -234,13 +234,15 @@
                     android:orientation="vertical">
 
                     <Switch
+                        android:id="@+id/aiDoc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginRight="2dp"
-                        android:text="AI Doctor"
-                        android:id="@+id/aiDoc"
-                        android:backgroundTint="@color/colortheme"/>
+                        android:layout_marginBottom="5dp"
+                        android:backgroundTint="@color/colortheme"
+                        android:text="No Doctor (Automated Monitoring)" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
