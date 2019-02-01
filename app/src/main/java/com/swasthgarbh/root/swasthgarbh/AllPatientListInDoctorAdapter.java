@@ -188,7 +188,7 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
                                 LineData data = new LineData(dataSets);
                                 chart.setData(data);
                                 chart.invalidate();
-                                chart.animateXY(1000, 1000);
+//                                chart.animateXY(1000, 1000);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

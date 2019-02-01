@@ -37,7 +37,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
     EditText date_of_birth, name, address, email, mobile, password, doctor_number, doctor_name, lmpDate;
     Switch aiDoc;
     int doc_id;
-    Boolean docRequried = Boolean.TRUE;
+    Boolean docRequried = Boolean.FALSE;
     LinearLayout normalDoc;
     String token, type;
     int u_id, id;
@@ -78,16 +78,21 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
 
         aiDoc = (Switch)findViewById(R.id.aiDoc);
         normalDoc = (LinearLayout)findViewById(R.id.normalDoc);
+
+        normalDoc.setVisibility(View.GONE);
+        docRequried = Boolean.FALSE;
+
         aiDoc.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // do something, the isChecked will be
                 // true if the switch is in the On position
                 if(isChecked){
-                    normalDoc.setVisibility(View.GONE);
-                    docRequried = Boolean.FALSE;
-                }else{
                     normalDoc.setVisibility(View.VISIBLE);
                     docRequried = Boolean.TRUE;
+                }else{
+                    normalDoc.setVisibility(View.GONE);
+                    docRequried = Boolean.FALSE;
+                    Toast.makeText(PatientSignup.this, "Automated Monitoring", Toast.LENGTH_SHORT).show();
                 }
             }
         });
