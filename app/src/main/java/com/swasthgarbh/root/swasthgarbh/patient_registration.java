@@ -68,7 +68,7 @@ public class patient_registration extends AppCompatActivity {
     private int doctorId;
     TextView doctorName, patientName, pregStartDate, doctorMobile, whoFollowing, dummyData;
     LinearLayout TextWhenNoData, parentView, chartLayout;
-    ImageView callDoctor;
+    ImageView callDoctor, verified;
     SwipeRefreshLayout mSwipeRefreshLayout;
     Dialog choose_doc;
     int doc_id;
@@ -359,6 +359,7 @@ public class patient_registration extends AppCompatActivity {
         whoFollowing = (TextView) findViewById(R.id.whoFollowing);
         callDoctor = (ImageView)  findViewById(R.id.callDoctor);
         dummyData = (TextView)  findViewById(R.id.dummyData);
+        verified = (ImageView)findViewById(R.id.verified);
         dummyData.setVisibility(View.GONE);
 
         Button whoGuidelines = (Button) findViewById(R.id.who_button);
@@ -435,6 +436,11 @@ public class patient_registration extends AppCompatActivity {
                                 doctorName.setText(response.getString("name"));
                                 Log.i("mobilee", "onResponse: " + response.getLong("mobile"));
                                 doctorMobile.setText(Long.toString(response.getLong("mobile")));
+                                if(!response.getBoolean("verified")){
+                                    verified.setVisibility(View.GONE);
+                                }else{
+                                    verified.setVisibility(View.VISIBLE);
+                                }
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -459,6 +465,7 @@ public class patient_registration extends AppCompatActivity {
         } else {
             doctorName.setText("No Doctor");
             doctorMobile.setText("- - - -");
+            verified.setVisibility(View.GONE);
         }
     }
 

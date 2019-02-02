@@ -240,6 +240,7 @@ public class PatientSignup extends AppCompatActivity implements View.OnClickList
                         params.put("history_of_obesity", histObes.isChecked());
                         params.put("more_than_one_baby", moreThanOneBaby.isChecked());
                         params.put("history_of_diseases", diseases.isChecked());
+                        params.put("verified", Boolean.FALSE);
 
                     } catch (JSONException e) {
                         e.printStackTrace();

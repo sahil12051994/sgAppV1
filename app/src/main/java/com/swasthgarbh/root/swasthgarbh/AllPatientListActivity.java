@@ -112,7 +112,7 @@ public class AllPatientListActivity extends AppCompatActivity {
                             }
                             for (int i = 0; i < allPatientsArray.length(); i++) {
                                 JSONObject po = (JSONObject) allPatientsArray.get(i);
-                                PatientListRowInDoctorClass pr = new PatientListRowInDoctorClass(po.getInt("pk"),po.getString("name"), po.getString("lmp"));
+                                PatientListRowInDoctorClass pr = new PatientListRowInDoctorClass(po.getInt("pk"),po.getString("name"), po.getString("lmp"), po.getBoolean("verified"));
                                 patientRowData.add(pr);
                             }
 

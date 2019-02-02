@@ -23,14 +23,24 @@
                 android:layout_width="0px"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
-                android:layout_weight="0.7"
+                android:layout_weight="8"
                 android:inputType="textPersonName"
                 android:text="Sahil Sharma"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:ellipsize="end"
+                android:maxLines="1"/>
 
             <ImageView
                 android:layout_width="0px"
-                android:layout_weight="0.2"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@drawable/correct"
+                android:layout_gravity="center|bottom"
+                android:id="@+id/verified"/>
+
+            <ImageView
+                android:layout_width="0px"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_marginTop="5dp"
                 android:src="@drawable/next"/>

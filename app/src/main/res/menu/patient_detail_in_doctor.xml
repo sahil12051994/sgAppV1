@@ -26,6 +26,11 @@
                 app:showAsAction="ifRoom"
                 android:title="Complication Images" />
 
+            <item android:id="@+id/patientDetails"
+                android:icon="@drawable/checkup"
+                app:showAsAction="ifRoom"
+                android:title="Details" />
+
             <item android:id="@+id/action_logout"
                 android:icon="@drawable/logout"
                 app:showAsAction="ifRoom"

@@ -54,7 +54,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
     patientDataAdapter adapter;
     private int doctorId, clickedPatientId;
     TextView doctorName, patientName, pregStartDate, patientMobile, whoFollowing, patientEmail, dummyData;
-    ImageView callDoctor;
+    ImageView callDoctor, verified;
     Button notify, send;
     Dialog notify_dialog;
     EditText message_box;
@@ -82,6 +82,10 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
             startActivity(intent);
         } else if (item.getItemId() == R.id.action_refresh){
             getPatientData(clickedPatientId);
+        } else if (item.getItemId() == R.id.patientDetails){
+            Intent intent = new Intent(DoctorScreenForParticularPatient.this, patientDetailInDoctor.class);
+            intent.putExtra("EXTRA_PATIENT_ID", clickedPatientId);
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
@@ -141,6 +145,7 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
         whoFollowing = (TextView) findViewById(R.id.whoFollowing);
         callDoctor = (ImageView)  findViewById(R.id.callDoctor);
         dummyData = (TextView)  findViewById(R.id.dummyData);
+        verified = (ImageView)findViewById(R.id.verified);
         dummyData.setVisibility(View.GONE);
 //        Button logOutButton = (Button) findViewById(R.id.analyseResult);
 //        logOutButton.setOnClickListener(new View.OnClickListener() {
@@ -218,6 +223,9 @@ public class DoctorScreenForParticularPatient extends AppCompatActivity implemen
                             patientEmail.setText(response.getString("email"));
                             patientMobile.setText(String.valueOf(response.getLong("mobile")));
                             whoFollowing.setText(response.getString("who_following"));
+                            if(!response.getBoolean("verified")){
+                                verified.setVisibility(View.GONE);
+                            }
                             String date = response.getString("lmp").split("T")[0].split("-")[2] + "-" + response.getString("lmp").split("T")[0].split("-")[1] + "-" + response.getString("lmp").split("T")[0].split("-")[0];
                             pregStartDate.setText(date);
                             JSONArray patientBpData = response.getJSONArray("data");

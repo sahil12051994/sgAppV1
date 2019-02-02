@@ -69,6 +69,12 @@ public class AllPatientListInDoctorAdapter extends ArrayAdapter<PatientListRowIn
 
         getPatientGraph(patientId, current_patient_data, listItemView);
 
+        ImageView verified;
+        verified = (ImageView)listItemView.findViewById(R.id.verified);
+        if(!current_patient_data.getVerified()){
+            verified.setVisibility(View.GONE);
+        }
+
         LinearLayout getInsideParticularPatient = (LinearLayout) listItemView.findViewById(R.id.getInsideParticularPatient);
         getInsideParticularPatient.setOnClickListener(new View.OnClickListener() {
             @Override

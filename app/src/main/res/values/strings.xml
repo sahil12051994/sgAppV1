@@ -110,4 +110,5 @@
     <string name="title_activity_anc__assist">ANC Assist</string>
 
     <string name="action_settings" translatable="false">Settings</string>
+    <string name="title_activity_patient_detail_in_doctor">patientDetailInDoctor</string>
 </resources>

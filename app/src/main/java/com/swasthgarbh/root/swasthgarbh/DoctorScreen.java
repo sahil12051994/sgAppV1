@@ -66,7 +66,7 @@ public class DoctorScreen extends AppCompatActivity {
     patientDataAdapter adapter;
     private int doctorId;
     TextView doctorName, doctorEmail, doctorTotalPatients, doctorHospital, doctorSpeciality, dummyData;
-    ImageView callDoctor;
+    ImageView callDoctor, verified;
     ProgressBar barPB;
     ProgressBar piePB;
     boolean doubleBackToExitPressedOnce = false;
@@ -136,6 +136,7 @@ public class DoctorScreen extends AppCompatActivity {
         doctorEmail = (TextView) findViewById(R.id.registeredDoctorEmail);
         doctorTotalPatients = (TextView) findViewById(R.id.registeredDoctorTotalPatients);
         doctorSpeciality = (TextView) findViewById(R.id.registeredDoctorSpeciality);
+        verified = (ImageView)findViewById(R.id.verified);
         barPB = (ProgressBar) findViewById(R.id.barPB);
         piePB = (ProgressBar) findViewById(R.id.piePB);
         barPB.setVisibility(View.VISIBLE);
@@ -363,6 +364,9 @@ public class DoctorScreen extends AppCompatActivity {
 //                            doctorEmail.setText("vatsala.dhadwal@gmail.com");
                             doctorTotalPatients.setText(String.valueOf(response.getJSONArray("patients").length()));
                             doctorSpeciality.setText(response.getString("speciality"));
+                            if(!response.getBoolean("verified")){
+                                verified.setVisibility(View.GONE);
+                            }
 
                             JSONObject analysis_obj = (JSONObject) response.getJSONObject("analysis_object");
                             if(keepDummyData == 1){

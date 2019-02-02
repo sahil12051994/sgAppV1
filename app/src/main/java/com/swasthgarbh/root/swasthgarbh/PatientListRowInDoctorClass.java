@@ -34,20 +34,26 @@ public class PatientListRowInDoctorClass {
     private String patientName;
     private String patientLmp, endDate;
     private int patientId;
+    private Boolean verified;
     private ArrayList<Entry> yValues = new ArrayList<Entry>();
     private ArrayList<Entry> y2Values = new ArrayList<Entry>();
 
 
-    public PatientListRowInDoctorClass(int patientId, String name, String lmp){
+    public PatientListRowInDoctorClass(int patientId, String name, String lmp, Boolean verified){
 
         this.patientName = name;
         this.patientLmp = lmp.split("T")[0].split("-")[2] + "-" + lmp.split("T")[0].split("-")[1] + "-" + lmp.split("T")[0].split("-")[0];;
         this.patientId = patientId;
+        this.verified = verified;
     }
 
     public String getName() {return patientName; }
 
-//    public String getLmp() {return patientLmp; }
+    public Boolean getVerified() {
+        return verified;
+    }
+
+    //    public String getLmp() {return patientLmp; }
 
     public String getEDD() throws ParseException {
 
