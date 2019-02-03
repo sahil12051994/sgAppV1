@@ -10,17 +10,22 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +67,9 @@ public class MedicineReminder extends AppCompatActivity {
     FloatingActionButton fab;
     SwipeRefreshLayout mSwipeRefreshLayout;
     ProgressBar listPB,addMedPB;
+    Switch sosSwitch;
+    Boolean isSOS;
+    LinearLayout periodLayout;
 
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
@@ -120,10 +128,59 @@ public class MedicineReminder extends AppCompatActivity {
         add_medicine_dialog.setContentView(R.layout.medicine_add_screen);
         add_medicine_dialog.setCancelable(true);
         add_medicine_dialog.show();
+
+        // Get screen width and height in pixels
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        // The absolute width of the available display size in pixels.
+        int displayWidth = displayMetrics.widthPixels;
+        // The absolute height of the available display size in pixels.
+        int displayHeight = displayMetrics.heightPixels;
+
+        // Initialize a new window manager layout parameters
+        WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
+
+        // Copy the alert dialog window attributes to new layout parameter instance
+        layoutParams.copyFrom(add_medicine_dialog.getWindow().getAttributes());
+
+        // Set the alert dialog window width and height
+        // Set alert dialog width equal to screen width 90%
+        // int dialogWindowWidth = (int) (displayWidth * 0.9f);
+        // Set alert dialog height equal to screen height 90%
+        // int dialogWindowHeight = (int) (displayHeight * 0.9f);
+
+        // Set alert dialog width equal to screen width 80%
+        int dialogWindowWidth = (int) (displayWidth * 0.85f);
+        // Set alert dialog height equal to screen height 70%
+        int dialogWindowHeight = (int) (displayHeight * 0.70f);
+        // Set the width and height for the layout parameters
+        // This will bet the width and height of alert dialog
+        layoutParams.width = dialogWindowWidth;
+        layoutParams.height = dialogWindowHeight;
+        // Apply the newly created layout parameters to the alert dialog window
+        add_medicine_dialog.getWindow().setAttributes(layoutParams);
+
+
         addMedPB = (ProgressBar) add_medicine_dialog.findViewById(R.id.addMedPB);
         addMedPB.setVisibility(View.GONE);
         addMedButton = add_medicine_dialog.findViewById(R.id.addMedButton);
         medName = add_medicine_dialog.findViewById(R.id.medName);
+        sosSwitch = add_medicine_dialog.findViewById(R.id.sosSwitch);
+        periodLayout = add_medicine_dialog.findViewById(R.id.periodLayout);
+
+        sosSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                // do something, the isChecked will be
+                // true if the switch is in the On position
+                if(isChecked){
+                    periodLayout.setVisibility(View.GONE);
+                    isSOS = Boolean.TRUE;
+                }else{
+                    periodLayout.setVisibility(View.VISIBLE);
+                    isSOS = Boolean.FALSE;
+                }
+            }
+        });
 
         medStart = add_medicine_dialog.findViewById(R.id.medStart);
         medStart.setOnClickListener(new View.OnClickListener() {
@@ -209,11 +266,16 @@ public class MedicineReminder extends AppCompatActivity {
                                 freq = "weekly";
                             }
 
-                            params.put("medicine_freq", freq);
                             params.put("medicine_extra_comments", medComments.getText());
                             params.put("medicine_Image", "Sample image byte for Medicine");
                             params.put("medicine_start", medStartTime);
                             params.put("medicine_end", medEndTime);
+                            if(isSOS){
+                                params.put("isSOS", isSOS);
+                            }else{
+                                params.put("medicine_freq", freq);
+                                params.put("isSOS", isSOS);
+                            }
 
                             Log.i("Boddddyyyyy", "getBody: " + params.toString());
                         } catch (JSONException e) {
@@ -256,7 +318,7 @@ public class MedicineReminder extends AppCompatActivity {
                             }
                             for (int i = 0; i < medicineData.length(); i++) {
                                 JSONObject po = (JSONObject) medicineData.get(i);
-                                MedicineListClass pr = new MedicineListClass(po.getString("medicine_name"), po.getString("medicine_start"), po.getString("medicine_end"), po.getString("medicine_freq"), po.getString("medicine_extra_comments"));
+                                MedicineListClass pr = new MedicineListClass(po.getString("medicine_name"), po.getString("medicine_start"), po.getString("medicine_end"), po.getString("medicine_freq"), po.getString("medicine_extra_comments"), po.getBoolean("isSOS"));
                                 medicineRowAdapter.add(pr);
                                 Log.i("Data in array", "" + String.valueOf(medicineData.get(i)));
                             }

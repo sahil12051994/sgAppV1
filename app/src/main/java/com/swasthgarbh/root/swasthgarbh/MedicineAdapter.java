@@ -1,13 +1,16 @@
 package com.swasthgarbh.root.swasthgarbh;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.provider.CalendarContract;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -56,7 +59,6 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
         medName.setText(current_medicine_data.getMedName());
 
         final TextView medFreq = (TextView)listItemView.findViewById(R.id.medFreq);
-        medFreq.setText(current_medicine_data.getfreq());
 
         final TextView startDateMed = (TextView)listItemView.findViewById(R.id.startDateMed);
         startDateMed.setText(current_medicine_data.getStartDate_date() + "-" + current_medicine_data.getStartDate_month() + "-" + current_medicine_data.getStartDate_year());
@@ -67,11 +69,24 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
         final TextView extraComments = (TextView)listItemView.findViewById(R.id.medicineDetail);
         extraComments.setText(current_medicine_data.getComments());
 
+        final TextView medFreqText = (TextView)listItemView.findViewById(R.id.medFreqText);
+
         ImageView reminder = (ImageView)listItemView.findViewById(R.id.reminderButton);
+
+        if(current_medicine_data.getSOS() == Boolean.TRUE){
+            reminder.setVisibility(View.INVISIBLE);
+            medFreqText.setText("SOS");
+            medFreqText.setTextColor(Color.parseColor("#C70039"));
+            medFreq.setText("");
+        } else {
+            reminder.setVisibility(View.VISIBLE);
+            medFreqText.setText("Period");
+            medFreqText.setTextColor(Color.parseColor("#808080"));
+            medFreq.setText(current_medicine_data.getfreq());
+        }
 
         session = new SessionManager(getContext());
         final HashMap<String, String> user = session.getUserDetails();
-//        Log.i("typeeeeee", "getView: " + user.get("type"));
         if ("patient".equals(user.get("type"))){
             reminder.setOnClickListener(new View.OnClickListener() {
                 @Override

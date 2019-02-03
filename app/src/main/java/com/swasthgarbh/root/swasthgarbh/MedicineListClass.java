@@ -9,8 +9,9 @@ public class MedicineListClass {
     private String medName, comments, frequency;
     public String startDate_date, startDate_month, startDate_year, endDate_date, endDate_month, endDate_year;
     Date startDate, endDate;
+    private Boolean isSOS;
 
-    public MedicineListClass (String medName, String startDate, String endDate, String freq, String comments) throws ParseException {
+    public MedicineListClass (String medName, String startDate, String endDate, String freq, String comments, Boolean isSOS) throws ParseException {
 
         SimpleDateFormat dateFormatterServer = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -25,6 +26,10 @@ public class MedicineListClass {
         this.endDate_date = get_date_date(endDate);
         this.endDate_month = get_date_month(endDate);
         this.endDate_year = get_date_year(endDate);
+        this.isSOS = isSOS;
+        if(isSOS){
+            this.frequency = "SOS";
+        }
     }
 
     public String getMedName(){ return medName; }
@@ -32,6 +37,10 @@ public class MedicineListClass {
     public Date getEndDate() { return endDate; }
     public String getComments() { return comments; }
     public String getfreq() { return frequency; }
+
+    public Boolean getSOS() {
+        return isSOS;
+    }
 
     public String getStartDate_date(){
         return startDate_date;

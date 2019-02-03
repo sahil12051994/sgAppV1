@@ -3,7 +3,7 @@
     android:padding="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="fill_parent"
     android:orientation="vertical"
     android:weightSum="1"
     >
@@ -61,10 +61,27 @@
             android:inputType="none" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+
+        <Switch
+            android:id="@+id/sosSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="3dp"
+            android:text="SOS" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/periodLayout">
 
         <RadioGroup
             android:layout_width="0dp"
@@ -114,8 +131,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:layout_gravity="center_horizontal"
-        android:orientation="horizontal">
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:orientation="horizontal"
+        android:gravity = "bottom">
 
         <ProgressBar
             android:id="@+id/addMedPB"
