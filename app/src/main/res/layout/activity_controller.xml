@@ -11,6 +11,6 @@
         android:layout_height="279dp"
         android:layout_gravity="center"
         android:layout_weight="1"
-        android:src="@drawable/logo"
-        app:srcCompat="@drawable/logo" />
+        android:src="@drawable/unnamed"
+        app:srcCompat="@drawable/unnamed" />
 </LinearLayout>

@@ -26,7 +26,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:contentDescription="TODO"
-            android:src="@drawable/logo" />
+            android:src="@drawable/unnamed" />
 
         <TextView
             android:id="@+id/textView2"

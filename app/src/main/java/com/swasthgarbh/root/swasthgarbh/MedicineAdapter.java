@@ -199,6 +199,7 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
                             @Override
                             public void onResponse(JSONObject response) {
                                 Log.i("reeeesponse", "onResponse: " + response);
+                                Toast.makeText(v.getContext(), "Medicine updated successfully", Toast.LENGTH_SHORT).show();
                                 add_medicine_dialog.dismiss();
                                 ((MedicineReminder)MedReminderView.getContext()).getPatientData(clickedPatientId);
                             }

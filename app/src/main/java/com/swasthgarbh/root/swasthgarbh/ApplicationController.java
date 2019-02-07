@@ -14,9 +14,9 @@ public class ApplicationController extends Application {
 
     public static final String TAG = ApplicationController.class.getSimpleName();
 
-//    private static String base_url = "http://compbio.iitr.ac.in/sg/";
+    private static String base_url = "http://compbio.iitr.ac.in/sg/";
 
-    private static String base_url = "http://10.0.2.2:8000/sg/";
+//    private static String base_url = "http://10.0.2.2:8000/sg/";
 
     private RequestQueue mRequestQueue;
 
