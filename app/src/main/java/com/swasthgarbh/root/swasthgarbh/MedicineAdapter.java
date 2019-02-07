@@ -108,7 +108,8 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
         return date.split("-")[2].split("T")[0];
     }
 
-    public void openMedicineModal(View v){
+    public void openMedicineModal(final View v){
+        final View MedReminderView= v;
         add_medicine_dialog = new Dialog(v.getContext());
         add_medicine_dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         add_medicine_dialog.setContentView(R.layout.medicine_add_screen);
@@ -186,7 +187,7 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
 
         addMedButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 addMedPB.setVisibility(View.VISIBLE);
                 addMedButton.setVisibility(View.GONE);
 
@@ -199,6 +200,7 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
                             public void onResponse(JSONObject response) {
                                 Log.i("reeeesponse", "onResponse: " + response);
                                 add_medicine_dialog.dismiss();
+                                ((MedicineReminder)MedReminderView.getContext()).getPatientData(clickedPatientId);
                             }
                         }, new Response.ErrorListener() {
 
@@ -280,7 +282,7 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
                                                 Log.i("Delete", "onResponse: Data deleted");
                                                 Toast.makeText(v.getContext(), "Medicine deleted successfully", Toast.LENGTH_SHORT).show();
                                                 add_medicine_dialog.dismiss();
-//                                                ((MedicineReminder)v.getContext()).getPatientData(clickedPatientId);
+                                                ((MedicineReminder)MedReminderView.getContext()).getPatientData(clickedPatientId);
 //                                                    Intent intent = new Intent(v.getContext(), patient_registration.class);
 //                                                    v.getContext().startActivity(intent);
                                             }
