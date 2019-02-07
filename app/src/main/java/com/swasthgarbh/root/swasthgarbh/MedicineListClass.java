@@ -10,8 +10,9 @@ public class MedicineListClass {
     public String startDate_date, startDate_month, startDate_year, endDate_date, endDate_month, endDate_year;
     Date startDate, endDate;
     private Boolean isSOS;
+    private Integer medId;
 
-    public MedicineListClass (String medName, String startDate, String endDate, String freq, String comments, Boolean isSOS) throws ParseException {
+    public MedicineListClass (Integer id, String medName, String startDate, String endDate, String freq, String comments, Boolean isSOS) throws ParseException {
 
         SimpleDateFormat dateFormatterServer = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -27,9 +28,14 @@ public class MedicineListClass {
         this.endDate_month = get_date_month(endDate);
         this.endDate_year = get_date_year(endDate);
         this.isSOS = isSOS;
+        this.medId = id;
         if(isSOS){
             this.frequency = "SOS";
         }
+    }
+
+    public Integer getMedId() {
+        return medId;
     }
 
     public String getMedName(){ return medName; }

@@ -68,8 +68,9 @@ public class MedicineReminder extends AppCompatActivity {
     SwipeRefreshLayout mSwipeRefreshLayout;
     ProgressBar listPB,addMedPB;
     Switch sosSwitch;
-    Boolean isSOS;
+    Boolean isSOS = Boolean.FALSE;
     LinearLayout periodLayout;
+    ImageView deleteMedicine;
 
     private DatePickerDialog fromDatePickerDialog;
     private DatePickerDialog toDatePickerDialog;
@@ -128,6 +129,9 @@ public class MedicineReminder extends AppCompatActivity {
         add_medicine_dialog.setContentView(R.layout.medicine_add_screen);
         add_medicine_dialog.setCancelable(true);
         add_medicine_dialog.show();
+
+        deleteMedicine = (ImageView)add_medicine_dialog.findViewById(R.id.deleteMedicine);
+        deleteMedicine.setVisibility(View.GONE);
 
         // Get screen width and height in pixels
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -318,7 +322,7 @@ public class MedicineReminder extends AppCompatActivity {
                             }
                             for (int i = 0; i < medicineData.length(); i++) {
                                 JSONObject po = (JSONObject) medicineData.get(i);
-                                MedicineListClass pr = new MedicineListClass(po.getString("medicine_name"), po.getString("medicine_start"), po.getString("medicine_end"), po.getString("medicine_freq"), po.getString("medicine_extra_comments"), po.getBoolean("isSOS"));
+                                MedicineListClass pr = new MedicineListClass(po.getInt("pk"), po.getString("medicine_name"), po.getString("medicine_start"), po.getString("medicine_end"), po.getString("medicine_freq"), po.getString("medicine_extra_comments"), po.getBoolean("isSOS"));
                                 medicineRowAdapter.add(pr);
                                 Log.i("Data in array", "" + String.valueOf(medicineData.get(i)));
                             }
