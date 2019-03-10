@@ -89,7 +89,7 @@ public class WHOGuidelines extends AppCompatActivity {
 
         pb = (ProgressBar) findViewById(R.id.sendPB);
         pb.setVisibility(View.GONE);
-        getSupportActionBar().setTitle("WHO Guidlines");
+        getSupportActionBar().setTitle("Clinical Tests (WHO Guidlines)");
 
         session = new SessionManager(this);
 //      Getting the WHO Data
@@ -174,7 +174,7 @@ public class WHOGuidelines extends AppCompatActivity {
                             anc7_diabtese.setChecked(response.getBoolean("anc7_diabtese"));
 
 
-                            newDate1.add(Calendar.DATE, 14);
+                            newDate1.add(Calendar.DATE, 16);
                             anc8Date.setText("40 Weeks - " + sdf.format(newDate1.getTime()));
                             anc8_diabtese.setChecked(response.getBoolean("anc8_diabtese"));
 

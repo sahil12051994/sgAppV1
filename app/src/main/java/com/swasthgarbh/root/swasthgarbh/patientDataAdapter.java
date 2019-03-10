@@ -166,7 +166,7 @@ public class patientDataAdapter extends ArrayAdapter<patient_data_listview_class
 
 //        Log.i("List position", "getView: " + (current_patient_data.getTotalPatients() - position));
         TextView listItemNumber = (TextView)listItemView.findViewById(R.id.listItemNumber);
-        listItemNumber.setText(Integer.toString((current_patient_data.getTotalPatients() - position - 1)));
+        listItemNumber.setText(Integer.toString((current_patient_data.getTotalPatients() - position)));
 
         TextView bpSysTextView = (TextView)listItemView.findViewById(R.id.sysValue);
         if(current_patient_data.bpSysValue() == 0){

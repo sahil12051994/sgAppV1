@@ -541,12 +541,51 @@ public class patient_registration extends AppCompatActivity {
                                     patientRowData.add(pr);
                                 }
 
+                                Integer sys,dys,wt;
+
+                                Integer sys_temp = 0, dys_temp=0, wt_temp=0, update_temp_sys=0, update_temp_dys=0, update_temp_wt=0;
                                 for (int i = patientBpData.length()-1; i>=0; i--) {
                                     JSONObject po = (JSONObject) patientBpData.get(i);
-                                    int len = patientBpData.length();
-                                    if(po.getInt("systolic") != 0 || len == 1){
-                                        yValues.add(new Entry(patientBpData.length()-1-i, po.getInt("systolic")));
+                                    if(patientBpData.length() > 1){
+                                        if(update_temp_sys == 0){
+                                            if(po.getInt("systolic") == 0){
+                                                sys_temp = ((JSONObject) patientBpData.get(i+1)).getInt("systolic");
+                                                update_temp_sys = 1;
+                                            }
+                                        }
+                                        if(po.getInt("systolic") != 0){
+                                            update_temp_sys = 0;
+                                        }
+
+                                        if(update_temp_dys == 0){
+                                            if(po.getInt("diastolic") == 0){
+                                                dys_temp = ((JSONObject) patientBpData.get(i+1)).getInt("diastolic");
+                                                update_temp_dys = 1;
+                                            }
+                                        }
+                                        if(po.getInt("diastolic") != 0){
+                                            update_temp_dys = 0;
+                                        }
+
+                                        if(update_temp_wt == 0){
+                                            if(po.getInt("weight") == 0){
+                                                wt_temp = ((JSONObject) patientBpData.get(i+1)).getInt("weight");
+                                                update_temp_wt = 1;
+                                            }
+                                        }
+                                        if(po.getInt("weight") != 0){
+                                            update_temp_wt = 0;
+                                        }
                                     }
+                                    sys = (po.getInt("systolic") != 0) ? po.getInt("systolic") : sys_temp;
+                                    dys = (po.getInt("diastolic") != 0) ? po.getInt("diastolic") : dys_temp;
+                                    wt = (po.getInt("weight") != 0) ? po.getInt("weight") : wt_temp;
+
+                                    int len = patientBpData.length();
+//                                    Log.i("lennnnnnnn", "" + sys);
+//                                    if(po.getInt("systolic") != 0 || len == 1){
+                                        yValues.add(new Entry(patientBpData.length()-i, sys));
+//                                    }
 
                                     if(po.getInt("systolic") >=160){
                                         colorssys.add(ContextCompat.getColor(patient_registration.this, R.color.chart6)) ;
@@ -564,12 +603,12 @@ public class patient_registration extends AppCompatActivity {
                                         colorsdys.add(ContextCompat.getColor(patient_registration.this, R.color.chartdys)) ;
                                     }
 
-                                    if(po.getInt("diastolic") != 0 || len == 1){
-                                        y2Values.add(new Entry(patientBpData.length()-1-i, po.getInt("diastolic")));
-                                    }
-                                    if(po.getInt("weight") != 0 || len == 1){
-                                        y3Values.add(new Entry(patientBpData.length()-1-i, po.getInt("weight")));
-                                    }
+//                                    if(po.getInt("diastolic") != 0 || len == 1){
+                                        y2Values.add(new Entry(patientBpData.length()-i, dys));
+//                                    }
+//                                    if(po.getInt("weight") != 0 || len == 1){
+                                        y3Values.add(new Entry(patientBpData.length()-i, wt));
+//                                    }
                                 }
 
                                 chart.setDragEnabled(true);
@@ -588,6 +627,7 @@ public class patient_registration extends AppCompatActivity {
                                 set1.setColor(Color.rgb(19, 141, 117));
                                 set1.setDrawValues(false);
 //                                set1.setDrawCircles(false);
+                                set1.setDrawValues(false);
                                 set1.setCircleColors(colorssys);
 
                                 set2.setLineWidth(2f);
@@ -595,11 +635,13 @@ public class patient_registration extends AppCompatActivity {
                                 set2.setDrawValues(false);
 //                                set2.setDrawCircles(false);
                                 set2.setCircleColors(colorsdys);
+                                set2.setDrawValues(false);
 
                                 set3.setColor(Color.rgb(93, 173, 226));
                                 set3.setLineWidth(2f);
                                 set3.setDrawValues(false);
                                 set3.setDrawCircles(false);
+                                set3.setDrawValues(false);
 
                                 YAxis leftAxis = chart.getAxisLeft();
                                 LimitLine ll = new LimitLine(160f, "Critical");

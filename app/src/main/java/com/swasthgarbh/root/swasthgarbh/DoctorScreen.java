@@ -395,7 +395,7 @@ public class DoctorScreen extends AppCompatActivity {
                             if(analysis_obj.getInt("high_dys")!=0)
                                 yvalues.add(new PieEntry(analysis_obj.getInt("high_dys"), "High Diastolic BP"));
                             if(analysis_obj.getInt("high_weight")!=0)
-                                yvalues.add(new PieEntry(analysis_obj.getInt("high_weight"), "Over Weight"));
+                                yvalues.add(new PieEntry(analysis_obj.getInt("high_weight"), "Under Weight"));
                             if(analysis_obj.getInt("hyper_tension")!=0)
                                 yvalues.add(new PieEntry(analysis_obj.getInt("hyper_tension"), "Hypertensed"));
                             if(analysis_obj.getInt("urine_albumin")!=0)

@@ -91,7 +91,7 @@ public class patientDataEntry extends AppCompatActivity {
         visProb = (CheckBox) findViewById(R.id.visProb);
         decFea = (CheckBox) findViewById(R.id.decFea);
         swell = (CheckBox) findViewById(R.id.swell);
-        hyperT = (CheckBox) findViewById(R.id.hyperT);
+//        hyperT = (CheckBox) findViewById(R.id.hyperT);
         bodyWeight = (EditText) findViewById(R.id.bodyWeight);
         extraComments = (EditText) findViewById(R.id.extraComments);
         urineAlb = (EditText)findViewById(R.id.urineAlbumin);
@@ -296,7 +296,7 @@ public class patientDataEntry extends AppCompatActivity {
                             params.put("visual_problems", visProb.isChecked());
                             params.put("decreased_fetal_movements", decFea.isChecked());
                             params.put("swelling_in_hands_or_face", swell.isChecked());
-                            params.put("hyper_tension", hyperT.isChecked());
+                            params.put("hyper_tension", (sys >= 180 && dys >=120) ? Boolean.TRUE : Boolean.FALSE);
 
                             String extraComm = "";
                             if(extraComments.getText().length()==0){

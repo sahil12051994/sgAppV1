@@ -374,6 +374,13 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
         }
 
         final LinearLayout medicineBlock = (LinearLayout)listItemView.findViewById(R.id.medicineBlock);
+        medicineBlock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(v.getContext(), "Press long to edit/delete", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         medicineBlock.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -406,9 +413,12 @@ public class MedicineAdapter extends ArrayAdapter<MedicineListClass> {
 
         if(current_medicine_data.getSOS() == Boolean.TRUE){
             reminder.setVisibility(View.INVISIBLE);
-            medFreqText.setText("SOS");
-            medFreqText.setTextColor(Color.parseColor("#C70039"));
-            medFreq.setText("");
+//            medFreqText.setText("SOS");
+//            medFreqText.setTextColor(Color.parseColor("#C70039"));
+//            medFreq.setText("");
+            startDateMed.setTextColor(Color.parseColor("#C70039"));
+            startDateMed.setText("SOS");
+            endDateMed.setText("-");
         } else {
             reminder.setVisibility(View.VISIBLE);
             medFreqText.setText("Period");

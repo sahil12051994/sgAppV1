@@ -112,7 +112,7 @@ public class ANC_Assist extends AppCompatActivity {
                 anc7Date.setText("38 Weeks: " + dateFormatterShow.format(newDate1.getTime()));
                 fourthvisit.setText(dateFormatterShow.format(newDate1.getTime()));
 
-                newDate1.add(Calendar.DATE, 14);
+                newDate1.add(Calendar.DATE, 16);
                 anc8_date = dateFormatterShow.format(newDate1.getTime());
                 anc8Date.setText("40 Weeks: " + dateFormatterShow.format(newDate1.getTime()));
 

@@ -147,14 +147,14 @@
                         android:layout_weight="1"
                         android:text="@string/swelling_in_hands_or_face" />
 
-                    <CheckBox
-                        android:id="@+id/hyperT"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_weight="1"
-                        android:text="@string/hypertension" />
+                    <!--<CheckBox-->
+                        <!--android:id="@+id/hyperT"-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginTop="5dp"-->
+                        <!--android:layout_marginBottom="5dp"-->
+                        <!--android:layout_weight="1"-->
+                        <!--android:text="@string/hypertension" />-->
 
 
                 </LinearLayout>

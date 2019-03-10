@@ -18,6 +18,10 @@ public class ApplicationController extends Application {
 
 //    private static String base_url = "http://10.0.2.2:8000/sg/";
 
+//    App Icon Generators Online
+//    https://romannurik.github.io/AndroidAssetStudio/index.html
+//    https://appiconmaker.co/Home/Index/8d021a99-471e-4cfd-a62c-e709b080555e
+
     private RequestQueue mRequestQueue;
 
     private static ApplicationController mInstance;
