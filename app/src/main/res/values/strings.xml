@@ -12,7 +12,7 @@
     <string name="name">Name</string>
     <string name="doctor">Doctor</string>
     <string name="doctors_mobile">Doctors Mobile</string>
-    <string name="pregnancy_start">Pregnancy Start</string>
+    <string name="pregnancy_start">Pregnancy EDD</string>
     <string name="who_medication">WHO Medication</string>
     <string name="add_data">Add Data</string>
     <string name="who">Tests</string>

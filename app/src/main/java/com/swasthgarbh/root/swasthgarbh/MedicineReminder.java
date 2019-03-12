@@ -69,7 +69,7 @@ public class MedicineReminder extends AppCompatActivity {
     ProgressBar listPB,addMedPB;
     Switch sosSwitch;
     Boolean isSOS = Boolean.FALSE;
-    LinearLayout periodLayout;
+    LinearLayout periodLayout, dateLayout;
     ImageView deleteMedicine;
 
     private DatePickerDialog fromDatePickerDialog;
@@ -171,6 +171,7 @@ public class MedicineReminder extends AppCompatActivity {
         medName = add_medicine_dialog.findViewById(R.id.medName);
         sosSwitch = add_medicine_dialog.findViewById(R.id.sosSwitch);
         periodLayout = add_medicine_dialog.findViewById(R.id.periodLayout);
+        dateLayout = add_medicine_dialog.findViewById(R.id.dateLayout);
 
         sosSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -178,9 +179,11 @@ public class MedicineReminder extends AppCompatActivity {
                 // true if the switch is in the On position
                 if(isChecked){
                     periodLayout.setVisibility(View.GONE);
+                    dateLayout.setVisibility(View.GONE);
                     isSOS = Boolean.TRUE;
                 }else{
                     periodLayout.setVisibility(View.VISIBLE);
+                    dateLayout.setVisibility(View.VISIBLE);
                     isSOS = Boolean.FALSE;
                 }
             }

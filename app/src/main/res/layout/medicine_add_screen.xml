@@ -37,50 +37,55 @@
         android:ems="10"
         android:hint="Medicine Name"
         android:inputType="textPersonName" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="0px"
+        android:orientation="vertical"
+        android:id="@+id/dateLayout">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="From" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/medStart"
-            android:layout_width="0px"
-            android:layout_weight="1"
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="From" />
+
+            <EditText
+                android:id="@+id/medStart"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Date"
+                android:inputType="none" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:focusable="false"
-            android:hint="Date"
-            android:inputType="none" />
+            android:orientation="horizontal">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <TextView
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="To" />
 
-        <TextView
-            android:layout_width="0px"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="To" />
+            <EditText
+                android:id="@+id/medEnd"
+                android:layout_width="0px"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:focusable="false"
+                android:hint="Date"
+                android:inputType="none" />
 
-        <EditText
-            android:id="@+id/medEnd"
-            android:layout_width="0px"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:focusable="false"
-            android:hint="Date"
-            android:inputType="none" />
-
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout

@@ -51,7 +51,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -497,6 +501,13 @@ public class patient_registration extends AppCompatActivity {
                             whoFollowing.setText(response.getString("who_following"));
                             String date = response.getString("lmp").split("T")[0].split("-")[2] + "-" + response.getString("lmp").split("T")[0].split("-")[1] + "-" + response.getString("lmp").split("T")[0].split("-")[0];
                             pregStartDate.setText(date);
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                            SimpleDateFormat sdf2 = new SimpleDateFormat("dd-MMMM-yyyy");
+                            Date d = sdf.parse(date);
+                            Calendar c = Calendar.getInstance();
+                            c.setTime(d);
+                            c.add(Calendar.DAY_OF_MONTH, 282);
+                            pregStartDate.setText(sdf2.format(c.getTime()));
 //                            Log.i("whoooooo", "onResponse: " + response.getString("who_following"));
                             JSONArray patientBpData = response.getJSONArray("data");
                             int dummyDataVariable = 0;
@@ -685,6 +696,8 @@ public class patient_registration extends AppCompatActivity {
                             }
                             getDoctorData();
                         } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (ParseException e) {
                             e.printStackTrace();
                         }
                     }
